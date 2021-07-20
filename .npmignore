@@ -1,0 +1,11 @@
+.idea/
+.DS_Store/
+node_modules/
+src/
+.eslintrc.js
+.gitignore
+babel.config.js
+tsconfig.json
+webpack.config.js
+.package-lock.json
+*.log

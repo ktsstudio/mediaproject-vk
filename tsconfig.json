@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "noImplicitAny": false,
+    "strictNullChecks": true,
+    "experimentalDecorators": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "suppressImplicitAnyIndexErrors": true
+    "declaration": true,
+    "allowJs": true,
+    "noEmit": false,
+    "strict": true,
+    "module": "es6",
+    "target": "es6",
+    "jsx": "react",
+    "moduleResolution": "node"
+  },
+  "main": "./src/index.ts",
+  "types": "./types/typings.d.ts",
+  "include": ["src", "types"],
+  "exclude": ["node_modules", "packages/*/node_modules"]
+}
