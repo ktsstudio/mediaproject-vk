@@ -59,10 +59,10 @@
   resolved "https://registry.yarnpkg.com/@humanwhocodes/object-schema/-/object-schema-1.2.0.tgz#87de7af9c231826fdd68ac7258f77c429e0e5fcf"
   integrity sha512-wdppn25U8z/2yiaT6YGquE6X8sSv7hNMWSXYSSU1jGv/yd6XqjXgTDJ8KP4NgjTXfJ3GbRjeeb8RTV7a/VpM+w==
 
-"@ktsstudio/mediaproject-utils@^1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@ktsstudio/mediaproject-utils/-/mediaproject-utils-1.0.0.tgz#4592dcde385bb78c4b94f162f12b5efa95fe0997"
-  integrity sha512-UuctJYRGL9i0tHgHAmSx/l3dI/2DBsKhw1LehoOpvtprI1vSUbKy0Agj/Gt13+yGbJq8GqFa3Yg+FFxgLH8aFA==
+"@ktsstudio/mediaproject-utils@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@ktsstudio/mediaproject-utils/-/mediaproject-utils-1.0.1.tgz#8b11b3f130bbfc385cfff0291f74658f5db91c87"
+  integrity sha512-hLlKbFe0T/TjB7X5/WveDDlhIW6vHkVNDI97wubwkoN0EsPNZWyCItOe13QxiW35H2VBcz4q1Y7jqy0tK4p/yA==
   dependencies:
     axios "^0.21.1"
 
