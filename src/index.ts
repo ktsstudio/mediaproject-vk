@@ -25,6 +25,7 @@ import {
   VibrationNotificationEnum,
 } from './vibrate';
 import vkApi from './vkApi';
+import initializeVkApp from './initializeVkApp';
 
 export {
   addToFavorites,
@@ -41,6 +42,7 @@ export {
   vibrateAsNotification,
   vibrateAsSelection,
   vkApi,
+  initializeVkApp,
 };
 
 export {

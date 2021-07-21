@@ -22,6 +22,7 @@
     ]
   },
   "devDependencies": {
+    "@types/node": "^16.4.0",
     "@typescript-eslint/eslint-plugin": "^4.13.0",
     "@typescript-eslint/parser": "^4.14.1",
     "eslint": "^7.31.0",
@@ -36,6 +37,7 @@
     "typescript": "^4.1.3"
   },
   "dependencies": {
+    "@ktsstudio/mediaproject-utils": "^1.0.0",
     "@vkontakte/vk-bridge": "^2.4.4"
   }
 }
