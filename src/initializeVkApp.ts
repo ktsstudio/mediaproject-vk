@@ -21,6 +21,10 @@ export default () => {
   window.is_mobile = window.platform !== 'desktop_web';
   window.page = findGetParameter('page', window.location_hash);
 
+  window.is_mobile
+    ? document.body.classList.add('mobile')
+    : document.body.classList.remove('mobile');
+
   checkIOS();
 
   bridge.send('VKWebAppInit', {});
