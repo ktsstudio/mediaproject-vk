@@ -1,3 +1,6 @@
+#### v1.0.5
+- [*] README
+
 #### v1.0.4
 - [+] types moved to src/types
 - [*] Window type inherited
