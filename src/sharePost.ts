@@ -1,24 +1,6 @@
 import bridge, { WallPostRequestOptions } from '@vkontakte/vk-bridge';
 
-export enum AttachmentMediaEnum {
-  photo = 'photo', // фотография
-  video = 'video', // видеозапись
-  audio = 'audio', // аудиозапись
-  doc = 'doc', // документ
-  page = 'page', // wiki-страница
-  note = 'note', // заметка
-  poll = 'poll', // опрос
-  album = 'album', // альбом
-  market = 'market', // товар
-  market_album = 'market_album', // подборка товаров
-  audio_playlist = 'audio_playlist', // плейлист с аудио
-}
-
-export type PostAttachmentType = {
-  type: AttachmentMediaEnum; // тип медиа-приложения
-  owner_id: number | string; // идентификатор владельца медиа-приложения
-  media_id: number | string; // идентификатор медиа-приложения
-};
+import { PostAttachmentType } from './types/sharing';
 
 export default async (
   message: string,

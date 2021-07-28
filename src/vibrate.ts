@@ -1,32 +1,33 @@
 import bridge from '@vkontakte/vk-bridge';
 
-export enum VibrationImpactEnum {
-  heavy = 'heavy',
-  medium = 'medium',
-  light = 'light',
-}
+import {
+  VibrationImpactEnum,
+  VibrationNotificationEnum,
+} from './types/vabrations';
 
-// виброотклик на ошибку
+/*
+ * Wrapper for VKWebAppTapticImpactOccurred. Imitates error vibration.
+ * @param {VibrationImpactEnum} style Vibration style
+ */
 export const vibrateAsImpact = (style: VibrationImpactEnum) => {
   if (bridge.supports('VKWebAppTapticImpactOccurred')) {
     bridge.send('VKWebAppTapticImpactOccurred', { style });
   }
 };
 
-export enum VibrationNotificationEnum {
-  error = 'error',
-  success = 'success',
-  warning = 'warning',
-}
-
-// виброотклик на успешность выполнения действия
+/*
+ * Wrapper for VKWebAppTapticNotificationOccurred. Imitates action success vibration.
+ * @param {VibrationNotificationEnum} type Vibration type
+ */
 export const vibrateAsNotification = (type: VibrationNotificationEnum) => {
   if (bridge.supports('VKWebAppTapticNotificationOccurred')) {
     bridge.send('VKWebAppTapticNotificationOccurred', { type });
   }
 };
 
-// виброотклик на изменение выбора
+/*
+ * Wrapper for VKWebAppTapticSelectionChanged. Imitates selection change vibration.
+ */
 export const vibrateAsSelection = () => {
   if (bridge.supports('VKWebAppTapticSelectionChanged')) {
     bridge.send('VKWebAppTapticSelectionChanged', {});

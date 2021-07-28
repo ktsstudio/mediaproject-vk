@@ -1,5 +1,13 @@
 import bridge, { ReceiveData } from '@vkontakte/vk-bridge';
 
+/*
+ * Wrapper for VKWebAppCallAPIMethod.
+ * Calls VK API methods. Uses version 5.131.
+ * @param {string} method VK API method
+ * @param {string} access_token VK access token
+ * @param params Additional payload
+ * @returns {Promise<ReceiveData<'VKWebAppCallAPIMethod'>}
+ */
 export default async (
   method: string,
   access_token: string,

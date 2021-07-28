@@ -1,19 +1,19 @@
+![kts](./logo.png)
+
 # @ktsstudio/mediaproject-vk
 
-Набор утилит для работы с ВК. 
-Содержит обертки следующих методов:
+Package with utils for VK media projects.
 
-* VKWebAppAddToFavorites - добавление в избранное
-* VKWebAppAllowMessagesFromGroup - запрос на разрешение отправки сообщений от группы
-* VKWebAppAllowNotifications - запрос на разрешение получения уведомлений от приложения
-* VKWebAppGetAuthToken - получение токена пользователя
-* VKWebAppGetUserInfo - получение данных пользователя
-* VKWebAppSetSwipeSettings - включение swipe back
-* VKWebAppSetViewSettings - кастомизация статус-бара и других элементов
-* VKWebAppShare - шеринг ссылки
-* VKWebAppShowWallPostBox - шеринг поста
-* VKWebAppShowStoryBox - шеринг истории
-* VKWebAppTapticImpactOccurred - вибрация на ошибку
-* VKWebAppTapticNotificationOccurred - вибрация на уведомление
-* VKWebAppTapticSelectionChanged - вибрация на выбор
-* VKWebAppCallAPIMethod - вызов метода API
+### Usage
+
+`npm install @ktsstudio/mediaproject-vk`
+
+`yarn add @ktsstudio/mediaproject-vk`
+
+### About
+
+Contains wrappers for several vk-bridge methods. Also contains [wrapper for calling VK API with vk-bridge](./src/vkApi.ts) and [method to initialize VK Mini App parameters](./src/initializeVkApp.ts) on start using GET parameters. Stores app parameters in [Window](./src/types/window.ts).
+
+### Proposals & feedback
+
+Please, fell free to write on [hello@ktsstudio.ru](mailto:hello@ktsstudio.ru) with theme "mediaproject-vk feedback"

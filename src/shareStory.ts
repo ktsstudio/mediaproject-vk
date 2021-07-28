@@ -1,19 +1,6 @@
 import bridge from '@vkontakte/vk-bridge';
 
-export enum BackgroundStoryEnum {
-  image = 'image',
-  video = 'video',
-  none = 'none',
-}
-
-export type StoryAttachmentType = {
-  text: string; // ключ для текста кнопки
-  type: 'url' | 'audio' | 'video' | 'photo'; // тип аттача
-  url?: string; // ссылка на контент
-  owner_id?: number; // идентификатор владельца объекта
-  id?: number; // идентификатор объекта
-  access_key?: string; // ключ доступа для вложения
-};
+import { BackgroundStoryEnum, StoryAttachmentType } from './types/sharing';
 
 export default async (
   url?: string,

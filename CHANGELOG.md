@@ -1,3 +1,16 @@
+#### v1.0.4
+- [+] types moved to src/types
+- [*] Window type inherited
+- [*] initializeVkApp
+- [+] checkIOS
+- [*] README
+
+#### v1.0.3
+- [*] Code style
+
+#### v1.0.2
+- [*] Code style
+
 #### v1.0.1
 [+] Метод для инициализации приложения с получением квери-параметров и отправки VKWebAppInit
 

@@ -1,12 +1,6 @@
-import bridge, { AppearanceType } from '@vkontakte/vk-bridge';
+import bridge from '@vkontakte/vk-bridge';
 
-export type ViewSettingsType = {
-  status_bar_style: AppearanceType;
-  /** Android only */
-  action_bar_color?: 'none' | string;
-  /** Android only */
-  navigation_bar_color?: string;
-};
+import { ViewSettingsType } from './types/viewSettings';
 
 export const defaultViewSettings: ViewSettingsType = {
   status_bar_style: 'light',
@@ -14,6 +8,10 @@ export const defaultViewSettings: ViewSettingsType = {
   navigation_bar_color: 'white',
 };
 
+/*
+ * Wrapper for VKWebAppSetViewSettings. Sets mobile view settings.
+ * Defaults are light status bar, white action bar, white navigation bar
+ */
 export default (viewSettings: ViewSettingsType = defaultViewSettings): void => {
   if (bridge.supports('VKWebAppSetViewSettings')) {
     bridge.send('VKWebAppSetViewSettings', viewSettings);

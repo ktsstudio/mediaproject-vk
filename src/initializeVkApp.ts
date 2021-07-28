@@ -1,20 +1,29 @@
 import bridge from '@vkontakte/vk-bridge';
-import { checkIOS, findGetParameter } from '@ktsstudio/mediaproject-utils';
+import {
+  findGetParameter,
+  initializeAppParams,
+} from '@ktsstudio/mediaproject-utils';
 
+import checkIOS from './checkIOS';
+
+/*
+ * Method to initialize VK Mini App. Takes params from GET parameters.
+ * Firstly initializes common params. Sends VKWebAppInit to vk-bridge
+ */
 export default () => {
-  window.search = location.search;
+  initializeAppParams();
+
   window.app_id = Number(findGetParameter('vk_app_id'));
   window.scope = findGetParameter('vk_access_token_settings');
-  window.user_id = findGetParameter('vk_user_id');
+  window.user_id = Number(findGetParameter('vk_user_id'));
   window.group_id = findGetParameter('group_id');
+  window.platform = findGetParameter('vk_platform') || 'desktop_web';
+  window.is_mobile = window.platform !== 'desktop_web';
+  window.page = findGetParameter('page', window.location_hash);
 
-  window.PLATFORM = findGetParameter('vk_platform') || 'desktop_web';
-  window.IS_MOBILE = window.PLATFORM !== 'desktop_web';
-  window.IS_PRODUCTION = process.env.NODE_ENV === 'production';
-  window.LOCATION_HASH = location.hash;
-  window.page = findGetParameter('page', window.LOCATION_HASH);
-
-  checkIOS(window.PLATFORM);
+  checkIOS();
 
   bridge.send('VKWebAppInit', {});
+
+  console.log(`VK, ${window.is_mobile ? 'mobile, ' : ''}${window.platform}`);
 };
