@@ -1,3 +1,9 @@
+#### v1.0.7
+- [*] getAuthToken: added exception handling, changed returned value
+
+#### v1.0.6
+- [*] initializeVkApp
+
 #### v1.0.5
 - [*] README
 
