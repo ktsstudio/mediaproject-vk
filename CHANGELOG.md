@@ -1,3 +1,6 @@
+#### v1.0.8
+- [*] getUserInfo: wrapped try catch
+
 #### v1.0.7
 - [*] getAuthToken: added exception handling, changed returned value
 

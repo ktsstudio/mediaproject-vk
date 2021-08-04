@@ -1,4 +1,9 @@
 import bridge, { UserInfo } from '@vkontakte/vk-bridge';
 
-export default async (): Promise<UserInfo | void> =>
-  await bridge.send('VKWebAppGetUserInfo');
+export default async (): Promise<UserInfo | null> => {
+  try {
+    return await bridge.send('VKWebAppGetUserInfo');
+  } catch (e) {
+    return null;
+  }
+};
