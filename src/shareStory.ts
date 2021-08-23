@@ -16,12 +16,22 @@ export default async (
   background_type = BackgroundStoryEnum.image
 ): Promise<boolean | null> => {
   try {
+    const props: any = {};
+
+    if (url) {
+      props.url = url;
+    } else if (blob) {
+      props.blob = blob;
+    }
+
+    if (attachment) {
+      props.attachment = attachment;
+    }
+
     const { result } = await bridge.send('VKWebAppShowStoryBox', {
       background_type,
-      url,
-      blob,
       locked,
-      attachment,
+      ...props,
     });
 
     return Boolean(result);

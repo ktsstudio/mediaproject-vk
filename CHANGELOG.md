@@ -1,3 +1,6 @@
+#### v1.0.10
+- [*] params
+
 #### v1.0.9
 - [*] sharePost: wrapped try catch
 - [*] shareStory: wrapped try catch
