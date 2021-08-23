@@ -1,3 +1,7 @@
+#### v1.0.9
+- [*] sharePost: wrapped try catch
+- [*] shareStory: wrapped try catch
+
 #### v1.0.8
 - [*] getUserInfo: wrapped try catch
 
