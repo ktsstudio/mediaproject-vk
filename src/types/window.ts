@@ -5,4 +5,5 @@ export interface WindowType extends CommonWindowType {
   group_id: string | null;
   page: string | null;
   platform: string;
+  is_odr: boolean;
 }

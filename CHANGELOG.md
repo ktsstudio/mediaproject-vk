@@ -1,3 +1,6 @@
+#### v1.0.11
+- [+] odr param in window
+
 #### v1.0.10
 - [*] params
 

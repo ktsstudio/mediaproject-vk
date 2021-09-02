@@ -20,6 +20,7 @@ export default () => {
   window.platform = findGetParameter('vk_platform') || 'desktop_web';
   window.is_mobile = window.platform !== 'desktop_web';
   window.page = findGetParameter('page', window.location_hash);
+  window.is_odr = findGetParameter('odr_enabled') === '1';
 
   window.is_mobile
     ? document.body.classList.add('mobile')
