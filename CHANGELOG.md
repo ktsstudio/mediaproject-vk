@@ -1,3 +1,7 @@
+#### v1.0.12
+- [*] swipe back
+- [*] view settings
+
 #### v1.0.11
 - [+] odr param in window
 
