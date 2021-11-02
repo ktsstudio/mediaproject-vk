@@ -1,6 +1,6 @@
 import bridge, { ReceiveData } from '@vkontakte/vk-bridge';
 
-/*
+/**
  * Wrapper for VKWebAppCallAPIMethod.
  * Calls VK API methods. Uses version 5.131.
  * @param {string} method VK API method

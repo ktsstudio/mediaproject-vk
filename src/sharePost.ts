@@ -2,7 +2,7 @@ import bridge, { WallPostRequestOptions } from '@vkontakte/vk-bridge';
 
 import { PostAttachmentType } from './types/sharing';
 
-/*
+/**
  * Method for post sharing.
  * Returns true, if success.
  * Returns false for non user caused errors,

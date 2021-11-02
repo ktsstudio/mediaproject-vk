@@ -2,7 +2,7 @@ import bridge from '@vkontakte/vk-bridge';
 
 import { BackgroundStoryEnum, StoryAttachmentType } from './types/sharing';
 
-/*
+/**
  * Method for story sharing.
  * Returns true, if success.
  * Returns false for non user caused errors,

@@ -2,7 +2,7 @@ import bridge from '@vkontakte/vk-bridge';
 
 import { AuthTokenResponseType, ScopesEnum } from './types/token';
 
-/*
+/**
  * Gets token with passed access scope.
  * Returns token string, if success.
  * Returns false for non user caused errors,

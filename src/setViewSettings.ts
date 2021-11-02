@@ -8,7 +8,7 @@ export const defaultViewSettings: ViewSettingsType = {
   navigation_bar_color: 'white',
 };
 
-/*
+/**
  * Wrapper for VKWebAppSetViewSettings. Sets mobile view settings.
  * Defaults are light status bar, white action bar, white navigation bar
  */

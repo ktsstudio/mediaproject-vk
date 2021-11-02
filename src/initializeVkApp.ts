@@ -6,7 +6,7 @@ import {
 
 import checkIOS from './checkIOS';
 
-/*
+/**
  * Method to initialize VK Mini App. Takes params from GET parameters.
  * Firstly initializes common params. Sends VKWebAppInit to vk-bridge
  */
