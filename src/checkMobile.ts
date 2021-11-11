@@ -1,20 +1,15 @@
 /**
- * Checks whether platform fits mobile device.
- * Sets field window.is_mobile = true, if true.
- * Adds classname 'mobile' or 'desktop' to document.body.
- * @param {string} platform Taken from VK current platform. Taken from Window by default
- * @returns Result of checking.
+ * Проверяет является ли мобильной платформа, на которой открыто vk-приложение.
+ * Устанавливает window.is_mobile = true, если является.
+ * Добавляет класс 'mobile' или 'desktop' на document.body в зависимости от результата проверки.
+ * @param {string} platform Текущая платформа, получаемая при инициализации vk-приложения. По умолчанию window.platform.
+ * @returns Результат проверки.
  */
 export default function checkMobile(platform = window.platform): boolean {
   const isMobile = platform.indexOf('mobile') !== -1;
 
   window.is_mobile = isMobile;
-
-  if (isMobile) {
-    document.body.classList.add('mobile');
-  } else {
-    document.body.classList.add('desktop');
-  }
+  document.body.classList.add(isMobile ? 'mobile' : 'desktop');
 
   return isMobile;
 }
