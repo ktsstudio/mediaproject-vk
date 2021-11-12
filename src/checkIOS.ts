@@ -1,21 +1,25 @@
-/*
- * Method to check current platform is IOS.
- * Sets Window.is_ios = true and adds classname 'ios' for document.body if matches
- * @param {string} platform Taken from VK current platform. Taken from Window by default
- * @returns {boolean} Returns true if matches
+import checkMobile from './checkMobile';
+
+/**
+ * Метод для проверки, является ли текущая платформа IOS.
+ * Проверяет параметр platform, полученный при инициализации приложения.
+ * В случае совпадения устанавливает window.is_ios = true и добавляет класс 'ios' на document.body
+ * @param {string} platform Полученная от VK текущая платформа. По умолчанию берется из Window.platform.
+ * @returns {boolean} Возвращает true, если платформа IOS
  */
 export default (platform = window.platform): boolean => {
-  if (
+  const isIOS =
+    platform === 'mobile_ipad' ||
     platform === 'mobile_iphone' ||
     platform === 'mobile_iphone_messenger' ||
-    /(iPad|iPhone|iPod)/g.test(navigator.userAgent)
-  ) {
+    /(iPad|iPhone|iPod)/g.test(navigator.userAgent);
+
+  if (isIOS) {
     window.is_ios = true;
-
     document.body.classList.add('ios');
-
-    return true;
+  } else if (checkMobile()) {
+    document.body.classList.add('android');
   }
 
-  return false;
+  return isIOS;
 };

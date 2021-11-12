@@ -6,9 +6,10 @@ import {
 
 import checkIOS from './checkIOS';
 
-/*
- * Method to initialize VK Mini App. Takes params from GET parameters.
- * Firstly initializes common params. Sends VKWebAppInit to vk-bridge
+/**
+ * Утилита для инициализации параметров vk-mini-app. Берет параметры из строки с квери-параметрами.
+ * Сначала инициализирует общие параметры через initializeAppParams из @ktsstudio/mediaproject-utils.
+ * Отправляет событие VKWebAppInit в vk-bridge
  */
 export default () => {
   initializeAppParams();

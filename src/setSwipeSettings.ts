@@ -1,7 +1,7 @@
 import bridge from '@vkontakte/vk-bridge';
 
-/*
- * Wrapper for VKWebAppSetSwipeSettings
+/**
+ * Обертка для VKWebAppSetSwipeSettings
  */
 export default (history = true): void => {
   if (window.is_mobile && bridge.supports('VKWebAppSetSwipeSettings')) {

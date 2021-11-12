@@ -2,11 +2,15 @@ import bridge, { WallPostRequestOptions } from '@vkontakte/vk-bridge';
 
 import { PostAttachmentType } from './types/sharing';
 
-/*
- * Method for post sharing.
- * Returns true, if success.
- * Returns false for non user caused errors,
- * returns null for error 'User denied'.
+/**
+ * Метод для шеринга поста на стену.
+ * В случае успеха возвращает true
+ * В случае ошибки возвращает false,
+ * Возвращает null, если пользователь не дал разрешение (ошибка 'User denied')
+ * @param {string} message Текст поста
+ * @param {PostAttachmentType[]} mediaAttachments Медиа аттачи к посту (фотки, видосы и т.д., но не ссылки)
+ * @param {string[]} linksAttachments Аттачи-ссылки
+ * @param {Partial<WallPostRequestOptions>} extra Дополнительные параметры для шеринга поста
  */
 export default async (
   message: string,

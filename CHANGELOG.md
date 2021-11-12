@@ -1,3 +1,8 @@
+#### v1.1.0
+- [+] checkMobile
+- [*] checkIOS: add platform 'mobile_ipad', adding classname 'android'
+- [*] fix JSDoc syntax
+
 #### v1.0.12
 - [*] swipe back
 - [*] view settings

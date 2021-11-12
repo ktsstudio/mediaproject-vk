@@ -2,11 +2,13 @@ import bridge from '@vkontakte/vk-bridge';
 
 import { AuthTokenResponseType, ScopesEnum } from './types/token';
 
-/*
- * Gets token with passed access scope.
- * Returns token string, if success.
- * Returns false for non user caused errors,
- * returns true for error 'User denied'.
+/**
+ * Получает access token с переданными параметрами access scope.
+ * В случае успеха возвращает строку с токеном.
+ * В случае ошибки возвращает false,
+ * Возвращает true, если пользователь не дал разрешение (ошибка 'User denied')
+ * @param {number} app_id ID VK-приложения, которое запрашивает доступ
+ * @param {ScopesEnum | ScopesEnum[]} accessScope параметры доступа access scope. То, к чему в результате будет доступ с запрашиваемым токеном (друзья, фото и т.д)
  */
 export default async (
   app_id: number,

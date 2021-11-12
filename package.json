@@ -1,6 +1,6 @@
 {
   "name": "@ktsstudio/mediaproject-vk",
-  "version": "1.0.12",
+  "version": "1.1.0",
   "author": "KTS Studio",
   "license": "MIT",
   "description": "Package with utils for vk mini apps",
@@ -43,7 +43,7 @@
     "typescript": "^4.1.3"
   },
   "dependencies": {
-    "@ktsstudio/mediaproject-utils": "^2.0.0",
+    "@ktsstudio/mediaproject-utils": "^2.1.0",
     "@vkontakte/vk-bridge": "^2.4.4"
   }
 }
