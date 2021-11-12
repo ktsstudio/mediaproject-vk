@@ -3,7 +3,7 @@ import bridge from '@vkontakte/vk-bridge';
 import {
   VibrationImpactEnum,
   VibrationNotificationEnum,
-} from './types/vabrations';
+} from './types/vibrations';
 
 /**
  * Обертка для VKWebAppTapticImpactOccurred. Имитация виброотклика на ошибку.

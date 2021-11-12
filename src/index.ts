@@ -48,7 +48,7 @@ import { ScopesEnum, AuthTokenResponseType } from './types/token';
 import {
   VibrationImpactEnum,
   VibrationNotificationEnum,
-} from './types/vabrations';
+} from './types/vibrations';
 import { ViewSettingsType } from './types/viewSettings';
 import { WindowType } from './types/window';
 

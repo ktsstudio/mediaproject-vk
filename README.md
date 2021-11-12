@@ -12,7 +12,9 @@
 
 ### О пакете
 
-Содержит обертки для некоторых методов vk-bridge. Также содержит [метод-обертку для работы VK API через vk-bridge](./src/vkApi.ts) и [утилиту для инициализации параметров vk-приложения](./src/initializeVkApp.ts) on start using GET parameters. Stores app parameters in [Window](./src/types/window.ts).
+Содержит обертки для некоторых методов vk-bridge. 
+Также содержит [метод-обертку для работы VK API через vk-bridge](./src/vkApi.ts) и [утилиту для инициализации параметров vk-приложения](./src/initializeVkApp.ts)
+с использованием GET-параметров. Хранит параметры приложения в [Window](./src/types/window.ts).
 
 #### Методы-обертки для vk-bridge:
 
