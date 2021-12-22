@@ -1,6 +1,6 @@
 import bridge, { LinkShareResult } from '@vkontakte/vk-bridge';
 
-/*
+/**
  * Обертка для VKWebAppShare.
  * @param {string} link Ссылка, которую нужно пошерить
  */

@@ -1,11 +1,11 @@
 export enum VibrationImpactEnum {
-    heavy = 'heavy',
-    medium = 'medium',
-    light = 'light',
+  heavy = 'heavy',
+  medium = 'medium',
+  light = 'light',
 }
 
 export enum VibrationNotificationEnum {
-    error = 'error',
-    success = 'success',
-    warning = 'warning',
+  error = 'error',
+  success = 'success',
+  warning = 'warning',
 }

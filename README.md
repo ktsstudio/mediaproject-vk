@@ -35,6 +35,11 @@
 
 - [checkIOS](./src/checkIOS.ts) - метод для проверки, является ли текущая платформа IOS на основе параметра платформы, получаемого при инициализации VK-приложения
 - [initializeVkApp](./src/initializeVkApp.ts) - утилита для инициализации параметров vk-mini-app
+- [isAvatarDefault](./src/isAvatarDefault.ts) - метод для проверки отсутствия аватарки по фотографии пользователя
+
+#### Хуки:
+- [useEventSubscribe](./src/hooks/useEventSubscribe.ts) - хук для подписки на событие vk-bridge
+- [usePolling](./src/hooks/usePolling.ts) - хук для поллинга внутри мини-приложения ВК
 
 ### Обратная связь
 

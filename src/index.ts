@@ -3,6 +3,7 @@ import allowMessagesFromGroup from './allowMessagesFromGroup';
 import allowNotifications from './allowNotifications';
 import getAuthToken from './getAuthToken';
 import getUserInfo from './getUserInfo';
+import isAvatarDefault from './isAvatarDefault';
 import setSwipeSettings from './setSwipeSettings';
 import setViewSettings from './setViewSettings';
 import shareLink from './shareLink';
@@ -17,6 +18,8 @@ import vkApi from './vkApi';
 import initializeVkApp from './initializeVkApp';
 import checkIOS from './checkIOS';
 import checkMobile from './checkMobile';
+// eslint-disable-next-line import/order
+import { useEventSubscribe, usePolling } from './hooks';
 
 export {
   addToFavorites,
@@ -24,6 +27,7 @@ export {
   allowNotifications,
   getAuthToken,
   getUserInfo,
+  isAvatarDefault,
   setSwipeSettings,
   setViewSettings,
   shareLink,
@@ -36,6 +40,8 @@ export {
   initializeVkApp,
   checkMobile,
   checkIOS,
+  useEventSubscribe,
+  usePolling,
 };
 
 import {
@@ -44,7 +50,6 @@ import {
   BackgroundStoryEnum,
   StoryAttachmentType,
 } from './types/sharing';
-import { ScopesEnum, AuthTokenResponseType } from './types/token';
 import {
   VibrationImpactEnum,
   VibrationNotificationEnum,
@@ -57,8 +62,6 @@ export {
   PostAttachmentType,
   BackgroundStoryEnum,
   StoryAttachmentType,
-  ScopesEnum,
-  AuthTokenResponseType,
   VibrationImpactEnum,
   VibrationNotificationEnum,
   ViewSettingsType,

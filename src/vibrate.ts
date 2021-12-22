@@ -16,7 +16,7 @@ export const vibrateAsImpact = (style: VibrationImpactEnum): void => {
 };
 
 /**
- * Обертка для VKWebAppTapticNotificationOccurred. Имитация виброотклика на какое-либо действия.
+ * Обертка для VKWebAppTapticNotificationOccurred. Имитация виброотклика на какое-либо действие.
  * @param {VibrationNotificationEnum} type Тип вибрации в зависимости от действия - ошибка, ворнинг или успех
  */
 export const vibrateAsNotification = (

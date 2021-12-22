@@ -42,6 +42,7 @@ export default async (
       return null;
     }
 
+    // eslint-disable-next-line no-console
     console.log(e);
     return false;
   }
