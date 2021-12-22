@@ -1,5 +1,4 @@
-import bridge from '@vkontakte/vk-bridge';
-import { PersonalAuthScope } from '@vkontakte/vk-bridge/dist/types/src/types/data';
+import bridge, { PersonalAuthScope } from '@vkontakte/vk-bridge';
 
 /**
  * Получает access token с переданными параметрами access scope.

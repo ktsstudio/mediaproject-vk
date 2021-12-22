@@ -1,7 +1,7 @@
 ### v1.2.0
 - [+] useEventSubscribe
 - [+] usePolling
-- [*] initializeVkApp добавляет класс 'mobile' или 'desktop'
+- [*] initializeVkApp добавляет класс 'desktop'
 - [*] getAuthToken проверяет наличие всех скоупов в ответе
 - [+] isAvatarDefault
 
