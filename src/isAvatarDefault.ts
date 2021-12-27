@@ -5,4 +5,4 @@
  * @return {boolean} Результат проверки
  */
 export default (photo: string, size: 50 | 100 | 200 | 400 = 100): boolean =>
-  photo === `https://vk.com/images/camera_${size}.png`;
+  !photo || photo === `https://vk.com/images/camera_${size}.png`;
