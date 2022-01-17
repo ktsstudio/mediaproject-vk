@@ -1,3 +1,6 @@
+### v1.2.1
+- [*] @ktsstudio/mediaprojetc-utils@4.0.0
+
 ### v1.2.0
 - [+] useEventSubscribe
 - [+] usePolling
