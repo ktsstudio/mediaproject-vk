@@ -1,6 +1,6 @@
 {
   "name": "@ktsstudio/mediaproject-vk",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "author": "KTS Studio",
   "license": "MIT",
   "description": "Package with utils for vk mini apps",
@@ -14,11 +14,12 @@
   "module": "./dist/index.js",
   "types": "./dist/types/index.d.ts",
   "scripts": {
+    "rm-build": "rm -rf dist",
     "lint": "eslint src --fix",
-    "codestyle": "prettier src --write \"*.{ts,js}?(x)\"",
+    "codestyle": "prettier --write \"src/**/*.{ts,js}?(x)\"",
     "tsc-check": "tsc --skipLibCheck --noEmit --project tsconfig.json",
-    "build": "tsc --module es6 --target es6 --outDir dist --declarationDir dist/types",
-    "build:cjs": "tsc --module commonjs --target es5 --outDir dist --declarationDir dist/types",
+    "build": "yarn run rm-build; tsc --module es6 --target es6 --outDir dist --declarationDir dist/types",
+    "build:cjs": "yarn run rm-build; tsc --module commonjs --target es5 --outDir dist --declarationDir dist/types",
     "precommit": "lint-staged"
   },
   "lint-staged": {
@@ -27,6 +28,13 @@
       "prettier --write"
     ]
   },
+  "files": [
+    "dist/",
+    "package.json",
+    "README.md",
+    "CHANGELOG.md",
+    "logo.png"
+  ],
   "devDependencies": {
     "@types/node": "^16.4.0",
     "@typescript-eslint/eslint-plugin": "^4.13.0",

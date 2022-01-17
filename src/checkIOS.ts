@@ -3,7 +3,8 @@ import checkMobile from './checkMobile';
 /**
  * Метод для проверки, является ли текущая платформа IOS.
  * Проверяет параметр platform, полученный при инициализации приложения.
- * В случае совпадения устанавливает window.is_ios = true и добавляет класс 'ios' на document.body
+ * В случае совпадения устанавливает window.is_ios = true.
+ * Добавляет класс 'ios' или 'android' на document.body.
  * @param {string} platform Полученная от VK текущая платформа. По умолчанию берется из Window.platform.
  * @returns {boolean} Возвращает true, если платформа IOS
  */
@@ -17,8 +18,12 @@ export default (platform = window.platform): boolean => {
   if (isIOS) {
     window.is_ios = true;
     document.body.classList.add('ios');
-  } else if (checkMobile()) {
-    document.body.classList.add('android');
+  } else {
+    window.is_ios = false;
+
+    if (checkMobile()) {
+      document.body.classList.add('android');
+    }
   }
 
   return isIOS;

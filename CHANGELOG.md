@@ -1,3 +1,10 @@
+### v1.2.0
+- [+] useEventSubscribe
+- [+] usePolling
+- [*] initializeVkApp добавляет класс 'desktop'
+- [*] getAuthToken проверяет наличие всех скоупов в ответе
+- [+] isAvatarDefault
+
 #### v1.1.0
 - [+] checkMobile
 - [*] checkIOS: add platform 'mobile_ipad', adding classname 'android'

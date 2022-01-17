@@ -3,7 +3,7 @@ import bridge, { ReceiveData } from '@vkontakte/vk-bridge';
 /**
  * Обертка для VKWebAppCallAPIMethod.
  * Вызывает метод vk api версии 5.131.
- * @param {string} метод vk api
+ * @param {string} method метод vk api
  * @param {string} access_token vk access token
  * @param params дополнительные параметры
  * @returns {Promise<ReceiveData<'VKWebAppCallAPIMethod'>}
