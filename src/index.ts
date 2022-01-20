@@ -1,3 +1,8 @@
+/**
+ * index
+ * @module index
+ */
+
 import addToFavorites from './addToFavorites';
 import allowMessagesFromGroup from './allowMessagesFromGroup';
 import allowNotifications from './allowNotifications';

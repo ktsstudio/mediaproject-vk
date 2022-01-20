@@ -1,0 +1,9 @@
+{
+    "entryPoints": "./src/index.ts",
+    "tsconfig": "./tsconfig.json",
+    "out": "doc",
+    "theme": "default",
+    "name": "mediaproject-vk",
+    "includeVersion": true
+}
+
