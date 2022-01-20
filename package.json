@@ -21,7 +21,7 @@
     "build": "yarn run rm-build; tsc --module es6 --target es6 --outDir dist --declarationDir dist/types",
     "build:cjs": "yarn run rm-build; tsc --module commonjs --target es5 --outDir dist --declarationDir dist/types",
     "precommit": "lint-staged",
-    "docs": "rm -rf doc && typedoc ./src/index.ts"
+    "docs": "rm -rf docs && typedoc --options typedoc.json"
   },
   "lint-staged": {
     "*.{ts,js}?(x)": [

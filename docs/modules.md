@@ -65,7 +65,7 @@ index
 
 #### Defined in
 
-[src/types/sharing.ts:15](https://github.com/ktsstudio/mediaproject-vk/blob/1c5e391/src/types/sharing.ts#L15)
+[src/types/sharing.ts:15](https://github.com/ktsstudio/mediaproject-vk/blob/6c79544/src/types/sharing.ts#L15)
 
 ___
 
@@ -86,7 +86,7 @@ ___
 
 #### Defined in
 
-[src/types/sharing.ts:27](https://github.com/ktsstudio/mediaproject-vk/blob/1c5e391/src/types/sharing.ts#L27)
+[src/types/sharing.ts:27](https://github.com/ktsstudio/mediaproject-vk/blob/6c79544/src/types/sharing.ts#L27)
 
 ___
 
@@ -104,7 +104,7 @@ ___
 
 #### Defined in
 
-[src/types/viewSettings.ts:3](https://github.com/ktsstudio/mediaproject-vk/blob/1c5e391/src/types/viewSettings.ts#L3)
+[src/types/viewSettings.ts:3](https://github.com/ktsstudio/mediaproject-vk/blob/6c79544/src/types/viewSettings.ts#L3)
 
 ## Properties
 
@@ -504,7 +504,7 @@ ___
 
 #### Defined in
 
-[src/checkMobile.ts:8](https://github.com/ktsstudio/mediaproject-vk/blob/1c5e391/src/checkMobile.ts#L8)
+[src/checkMobile.ts:8](https://github.com/ktsstudio/mediaproject-vk/blob/6c79544/src/checkMobile.ts#L8)
 
 ___
 
@@ -526,7 +526,7 @@ ___
 
 #### Defined in
 
-[src/vibrate.ts:12](https://github.com/ktsstudio/mediaproject-vk/blob/1c5e391/src/vibrate.ts#L12)
+[src/vibrate.ts:12](https://github.com/ktsstudio/mediaproject-vk/blob/6c79544/src/vibrate.ts#L12)
 
 ___
 
@@ -548,7 +548,7 @@ ___
 
 #### Defined in
 
-[src/vibrate.ts:22](https://github.com/ktsstudio/mediaproject-vk/blob/1c5e391/src/vibrate.ts#L22)
+[src/vibrate.ts:22](https://github.com/ktsstudio/mediaproject-vk/blob/6c79544/src/vibrate.ts#L22)
 
 ___
 
@@ -564,4 +564,4 @@ ___
 
 #### Defined in
 
-[src/vibrate.ts:33](https://github.com/ktsstudio/mediaproject-vk/blob/1c5e391/src/vibrate.ts#L33)
+[src/vibrate.ts:33](https://github.com/ktsstudio/mediaproject-vk/blob/6c79544/src/vibrate.ts#L33)

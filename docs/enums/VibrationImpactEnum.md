@@ -18,7 +18,7 @@
 
 #### Defined in
 
-[src/types/vibrations.ts:2](https://github.com/ktsstudio/mediaproject-vk/blob/1c5e391/src/types/vibrations.ts#L2)
+[src/types/vibrations.ts:2](https://github.com/ktsstudio/mediaproject-vk/blob/6c79544/src/types/vibrations.ts#L2)
 
 ___
 
@@ -28,7 +28,7 @@ ___
 
 #### Defined in
 
-[src/types/vibrations.ts:4](https://github.com/ktsstudio/mediaproject-vk/blob/1c5e391/src/types/vibrations.ts#L4)
+[src/types/vibrations.ts:4](https://github.com/ktsstudio/mediaproject-vk/blob/6c79544/src/types/vibrations.ts#L4)
 
 ___
 
@@ -38,4 +38,4 @@ ___
 
 #### Defined in
 
-[src/types/vibrations.ts:3](https://github.com/ktsstudio/mediaproject-vk/blob/1c5e391/src/types/vibrations.ts#L3)
+[src/types/vibrations.ts:3](https://github.com/ktsstudio/mediaproject-vk/blob/6c79544/src/types/vibrations.ts#L3)

@@ -26,7 +26,7 @@
 
 #### Defined in
 
-[src/types/sharing.ts:9](https://github.com/ktsstudio/mediaproject-vk/blob/1c5e391/src/types/sharing.ts#L9)
+[src/types/sharing.ts:9](https://github.com/ktsstudio/mediaproject-vk/blob/6c79544/src/types/sharing.ts#L9)
 
 ___
 
@@ -36,7 +36,7 @@ ___
 
 #### Defined in
 
-[src/types/sharing.ts:4](https://github.com/ktsstudio/mediaproject-vk/blob/1c5e391/src/types/sharing.ts#L4)
+[src/types/sharing.ts:4](https://github.com/ktsstudio/mediaproject-vk/blob/6c79544/src/types/sharing.ts#L4)
 
 ___
 
@@ -46,7 +46,7 @@ ___
 
 #### Defined in
 
-[src/types/sharing.ts:12](https://github.com/ktsstudio/mediaproject-vk/blob/1c5e391/src/types/sharing.ts#L12)
+[src/types/sharing.ts:12](https://github.com/ktsstudio/mediaproject-vk/blob/6c79544/src/types/sharing.ts#L12)
 
 ___
 
@@ -56,7 +56,7 @@ ___
 
 #### Defined in
 
-[src/types/sharing.ts:5](https://github.com/ktsstudio/mediaproject-vk/blob/1c5e391/src/types/sharing.ts#L5)
+[src/types/sharing.ts:5](https://github.com/ktsstudio/mediaproject-vk/blob/6c79544/src/types/sharing.ts#L5)
 
 ___
 
@@ -66,7 +66,7 @@ ___
 
 #### Defined in
 
-[src/types/sharing.ts:10](https://github.com/ktsstudio/mediaproject-vk/blob/1c5e391/src/types/sharing.ts#L10)
+[src/types/sharing.ts:10](https://github.com/ktsstudio/mediaproject-vk/blob/6c79544/src/types/sharing.ts#L10)
 
 ___
 
@@ -76,7 +76,7 @@ ___
 
 #### Defined in
 
-[src/types/sharing.ts:11](https://github.com/ktsstudio/mediaproject-vk/blob/1c5e391/src/types/sharing.ts#L11)
+[src/types/sharing.ts:11](https://github.com/ktsstudio/mediaproject-vk/blob/6c79544/src/types/sharing.ts#L11)
 
 ___
 
@@ -86,7 +86,7 @@ ___
 
 #### Defined in
 
-[src/types/sharing.ts:7](https://github.com/ktsstudio/mediaproject-vk/blob/1c5e391/src/types/sharing.ts#L7)
+[src/types/sharing.ts:7](https://github.com/ktsstudio/mediaproject-vk/blob/6c79544/src/types/sharing.ts#L7)
 
 ___
 
@@ -96,7 +96,7 @@ ___
 
 #### Defined in
 
-[src/types/sharing.ts:6](https://github.com/ktsstudio/mediaproject-vk/blob/1c5e391/src/types/sharing.ts#L6)
+[src/types/sharing.ts:6](https://github.com/ktsstudio/mediaproject-vk/blob/6c79544/src/types/sharing.ts#L6)
 
 ___
 
@@ -106,7 +106,7 @@ ___
 
 #### Defined in
 
-[src/types/sharing.ts:2](https://github.com/ktsstudio/mediaproject-vk/blob/1c5e391/src/types/sharing.ts#L2)
+[src/types/sharing.ts:2](https://github.com/ktsstudio/mediaproject-vk/blob/6c79544/src/types/sharing.ts#L2)
 
 ___
 
@@ -116,7 +116,7 @@ ___
 
 #### Defined in
 
-[src/types/sharing.ts:8](https://github.com/ktsstudio/mediaproject-vk/blob/1c5e391/src/types/sharing.ts#L8)
+[src/types/sharing.ts:8](https://github.com/ktsstudio/mediaproject-vk/blob/6c79544/src/types/sharing.ts#L8)
 
 ___
 
@@ -126,4 +126,4 @@ ___
 
 #### Defined in
 
-[src/types/sharing.ts:3](https://github.com/ktsstudio/mediaproject-vk/blob/1c5e391/src/types/sharing.ts#L3)
+[src/types/sharing.ts:3](https://github.com/ktsstudio/mediaproject-vk/blob/6c79544/src/types/sharing.ts#L3)

@@ -18,7 +18,7 @@
 
 #### Defined in
 
-[src/types/sharing.ts:22](https://github.com/ktsstudio/mediaproject-vk/blob/1c5e391/src/types/sharing.ts#L22)
+[src/types/sharing.ts:22](https://github.com/ktsstudio/mediaproject-vk/blob/6c79544/src/types/sharing.ts#L22)
 
 ___
 
@@ -28,7 +28,7 @@ ___
 
 #### Defined in
 
-[src/types/sharing.ts:24](https://github.com/ktsstudio/mediaproject-vk/blob/1c5e391/src/types/sharing.ts#L24)
+[src/types/sharing.ts:24](https://github.com/ktsstudio/mediaproject-vk/blob/6c79544/src/types/sharing.ts#L24)
 
 ___
 
@@ -38,4 +38,4 @@ ___
 
 #### Defined in
 
-[src/types/sharing.ts:23](https://github.com/ktsstudio/mediaproject-vk/blob/1c5e391/src/types/sharing.ts#L23)
+[src/types/sharing.ts:23](https://github.com/ktsstudio/mediaproject-vk/blob/6c79544/src/types/sharing.ts#L23)

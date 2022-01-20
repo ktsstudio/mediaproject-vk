@@ -63,7 +63,7 @@ ___
 
 #### Defined in
 
-[src/types/window.ts:5](https://github.com/ktsstudio/mediaproject-vk/blob/1c5e391/src/types/window.ts#L5)
+[src/types/window.ts:5](https://github.com/ktsstudio/mediaproject-vk/blob/6c79544/src/types/window.ts#L5)
 
 ___
 
@@ -115,7 +115,7 @@ ___
 
 #### Defined in
 
-[src/types/window.ts:8](https://github.com/ktsstudio/mediaproject-vk/blob/1c5e391/src/types/window.ts#L8)
+[src/types/window.ts:8](https://github.com/ktsstudio/mediaproject-vk/blob/6c79544/src/types/window.ts#L8)
 
 ___
 
@@ -153,7 +153,7 @@ ___
 
 #### Defined in
 
-[src/types/window.ts:6](https://github.com/ktsstudio/mediaproject-vk/blob/1c5e391/src/types/window.ts#L6)
+[src/types/window.ts:6](https://github.com/ktsstudio/mediaproject-vk/blob/6c79544/src/types/window.ts#L6)
 
 ___
 
@@ -163,7 +163,7 @@ ___
 
 #### Defined in
 
-[src/types/window.ts:7](https://github.com/ktsstudio/mediaproject-vk/blob/1c5e391/src/types/window.ts#L7)
+[src/types/window.ts:7](https://github.com/ktsstudio/mediaproject-vk/blob/6c79544/src/types/window.ts#L7)
 
 ___
 
@@ -173,7 +173,7 @@ ___
 
 #### Defined in
 
-[src/types/window.ts:4](https://github.com/ktsstudio/mediaproject-vk/blob/1c5e391/src/types/window.ts#L4)
+[src/types/window.ts:4](https://github.com/ktsstudio/mediaproject-vk/blob/6c79544/src/types/window.ts#L4)
 
 ___
 
