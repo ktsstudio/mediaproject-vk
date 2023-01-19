@@ -1,4 +1,3 @@
-import useEventSubscribe from './useEventSubscribe';
-import usePolling from './usePolling';
+export * from './useEventSubscribe';
 
-export { useEventSubscribe, usePolling };
+export * from './usePolling';

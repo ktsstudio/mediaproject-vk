@@ -1,27 +1,27 @@
-import bridge from '@vkontakte/vk-bridge';
+import bridge, { RequestProps } from '@vkontakte/vk-bridge';
 
-import { BackgroundStoryEnum, StoryAttachmentType } from './types/sharing';
+import {
+  BackgroundStoryEnum,
+  ShareStoryParamsType,
+  ShareStoryResponseType,
+} from './types/shareStory';
+import { checkUserDenied } from './checkUserDenied';
 
-/**
- * Метод для шеринга истории.
- * В случае успеха возвращает true
- * В случае ошибки возвращает false,
- * Возвращает null, если пользователь не дал разрешение (ошибка 'User denied')
- * @param {string} url Url картинки, которая шерится в историю
- * @param {string} blob Картинка для шеринга в base64
- * @param {StoryAttachmentType} attachment Аттач к истории - ссылка с кнопкой и т.д.
- * @param {boolean} locked Можно ли изменять размер и положение фоновой картинки
- * @param {BackgroundStoryEnum} background_type Тип фона - картинка, видео или фона нет
+/*
+ * Метод для шеринга истории
  */
-export default async (
-  url?: string,
-  blob?: string,
-  attachment?: StoryAttachmentType,
+const shareStory = async ({
+  url,
+  blob,
+  attachment,
   locked = true,
-  background_type = BackgroundStoryEnum.image
-): Promise<boolean | null> => {
+  backgroundType = BackgroundStoryEnum.image,
+}: ShareStoryParamsType): Promise<ShareStoryResponseType | void> => {
   try {
-    const props: any = {};
+    const props: RequestProps<'VKWebAppShowStoryBox'> = {
+      background_type: backgroundType,
+      locked,
+    };
 
     if (url) {
       props.url = url;
@@ -33,23 +33,14 @@ export default async (
       props.attachment = attachment;
     }
 
-    const { result } = await bridge.send('VKWebAppShowStoryBox', {
-      background_type,
-      locked,
-      ...props,
-    });
-
-    return Boolean(result);
-  } catch (e) {
-    if (
-      e.error_type === 'client_error' &&
-      e.error_data?.error_reason === 'User denied'
-    ) {
-      return null;
+    return await bridge.send('VKWebAppShowStoryBox', props);
+  } catch (error) {
+    if (checkUserDenied(error)) {
+      return;
     }
 
-    // eslint-disable-next-line no-console
-    console.log(e);
-    return false;
+    return error;
   }
 };
+
+export { shareStory };

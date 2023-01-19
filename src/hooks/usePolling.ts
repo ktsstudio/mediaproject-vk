@@ -10,7 +10,7 @@ import bridge, {
  * @param condition Условие, при котором нужно вызывать функцию. По умолчанию она вызывается всегда
  * @param pollingInterval Промежуток времени между вызовами в миллисекундах. По умолчанию минута
  */
-export default (
+const usePolling = (
   callback: VoidFunction,
   condition = true,
   pollingInterval = 60000
@@ -62,3 +62,5 @@ export default (
     return () => bridge.unsubscribe(hideAppListener);
   }, [condition]);
 };
+
+export { usePolling };

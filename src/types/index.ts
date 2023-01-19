@@ -1,12 +1,6 @@
-export * from './hooks';
-
-export * from './types';
-
 export * from './callApi';
 
-export * from './checkPlatform';
-
-export * from './checkUserDenied';
+export * from './common';
 
 export * from './getAccessToken';
 
@@ -17,3 +11,5 @@ export * from './setViewSettings';
 export * from './sharePost';
 
 export * from './shareStory';
+
+export * from './window';

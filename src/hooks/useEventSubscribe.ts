@@ -10,7 +10,7 @@ import * as React from 'react';
  * @param {VoidFunction} callBack Колбэк, вызываемый при наступлении события
  * @param {React.DependencyList} deps Зависимости переданного колбэка. По умолчанию пустые
  */
-export default (
+const useEventSubscribe = (
   eventName: AnyReceiveMethodName,
   callBack: VoidFunction,
   deps: React.DependencyList = []
@@ -30,3 +30,5 @@ export default (
     return () => bridge.unsubscribe(eventListener);
   }, deps);
 };
+
+export { useEventSubscribe };

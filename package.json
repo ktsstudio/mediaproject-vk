@@ -1,6 +1,6 @@
 {
   "name": "@ktsstudio/mediaproject-vk",
-  "version": "1.2.1",
+  "version": "2.0.0",
   "author": "KTS Studio",
   "license": "MIT",
   "description": "Package with utils for vk mini apps",
@@ -53,7 +53,7 @@
   },
   "dependencies": {
     "@ktsstudio/mediaproject-utils": "^4.0.0",
-    "@vkontakte/vk-bridge": "^2.4.4"
+    "@vkontakte/vk-bridge": "^2.7.2"
   },
   "peerDependencies": {
     "react": "^17.0.2"

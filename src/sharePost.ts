@@ -1,49 +1,155 @@
-import bridge, { WallPostRequestOptions } from '@vkontakte/vk-bridge';
+import { api } from '@ktsstudio/mediaproject-utils';
+import bridge from '@vkontakte/vk-bridge';
 
-import { PostAttachmentType } from './types/sharing';
+import { callApi } from './callApi';
+import { checkUserDenied } from './checkUserDenied';
+import {
+  ApiUploadResponseType,
+  SharePostParamsType,
+  SharePostResponseType,
+  SharePostWithUploadParamsType,
+  SharePostWithUploadResponseType,
+} from './types/sharePost';
 
-/**
- * Метод для шеринга поста на стену.
- * В случае успеха возвращает true
- * В случае ошибки возвращает false,
- * Возвращает null, если пользователь не дал разрешение (ошибка 'User denied')
- * @param {string} message Текст поста
- * @param {PostAttachmentType[]} mediaAttachments Медиа аттачи к посту (фотки, видосы и т.д., но не ссылки)
- * @param {string[]} linksAttachments Аттачи-ссылки
- * @param {Partial<WallPostRequestOptions>} extra Дополнительные параметры для шеринга поста
+/*
+ * Метод для шеринга поста на стену
  */
-export default async (
-  message: string,
-  mediaAttachments: PostAttachmentType[] = [],
-  linksAttachments: string[] = [],
-  extra: Partial<WallPostRequestOptions> = {}
-): Promise<boolean | null> => {
-  const attachments = mediaAttachments
-    .map(({ type, owner_id, media_id }) => `${type}${owner_id}_${media_id}`)
-    .concat(linksAttachments)
-    .join(',');
-
+const sharePost = async ({
+  message,
+  mediaAttachments = [],
+  linksAttachments = [],
+  extra = {},
+}: SharePostParamsType): Promise<SharePostResponseType | undefined> => {
   try {
-    const response: { post_id: number | string } = await bridge.send(
-      'VKWebAppShowWallPostBox',
-      {
-        message,
-        attachments,
-        ...extra,
-      }
-    );
+    const attachments = mediaAttachments
+      .map(({ type, owner_id, media_id }) => `${type}${owner_id}_${media_id}`)
+      .concat(linksAttachments)
+      .join(',');
 
-    return Boolean(response?.post_id);
-  } catch (e) {
-    if (
-      e.error_type === 'client_error' &&
-      e.error_data?.error_reason === 'User denied'
-    ) {
-      return null;
+    return await bridge.send('VKWebAppShowWallPostBox', {
+      message,
+      attachments,
+      ...extra,
+    });
+  } catch (error) {
+    if (checkUserDenied(error)) {
+      return undefined;
     }
 
-    // eslint-disable-next-line no-console
-    console.log(e);
-    return false;
+    return error;
   }
 };
+
+/*
+ * Метод для шеринга поста на стену с загрузкой фото в альбом
+ */
+const sharePostWithUpload = async ({
+  apiUploadUrl,
+  image,
+  text,
+  userId,
+  accessToken = window.access_token,
+  onUserDeniedAccess,
+  onErrorOccurred,
+}: SharePostWithUploadParamsType): Promise<SharePostWithUploadResponseType | void> => {
+  try {
+    /*
+     * Получаем url сервера для загрузки фото
+     */
+    const getWallUploadServerData = await callApi({
+      method: 'photos.getWallUploadServer',
+      accessToken,
+      getAccessTokenParams: {
+        scopes: ['photos'],
+        onUserDeniedAll: onUserDeniedAccess,
+        onUserDeniedSomeScopes: onUserDeniedAccess,
+      },
+      renewTokenIfNoneProvided: true,
+      renewTokenIfExpired: true,
+    });
+
+    if (getWallUploadServerData.error_type) {
+      onErrorOccurred?.(getWallUploadServerData);
+
+      return getWallUploadServerData;
+    }
+
+    /*
+     * Получили ссылку на сервер загрузки,
+     * теперь отправляем картинку на бэк для загрузки
+     */
+    const {
+      response: apiUploadResponse,
+      error,
+      errorData,
+    }: ApiUploadResponseType = await api(
+      apiUploadUrl,
+      {
+        image,
+        server_url: getWallUploadServerData.response.upload_url,
+      },
+      {},
+      true
+    );
+
+    /*
+     * Если загрузить картинку на сервер не получилось,
+     * обрабатываем ошибку и дальше не идем
+     */
+    if (!apiUploadResponse?.response || error) {
+      onErrorOccurred?.(error, errorData);
+
+      return;
+    }
+
+    const { hash, photo, server } = apiUploadResponse.response; // получили картинку, id сервера и хэш
+
+    /*
+     * Сохраняем фото к пользователю,
+     * передавая все поученное на предыдущем шаге
+     * в метод сохранения картинки в альбоме стены
+     */
+    const saveWallPhotoData = await callApi({
+      method: 'VKWebAppCallAPIMethod',
+      params: {
+        hash,
+        photo,
+        server: Number(server),
+        user_id: userId,
+      },
+    });
+
+    if (saveWallPhotoData.error_type) {
+      onErrorOccurred?.(saveWallPhotoData);
+
+      return;
+    }
+
+    /*
+     * Получили id загруженной картинки и id пользователя
+     */
+    const { id: mediaId, owner_id: ownerId } = saveWallPhotoData[0];
+
+    /*
+     * На этом моменте вылетает предложение зашерить пост
+     */
+    return await sharePost({
+      message: text,
+      mediaAttachments: [
+        {
+          type: 'photo',
+          owner_id: ownerId,
+          media_id: mediaId,
+        },
+      ],
+    });
+  } catch (error) {
+    if (!checkUserDenied(error)) {
+      onErrorOccurred?.(error);
+    }
+
+    return error;
+  }
+};
+
+export { sharePost, sharePostWithUpload };

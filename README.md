@@ -12,32 +12,25 @@
 
 ### О пакете
 
-Содержит обертки для некоторых методов vk-bridge. 
-Также содержит [метод-обертку для работы VK API через vk-bridge](./src/vkApi.ts) и [утилиту для инициализации параметров vk-приложения](./src/initializeVkApp.ts)
+Содержит обертки для некоторых методов vk-bridge.
+Также содержит [метод-обертку для работы VK API через vk-bridge](./src/callApi.ts) и [утилиту для инициализации параметров vk-приложения](./src/initializeApp.ts)
 с использованием GET-параметров. Хранит параметры приложения в [Window](./src/types/window.ts).
 
 #### Методы-обертки для vk-bridge:
 
-- [addToFavorites](./src/addToFavorites.ts) - добавление приложения в список избранных (VKWebAppAddToFavorites)
-- [allowMessagesFromGroup](./src/allowMessagesFromGroup.ts) - запрос у юзера разрешения на получение сообщений от сообщества (VKWebAppAllowMessagesFromGroup)
-- [allowNotifications](./src/allowNotifications.ts) - запрос у юзера разрешения на отправку уведомлений от приложения (VKWebAppAllowNotifications)
-- [getAuthToken](./src/getAuthToken.ts) - получение access token юзера (VKWebAppGetAuthToken)
-- [getUserInfo](./src/getUserInfo.ts) - получение данных юзера, открывшего приложение (VKWebAppGetUserInfo)
-- [setSwipeSettings](./src/setSwipeSettings.ts) - включение swipeBack (VKWebAppSetSwipeSettings)
-- [setViewSettings](./src/setViewSettings.ts) - установка вида statusbar, actionbar, navigationbar на мобильных устройствах (VKWebAppSetViewSettings)
-- [shareLink](./src/shareLink.ts) - поделиться ссылкой (VKWebAppShare)
+- [callApi](./src/callApi.ts) - вызов метода API VK (VKWebAppCallAPIMethod)
+- [getAccessToken](./src/getAccessToken.ts) - получение access token пользователя (VKWebAppGetAuthToken)
+- [setViewSettings](./src/setViewSettings.ts) - установить настройки status bar и других ui-элементов на мобильных платформах (VKWebAppShowWallPostBox)
 - [sharePost](./src/sharePost.ts) - поделиться постом на стену (VKWebAppShowWallPostBox)
 - [shareStory](./src/shareStory.ts) - поделиться историей (VKWebAppShowStoryBox)
-- [vibrateAsImpact, vibrateAsNotification, vibrateAsSelection](./src/vibrate.ts) - утилиты-обертки над методами вибраций (VKWebAppTapticImpactOccurred, VKWebAppTapticNotificationOccurred, VKWebAppTapticSelectionChanged)
-- [vkApi](./src/vkApi.ts) - вызвать метод vk api (VKWebAppCallAPIMethod)
 
 #### Другие методы:
 
-- [checkIOS](./src/checkIOS.ts) - метод для проверки, является ли текущая платформа IOS на основе параметра платформы, получаемого при инициализации VK-приложения
-- [initializeVkApp](./src/initializeVkApp.ts) - утилита для инициализации параметров vk-mini-app
-- [isAvatarDefault](./src/isAvatarDefault.ts) - метод для проверки отсутствия аватарки по фотографии пользователя
+- [checkMobile, checkIOS](./src/checkPlatform.ts) - методы ждя распознавания платформы, на которой открыто приложение (на основе параметра запуска vk_platform)
+- [initializeApp](./src/initializeApp.ts) - утилита для парсинга и сохранения параметров запуска vk-mini-app
 
 #### Хуки:
+
 - [useEventSubscribe](./src/hooks/useEventSubscribe.ts) - хук для подписки на событие vk-bridge
 - [usePolling](./src/hooks/usePolling.ts) - хук для поллинга внутри мини-приложения ВК
 

@@ -4,8 +4,9 @@ import {
   initializeAppParams,
 } from '@ktsstudio/mediaproject-utils';
 
-import checkIOS from './checkIOS';
-import checkMobile from './checkMobile';
+import { checkMobile, checkIOS } from './checkPlatform';
+import { PlatformType } from './types/common';
+import { AppInitResponseType } from './types/initializeApp';
 
 /**
  * Утилита для инициализации параметров vk-mini-app. Берет параметры из строки с квери-параметрами.
@@ -17,22 +18,31 @@ import checkMobile from './checkMobile';
  * - 'ios' или 'android' в зависимости от платформы.
  * Отправляет событие VKWebAppInit в vk-bridge.
  */
-export default (): void => {
+const initializeApp = async (): Promise<AppInitResponseType> => {
   initializeAppParams();
 
-  window.app_id = Number(findGetParameter('vk_app_id'));
-  window.scope = findGetParameter('vk_access_token_settings');
   window.user_id = Number(findGetParameter('vk_user_id'));
-  window.group_id = findGetParameter('group_id');
-  window.platform = findGetParameter('vk_platform') || 'desktop_web';
-  window.page = findGetParameter('page', window.location_hash);
+  window.app_id = Number(findGetParameter('vk_app_id'));
+  window.notifications_enabled = Boolean(
+    findGetParameter('vk_are_notifications_enabled')
+  );
+  window.language = findGetParameter('vk_language') || undefined;
+  window.ref = findGetParameter('vk_ref') || undefined;
+  window.scope = findGetParameter('vk_access_token_settings') || undefined;
+  window.group_id = findGetParameter('group_id') || undefined;
+  window.viewer_group_role =
+    findGetParameter('vk_viewer_group_role') || undefined;
+  window.platform = (findGetParameter('vk_platform') ||
+    'desktop_web') as PlatformType;
   window.is_odr = findGetParameter('odr_enabled') === '1';
 
   checkMobile();
   checkIOS();
 
-  bridge.send('VKWebAppInit', {});
-
   // eslint-disable-next-line no-console
   console.log(`VK, ${window.is_mobile ? 'mobile, ' : ''}${window.platform}`);
+
+  return await bridge.send('VKWebAppInit', {});
 };
+
+export { initializeApp };
