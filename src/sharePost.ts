@@ -128,6 +128,7 @@ const sharePostWithUpload = async ({
     /*
      * Получили id загруженной картинки и id пользователя
      */
+    // eslint-disable-next-line prefer-destructuring
     const { id: mediaId, owner_id: ownerId } = saveWallPhotoData[0];
 
     /*

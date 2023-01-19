@@ -1,4 +1,4 @@
-import { ResponseType } from './response';
+import { ResponseType } from './common';
 
 type AppInitResponseType = ResponseType<'VKWebAppInit'>;
 

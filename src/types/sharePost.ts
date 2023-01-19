@@ -1,7 +1,8 @@
-import { ErrorData, WallPostRequestOptions } from '@vkontakte/vk-bridge';
-import { ResponseType } from './common';
+import { WallPostRequestOptions } from '@vkontakte/vk-bridge';
 import { ApiResponse } from '@ktsstudio/mediaproject-utils';
 import { UrlConfigType } from '@ktsstudio/mediaproject-utils/dist/types/types/api';
+
+import { ResponseType } from './common';
 
 type PostAttachmentMediaType =
   | 'photo'
@@ -38,6 +39,7 @@ type SharePostWithUploadParamsType = {
   userId: number;
   accessToken?: string;
   onUserDeniedAccess?: () => void;
+  // eslint-disable-next-line
   onErrorOccurred?: (error?: any, errorData?: any) => void;
 };
 

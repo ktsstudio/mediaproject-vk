@@ -1,4 +1,4 @@
-import { PlatformType } from './types/platform';
+import { PlatformType } from './types/common';
 
 const IOS_PLATFORMS: PlatformType[] = [
   'mobile_ipad',
