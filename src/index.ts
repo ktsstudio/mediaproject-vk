@@ -4,6 +4,8 @@ export * from './types';
 
 export * from './callApi';
 
+export * from './checkAvatarDefault';
+
 export * from './checkPlatform';
 
 export * from './checkUserDenied';
