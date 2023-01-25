@@ -4,14 +4,14 @@ import {
   ReceiveData,
 } from '@vkontakte/vk-bridge';
 
-type ResponseType<M> = M extends AnyReceiveMethodName
+type VkResponseType<M> = M extends AnyReceiveMethodName
   ? Partial<ReceiveData<M> & ErrorData>
   : void;
 
-/*
+/**
  * https://dev.vk.com/mini-apps/development/launch-params#vk_platform
- */
-type InternalPlatformType =
+ **/
+type InternalVkPlatformType =
   | 'desktop_web'
   | 'mobile_android'
   | 'mobile_android_messenger'
@@ -20,18 +20,18 @@ type InternalPlatformType =
   | 'mobile_iphone_messenger'
   | 'mobile_web';
 
-type ExternalPlatformType =
+type ExternalVkPlatformType =
   | 'android_external'
   | 'iphone_external'
   | 'ipad_external'
   | 'web_external'
   | 'mvk_external';
 
-type PlatformType = InternalPlatformType | ExternalPlatformType;
+type VkPlatformType = InternalVkPlatformType | ExternalVkPlatformType;
 
 export type {
-  ResponseType,
-  InternalPlatformType,
-  ExternalPlatformType,
-  PlatformType,
+  VkResponseType,
+  InternalVkPlatformType,
+  ExternalVkPlatformType,
+  VkPlatformType,
 };

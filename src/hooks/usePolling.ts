@@ -4,12 +4,12 @@ import bridge, {
   VKBridgeEvent,
 } from '@vkontakte/vk-bridge';
 
-/**
+/***
  * Вызывает переданную функцию с указанной частотой, останавливая поллинг при сворачивании приложения.
  * @param callback Функция, которую нужно вызывать
  * @param condition Условие, при котором нужно вызывать функцию. По умолчанию она вызывается всегда
  * @param pollingInterval Промежуток времени между вызовами в миллисекундах. По умолчанию минута
- */
+ **/
 const usePolling = (
   callback: VoidFunction,
   condition = true,

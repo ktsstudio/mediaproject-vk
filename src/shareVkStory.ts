@@ -1,25 +1,21 @@
 import bridge, { RequestProps } from '@vkontakte/vk-bridge';
 
-import {
-  BackgroundStoryEnum,
-  ShareStoryParamsType,
-  ShareStoryResponseType,
-} from './types/shareStory';
-import { checkUserDenied } from './checkUserDenied';
+import { checkVkUserDenied } from './checkVkUserDenied';
+import { ShareVkStoryPropsType, ShareVkStoryResponseType } from './types';
 
-/*
+/**
  * Метод для шеринга истории
- */
-const shareStory = async ({
+ **/
+const shareVkStory = async ({
   url,
   blob,
   attachment,
   locked = true,
-  backgroundType = BackgroundStoryEnum.image,
-}: ShareStoryParamsType): Promise<ShareStoryResponseType | void> => {
+  background_type = 'image',
+}: ShareVkStoryPropsType): Promise<ShareVkStoryResponseType | void> => {
   try {
     const props: RequestProps<'VKWebAppShowStoryBox'> = {
-      background_type: backgroundType,
+      background_type,
       locked,
     };
 
@@ -35,7 +31,7 @@ const shareStory = async ({
 
     return await bridge.send('VKWebAppShowStoryBox', props);
   } catch (error) {
-    if (checkUserDenied(error)) {
+    if (checkVkUserDenied(error)) {
       return;
     }
 
@@ -43,4 +39,4 @@ const shareStory = async ({
   }
 };
 
-export { shareStory };
+export { shareVkStory };

@@ -1,38 +1,26 @@
 import { api } from '@ktsstudio/mediaproject-utils';
 import bridge from '@vkontakte/vk-bridge';
 
-import { callApi } from './callApi';
-import { checkUserDenied } from './checkUserDenied';
+import { callVkApi } from './callVkApi';
+import { checkVkUserDenied } from './checkVkUserDenied';
 import {
-  ApiUploadResponseType,
-  SharePostParamsType,
-  SharePostResponseType,
-  SharePostWithUploadParamsType,
-  SharePostWithUploadResponseType,
-} from './types/sharePost';
+  UploadFromApiToVkResponseType,
+  ShareVkPostResponseType,
+  ShareVkPostWithUploadParamsType,
+  ShareVkPostWithUploadResponseType,
+  ShareVkPostPropsType,
+} from './types';
 
-/*
+/**
  * Метод для шеринга поста на стену
- */
-const sharePost = async ({
-  message,
-  mediaAttachments = [],
-  linksAttachments = [],
-  extra = {},
-}: SharePostParamsType): Promise<SharePostResponseType | undefined> => {
+ **/
+const shareVkPost = async (
+  props: ShareVkPostPropsType
+): Promise<ShareVkPostResponseType | undefined> => {
   try {
-    const attachments = mediaAttachments
-      .map(({ type, owner_id, media_id }) => `${type}${owner_id}_${media_id}`)
-      .concat(linksAttachments)
-      .join(',');
-
-    return await bridge.send('VKWebAppShowWallPostBox', {
-      message,
-      attachments,
-      ...extra,
-    });
+    return await bridge.send('VKWebAppShowWallPostBox', props);
   } catch (error) {
-    if (checkUserDenied(error)) {
+    if (checkVkUserDenied(error)) {
       return undefined;
     }
 
@@ -40,23 +28,23 @@ const sharePost = async ({
   }
 };
 
-/*
+/**
  * Метод для шеринга поста на стену с загрузкой фото в альбом
- */
-const sharePostWithUpload = async ({
+ **/
+const shareVkPostWithUpload = async ({
+  postProps,
+  file,
   apiUploadUrl,
-  image,
-  text,
   userId,
   accessToken = window.access_token,
   onUserDeniedAccess,
   onErrorOccurred,
-}: SharePostWithUploadParamsType): Promise<SharePostWithUploadResponseType | void> => {
+}: ShareVkPostWithUploadParamsType): Promise<ShareVkPostWithUploadResponseType | void> => {
   try {
-    /*
+    /**
      * Получаем url сервера для загрузки фото
-     */
-    const getWallUploadServerData = await callApi({
+     **/
+    const getWallUploadServerData = await callVkApi({
       method: 'photos.getWallUploadServer',
       accessToken,
       getAccessTokenParams: {
@@ -74,28 +62,28 @@ const sharePostWithUpload = async ({
       return getWallUploadServerData;
     }
 
-    /*
+    /**
      * Получили ссылку на сервер загрузки,
      * теперь отправляем картинку на бэк для загрузки
-     */
+     **/
     const {
       response: apiUploadResponse,
       error,
       errorData,
-    }: ApiUploadResponseType = await api(
+    }: UploadFromApiToVkResponseType = await api(
       apiUploadUrl,
       {
-        image,
+        image: file,
         server_url: getWallUploadServerData.response.upload_url,
       },
       {},
       true
     );
 
-    /*
+    /**
      * Если загрузить картинку на сервер не получилось,
      * обрабатываем ошибку и дальше не идем
-     */
+     **/
     if (!apiUploadResponse?.response || error) {
       onErrorOccurred?.(error, errorData);
 
@@ -104,13 +92,19 @@ const sharePostWithUpload = async ({
 
     const { hash, photo, server } = apiUploadResponse.response; // получили картинку, id сервера и хэш
 
-    /*
+    /**
      * Сохраняем фото к пользователю,
      * передавая все поученное на предыдущем шаге
      * в метод сохранения картинки в альбоме стены
-     */
-    const saveWallPhotoData = await callApi({
-      method: 'VKWebAppCallAPIMethod',
+     **/
+    const saveWallPhotoData = await callVkApi({
+      method: 'photos.saveWallPhoto',
+      accessToken,
+      /**
+       * Здесь устанавливаем false, чтобы запрос доступа не показывался дважды
+       * (в начале этой функции уже есть запрос)
+       **/
+      renewTokenIfExpired: false,
       params: {
         hash,
         photo,
@@ -125,27 +119,24 @@ const sharePostWithUpload = async ({
       return;
     }
 
-    /*
+    /**
      * Получили id загруженной картинки и id пользователя
-     */
+     **/
     // eslint-disable-next-line prefer-destructuring
     const { id: mediaId, owner_id: ownerId } = saveWallPhotoData[0];
+    const uploadedPhotoAttachment = `photo${ownerId}_${mediaId}`;
 
-    /*
+    /**
      * На этом моменте вылетает предложение зашерить пост
-     */
-    return await sharePost({
-      message: text,
-      mediaAttachments: [
-        {
-          type: 'photo',
-          owner_id: ownerId,
-          media_id: mediaId,
-        },
-      ],
+     **/
+    return await shareVkPost({
+      ...postProps,
+      attachments: postProps.attachments
+        ? postProps.attachments.concat(`,${uploadedPhotoAttachment}`)
+        : uploadedPhotoAttachment,
     });
   } catch (error) {
-    if (!checkUserDenied(error)) {
+    if (!checkVkUserDenied(error)) {
       onErrorOccurred?.(error);
     }
 
@@ -153,4 +144,4 @@ const sharePostWithUpload = async ({
   }
 };
 
-export { sharePost, sharePostWithUpload };
+export { shareVkPost, shareVkPostWithUpload };

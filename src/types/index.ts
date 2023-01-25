@@ -1,15 +1,17 @@
-export * from './callApi';
+export * from './callVkApi';
+
+export * from './checkVkAvatarIsDefault';
 
 export * from './common';
 
-export * from './getAccessToken';
+export * from './getVkAccessToken';
 
-export * from './initializeApp';
+export * from './initializeVkApp';
 
-export * from './setViewSettings';
+export * from './setVkViewSettings';
 
-export * from './sharePost';
+export * from './shareVkPost';
 
-export * from './shareStory';
+export * from './shareVkStory';
 
 export * from './window';

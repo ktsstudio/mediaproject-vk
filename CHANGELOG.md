@@ -5,7 +5,7 @@
 - [*] изменен метод получения access token
 - [+] добавлен оптимальный метод получения access token с обращением к window
 - [+] добавлен метод для шеринга в пост с загрузкой картинки на сервер VK
-- [*] функция initializeApp теперь асинхронная (issue не было, но жалобы были)
+- [*] функция initializeVkApp теперь асинхронная (issue не было, но жалобы были)
 - [+] добавлена возможность получения access token с пустым scope ([issue](https://github.com/ktsstudio/mediaproject-vk/issues/7))
 - [*] исправлены возвращаемые типы всех функций ([issue](https://github.com/ktsstudio/mediaproject-vk/issues/6))
 - [*] общие минорные улучшения, небольшой рефактор
@@ -18,7 +18,7 @@
 
 - [+] useEventSubscribe
 - [+] usePolling
-- [*] initializeApp добавляет класс 'desktop'
+- [*] initializeVkApp добавляет класс 'desktop'
 - [*] getAuthToken проверяет наличие всех скоупов в ответе
 - [+] isAvatarDefault
 
@@ -43,8 +43,8 @@
 
 #### v1.0.9
 
-- [*] sharePost: wrapped try catch
-- [*] shareStory: wrapped try catch
+- [*] shareVkPost: wrapped try catch
+- [*] shareVkStory: wrapped try catch
 
 #### v1.0.8
 
@@ -56,7 +56,7 @@
 
 #### v1.0.6
 
-- [*] initializeApp
+- [*] initializeVkApp
 
 #### v1.0.5
 
@@ -66,7 +66,7 @@
 
 - [+] types moved to src/types
 - [*] Window type inherited
-- [*] initializeApp
+- [*] initializeVkApp
 - [+] checkIOS
 - [*] README
 

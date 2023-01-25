@@ -1,35 +1,38 @@
-import bridge, { ErrorData, ReceiveData } from '@vkontakte/vk-bridge';
+import bridge from '@vkontakte/vk-bridge';
 
-import { PlatformType } from './types/common';
-import { ViewSettingsType } from './types/setViewSettings';
+import {
+  VkPlatformType,
+  SetViewSettingsPropsType,
+  SetViewSettingsResponseType,
+} from './types';
 
-export const DEFAULT_VIEW_SETTINGS: ViewSettingsType = {
+const DEFAULT_VK_VIEW_SETTINGS: SetViewSettingsPropsType = {
   status_bar_style: 'dark',
   action_bar_color: 'white',
   navigation_bar_color: 'white',
 };
 
-const PLATFORMS_WITH_VIEW_SETTINGS: PlatformType[] = [
+const VK_PLATFORMS_WITH_VIEW_SETTINGS: VkPlatformType[] = [
   'mobile_iphone',
   'mobile_ipad',
   'mobile_android',
 ];
 
-const setViewSettings = async (
-  viewSettings: ViewSettingsType = DEFAULT_VIEW_SETTINGS
-): Promise<ReceiveData<'VKWebAppSetViewSettings'> | ErrorData | void> => {
+const setVkViewSettings = async (
+  viewSettings: SetViewSettingsPropsType = DEFAULT_VK_VIEW_SETTINGS
+): Promise<SetViewSettingsResponseType | undefined> => {
   try {
     let settingsForCurrentPlatform = { ...viewSettings };
 
     if (
       window.platform &&
-      PLATFORMS_WITH_VIEW_SETTINGS.includes(window.platform) &&
+      VK_PLATFORMS_WITH_VIEW_SETTINGS.includes(window.platform) &&
       bridge.supports('VKWebAppSetViewSettings')
     ) {
-      /*
+      /**
        * Все настройки поддерживаются только на android,
        * так что если платформа не android, то используем только цвет status bar
-       */
+       **/
       if (window.platform !== 'mobile_android') {
         settingsForCurrentPlatform = {
           status_bar_style: viewSettings.status_bar_style,
@@ -46,4 +49,8 @@ const setViewSettings = async (
   }
 };
 
-export { setViewSettings };
+export {
+  DEFAULT_VK_VIEW_SETTINGS,
+  VK_PLATFORMS_WITH_VIEW_SETTINGS,
+  setVkViewSettings,
+};

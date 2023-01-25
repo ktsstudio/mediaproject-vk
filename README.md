@@ -13,21 +13,21 @@
 ### О пакете
 
 Содержит обертки для некоторых методов vk-bridge.
-Также содержит [метод-обертку для работы VK API через vk-bridge](./src/callApi.ts) и [утилиту для инициализации параметров vk-приложения](./src/initializeApp.ts)
+Также содержит [метод-обертку для работы VK API через vk-bridge](./src/callVkApi.ts) и [утилиту для инициализации параметров vk-приложения](./src/initializeVkApp.ts)
 с использованием GET-параметров. Хранит параметры приложения в [Window](./src/types/window.ts).
 
 #### Методы-обертки для vk-bridge:
 
-- [callApi](./src/callApi.ts) - вызов метода API VK (VKWebAppCallAPIMethod)
-- [getAccessToken](./src/getAccessToken.ts) - получение access token пользователя (VKWebAppGetAuthToken)
-- [setViewSettings](./src/setViewSettings.ts) - установить настройки status bar и других ui-элементов на мобильных платформах (VKWebAppShowWallPostBox)
-- [sharePost](./src/sharePost.ts) - поделиться постом на стену (VKWebAppShowWallPostBox)
-- [shareStory](./src/shareStory.ts) - поделиться историей (VKWebAppShowStoryBox)
+- [callVkApi](./src/callVkApi.ts) - вызов метода API VK (VKWebAppCallAPIMethod)
+- [getVkAccessToken](./src/getVkAccessToken.ts) - получение access token пользователя (VKWebAppGetAuthToken)
+- [setVkViewSettings](./src/setVkViewSettings.ts) - установить настройки status bar и других ui-элементов на мобильных платформах (VKWebAppShowWallPostBox)
+- [shareVkPost](./src/shareVkPost.ts) - поделиться постом на стену (VKWebAppShowWallPostBox)
+- [shareVkStory](./src/shareVkStory.ts) - поделиться историей (VKWebAppShowStoryBox)
 
 #### Другие методы:
 
-- [checkMobile, checkIOS](./src/checkPlatform.ts) - методы ждя распознавания платформы, на которой открыто приложение (на основе параметра запуска vk_platform)
-- [initializeApp](./src/initializeApp.ts) - утилита для парсинга и сохранения параметров запуска vk-mini-app
+- [checkMobile, checkIOS](./src/checkVkPlatform.ts) - методы для распознавания платформы, на которой открыто приложение (на основе параметра запуска vk_platform)
+- [initializeVkApp](./src/initializeVkApp.ts) - утилита для парсинга и сохранения параметров запуска vk-mini-app
 
 #### Хуки:
 

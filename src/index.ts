@@ -2,20 +2,20 @@ export * from './hooks';
 
 export * from './types';
 
-export * from './callApi';
+export * from './callVkApi';
 
-export * from './checkAvatarDefault';
+export * from './checkVkAvatarIsDefault';
 
-export * from './checkPlatform';
+export * from './checkVkPlatform';
 
-export * from './checkUserDenied';
+export * from './checkVkUserDenied';
 
-export * from './getAccessToken';
+export * from './getVkAccessToken';
 
-export * from './initializeApp';
+export * from './initializeVkApp';
 
-export * from './setViewSettings';
+export * from './setVkViewSettings';
 
-export * from './sharePost';
+export * from './shareVkPost';
 
-export * from './shareStory';
+export * from './shareVkStory';

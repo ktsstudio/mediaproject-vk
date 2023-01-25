@@ -4,11 +4,10 @@ import {
   initializeAppParams,
 } from '@ktsstudio/mediaproject-utils';
 
-import { checkMobile, checkIOS } from './checkPlatform';
-import { PlatformType } from './types/common';
-import { AppInitResponseType } from './types/initializeApp';
+import { checkVkPlatform } from './checkVkPlatform';
+import { InitializeVkAppResponseType, VkPlatformType } from './types';
 
-/**
+/***
  * Утилита для инициализации параметров vk-mini-app. Берет параметры из строки с квери-параметрами.
  * Сначала инициализирует общие параметры через initializeAppParams из @ktsstudio/mediaproject-utils.
  * Параметры, которые устанавливаются: search, location_hash, is_production, is_dev,
@@ -17,8 +16,8 @@ import { AppInitResponseType } from './types/initializeApp';
  * - 'mobile' или 'desktop' в зависимости от устройства;
  * - 'ios' или 'android' в зависимости от платформы.
  * Отправляет событие VKWebAppInit в vk-bridge.
- */
-const initializeApp = async (): Promise<AppInitResponseType> => {
+ **/
+const initializeVkApp = async (): Promise<InitializeVkAppResponseType> => {
   initializeAppParams();
 
   window.user_id = Number(findGetParameter('vk_user_id'));
@@ -33,11 +32,10 @@ const initializeApp = async (): Promise<AppInitResponseType> => {
   window.viewer_group_role =
     findGetParameter('vk_viewer_group_role') || undefined;
   window.platform = (findGetParameter('vk_platform') ||
-    'desktop_web') as PlatformType;
+    'desktop_web') as VkPlatformType;
   window.is_odr = findGetParameter('odr_enabled') === '1';
 
-  checkMobile();
-  checkIOS();
+  checkVkPlatform();
 
   // eslint-disable-next-line no-console
   console.log(`VK, ${window.is_mobile ? 'mobile, ' : ''}${window.platform}`);
@@ -45,4 +43,4 @@ const initializeApp = async (): Promise<AppInitResponseType> => {
   return await bridge.send('VKWebAppInit', {});
 };
 
-export { initializeApp };
+export { initializeVkApp };
