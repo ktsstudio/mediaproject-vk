@@ -19,7 +19,7 @@ type ShareVkPostWithUploadParamsType = {
   apiUploadUrl: UrlConfigType;
   userId: number;
   accessToken?: string;
-  onUserDeniedAccess?: () => void;
+  onUserDeniedAccess?: VoidFunction;
   // eslint-disable-next-line
   onErrorOccurred?: (error?: any, errorData?: any) => void;
 };

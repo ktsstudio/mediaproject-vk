@@ -7,7 +7,7 @@
     "strict": true,
     "esModuleInterop": true,
     "jsx": "react",
-    "strictNullChecks": true
+    "strictNullChecks": true,
   },
   "include": ["src"]
 }

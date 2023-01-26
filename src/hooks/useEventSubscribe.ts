@@ -4,12 +4,12 @@ import bridge, {
 } from '@vkontakte/vk-bridge';
 import { useCallback, useEffect, DependencyList } from 'react';
 
-/***
- * Подписывается на событие vk-bridge.
- * @param {AnyReceiveMethodName} eventName Название события
- * @param {VoidFunction} callBack Колбэк, вызываемый при наступлении события
- * @param {React.DependencyList} deps Зависимости переданного колбэка. По умолчанию пустые
- **/
+/**
+ * Хук для подписки на событие vk-bridge.
+ * @param {AnyReceiveMethodName} eventName Название события.
+ * @param {VoidFunction} callBack Коллбэк, вызываемый при наступлении события.
+ * @param {React.DependencyList=[]} deps Зависимости переданного коллбэка. По умолчанию пустой массив.
+ */
 const useEventSubscribe = (
   eventName: AnyReceiveMethodName,
   callBack: VoidFunction,
