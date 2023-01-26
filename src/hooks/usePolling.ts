@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { useRef, useCallback, useEffect } from 'react';
 import bridge, {
   AnyReceiveMethodName,
   VKBridgeEvent,
@@ -15,23 +15,23 @@ const usePolling = (
   condition = true,
   pollingInterval = 60000
 ): void => {
-  const timer = React.useRef<NodeJS.Timeout | null>(null);
+  const timer = useRef<NodeJS.Timeout | null>(null);
 
-  const stopPolling = React.useCallback(() => {
+  const stopPolling = useCallback(() => {
     if (timer.current) {
       clearInterval(timer.current);
       timer.current = null;
     }
   }, []);
 
-  const startPolling = React.useCallback(() => {
+  const startPolling = useCallback(() => {
     stopPolling();
     callback();
 
     timer.current = setInterval(callback, pollingInterval);
   }, []);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (condition) {
       startPolling();
     }
@@ -39,7 +39,7 @@ const usePolling = (
     return () => stopPolling();
   }, [condition]);
 
-  const hideAppListener = React.useCallback(
+  const hideAppListener = useCallback(
     (event: VKBridgeEvent<AnyReceiveMethodName>) => {
       const eventType = event.detail.type;
 
@@ -56,7 +56,7 @@ const usePolling = (
     [condition]
   );
 
-  React.useEffect(() => {
+  useEffect(() => {
     bridge.subscribe(hideAppListener);
 
     return () => bridge.unsubscribe(hideAppListener);

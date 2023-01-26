@@ -9,6 +9,8 @@ import {
   ShareVkPostWithUploadParamsType,
   ShareVkPostWithUploadResponseType,
   ShareVkPostPropsType,
+  CallVkApiResponseType,
+  SaveVkWallPhotoResponseType,
 } from './types';
 
 /**
@@ -97,7 +99,7 @@ const shareVkPostWithUpload = async ({
      * передавая все поученное на предыдущем шаге
      * в метод сохранения картинки в альбоме стены
      **/
-    const saveWallPhotoData = await callVkApi({
+    const saveWallPhotoData: SaveVkWallPhotoResponseType = await callVkApi({
       method: 'photos.saveWallPhoto',
       accessToken,
       /**
@@ -113,7 +115,7 @@ const shareVkPostWithUpload = async ({
       },
     });
 
-    if (saveWallPhotoData.error_type) {
+    if (saveWallPhotoData.error_type || !saveWallPhotoData.response?.[0]) {
       onErrorOccurred?.(saveWallPhotoData);
 
       return;
@@ -123,7 +125,7 @@ const shareVkPostWithUpload = async ({
      * Получили id загруженной картинки и id пользователя
      **/
     // eslint-disable-next-line prefer-destructuring
-    const { id: mediaId, owner_id: ownerId } = saveWallPhotoData[0];
+    const { id: mediaId, owner_id: ownerId } = saveWallPhotoData.response[0];
     const uploadedPhotoAttachment = `photo${ownerId}_${mediaId}`;
 
     /**

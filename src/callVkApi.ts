@@ -1,7 +1,7 @@
 import bridge from '@vkontakte/vk-bridge';
 
 import { getVkAccessToken, getNewVkAccessToken } from './getVkAccessToken';
-import { CallApiParamsType, CallApiResponseType } from './types';
+import { CallVkApiParamsType, CallVkApiResponseType } from './types';
 
 const VK_TOKEN_ERRORS = [
   'User authorization failed: access_token was given to another ip address.',
@@ -21,7 +21,7 @@ const callVkApi = async ({
   getAccessTokenParams = {},
   renewTokenIfNoneProvided = false,
   renewTokenIfExpired = true,
-}: CallApiParamsType): Promise<CallApiResponseType> => {
+}: CallVkApiParamsType): Promise<CallVkApiResponseType> => {
   try {
     let token: string | null = accessToken;
 

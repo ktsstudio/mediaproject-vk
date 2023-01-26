@@ -1,4 +1,4 @@
-import { WindowType } from '../src';
+import { WindowType } from '../index';
 
 declare global {
   interface Window extends WindowType {}

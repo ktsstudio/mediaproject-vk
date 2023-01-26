@@ -3,17 +3,17 @@ import { RequestPropsMap } from '@vkontakte/vk-bridge';
 import { VkResponseType } from './common';
 import { GetVkAccessTokenParamsType } from './getVkAccessToken';
 
-type CallApiRequestPropsType = RequestPropsMap['VKWebAppCallAPIMethod'];
+type CallVkApiRequestPropsType = RequestPropsMap['VKWebAppCallAPIMethod'];
 
-type CallApiRequestMethodType = CallApiRequestPropsType['method'];
+type CallVkApiRequestMethodType = CallVkApiRequestPropsType['method'];
 
-type CallApiRequestParamsType = CallApiRequestPropsType['params'];
+type CallVkApiRequestParamsType = CallVkApiRequestPropsType['params'];
 
-type CallApiParamsType = {
-  method: CallApiRequestMethodType;
-  params?: Omit<CallApiRequestParamsType, 'access_token' | 'v'>;
-  version?: CallApiRequestParamsType['v'];
-  accessToken?: CallApiRequestParamsType['access_token'] | null;
+type CallVkApiParamsType = {
+  method: CallVkApiRequestMethodType;
+  params?: Omit<CallVkApiRequestParamsType, 'access_token' | 'v'>;
+  version?: CallVkApiRequestParamsType['v'];
+  accessToken?: CallVkApiRequestParamsType['access_token'] | null;
   renewTokenIfNoneProvided?: boolean;
 } & (
   | {
@@ -26,12 +26,12 @@ type CallApiParamsType = {
     }
 );
 
-type CallApiResponseType = VkResponseType<'VKWebAppCallAPIMethod'>;
+type CallVkApiResponseType = VkResponseType<'VKWebAppCallAPIMethod'>;
 
 export type {
-  CallApiRequestPropsType,
-  CallApiRequestMethodType,
-  CallApiRequestParamsType,
-  CallApiParamsType,
-  CallApiResponseType,
+  CallVkApiRequestPropsType,
+  CallVkApiRequestMethodType,
+  CallVkApiRequestParamsType,
+  CallVkApiParamsType,
+  CallVkApiResponseType,
 };

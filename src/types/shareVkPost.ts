@@ -3,6 +3,7 @@ import { ApiResponse } from '@ktsstudio/mediaproject-utils';
 import { UrlConfigType } from '@ktsstudio/mediaproject-utils/dist/types/types/api';
 
 import { VkResponseType } from './common';
+import { CallVkApiResponseType } from './callVkApi';
 
 type ShareVkPostPropsType = RequestPropsMap['VKWebAppShowWallPostBox'] & {
   link_image?: string;
@@ -35,10 +36,19 @@ type UploadFromApiToVkResponseType = ApiResponse<{
   };
 }>;
 
+type SaveVkWallPhotoResponseType = Omit<CallVkApiResponseType, 'response'> & {
+  response?: {
+    id: number;
+    album_id: number;
+    owner_id: number;
+  }[];
+};
+
 export type {
   ShareVkPostPropsType,
   ShareVkPostResponseType,
   ShareVkPostWithUploadParamsType,
   ShareVkPostWithUploadResponseType,
   UploadFromApiToVkResponseType,
+  SaveVkWallPhotoResponseType,
 };

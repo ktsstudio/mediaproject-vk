@@ -2,7 +2,7 @@ import bridge, {
   VKBridgeEvent,
   AnyReceiveMethodName,
 } from '@vkontakte/vk-bridge';
-import * as React from 'react';
+import { useCallback, useEffect, DependencyList } from 'react';
 
 /***
  * Подписывается на событие vk-bridge.
@@ -13,9 +13,9 @@ import * as React from 'react';
 const useEventSubscribe = (
   eventName: AnyReceiveMethodName,
   callBack: VoidFunction,
-  deps: React.DependencyList = []
+  deps: DependencyList = []
 ): void => {
-  const eventListener = React.useCallback(
+  const eventListener = useCallback(
     (event: VKBridgeEvent<AnyReceiveMethodName>) => {
       if (event.detail.type === eventName) {
         callBack();
@@ -24,7 +24,7 @@ const useEventSubscribe = (
     deps
   );
 
-  React.useEffect(() => {
+  useEffect(() => {
     bridge.subscribe(eventListener);
 
     return () => bridge.unsubscribe(eventListener);
