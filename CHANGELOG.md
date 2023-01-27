@@ -9,6 +9,9 @@
 - [+] добавлена возможность получения access token с пустым scope ([issue](https://github.com/ktsstudio/mediaproject-vk/issues/7))
 - [*] исправлены возвращаемые типы всех функций ([issue](https://github.com/ktsstudio/mediaproject-vk/issues/6))
 - [*] общие минорные улучшения, небольшой рефактор
+- [+] сборка библиотеки на rollup, режим разработки, сборка модулей в двух форматах - cjs и es
+- [*] улучшены JSDoc
+- [*] хук useEventSubscribe передает полученный event в callback ([issue](https://github.com/ktsstudio/mediaproject-vk/issues/1))
 
 #### v1.2.1
 
