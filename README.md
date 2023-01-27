@@ -2,38 +2,40 @@
 
 # @ktsstudio/mediaproject-vk
 
-Пакет с утилитами для медиапроектов vk-mini-app.
+Пакет с утилитами для [VK Mini Apps](https://dev.vk.com/mini-apps/overview).
 
-### Использование
+## Установка
 
 `npm install @ktsstudio/mediaproject-vk`
 
 `yarn add @ktsstudio/mediaproject-vk`
 
-### О пакете
+## О пакете
 
-Содержит обертки для некоторых методов vk-bridge.
-Также содержит [метод-обертку для работы VK API через vk-bridge](./src/callVkApi.ts) и [утилиту для инициализации параметров vk-приложения](./src/initializeVkApp.ts)
-с использованием GET-параметров. Хранит параметры приложения в [Window](./src/types/window.ts).
+Пакет содержит тайные знания, накопленные разработчиками [KTS](https://kts.studio/) за время работы над VK Mini Apps.
+Список основных утилит приведен ниже.
 
-#### Методы-обертки для vk-bridge:
+## Содержимое
 
-- [callVkApi](./src/callVkApi.ts) - вызов метода API VK (VKWebAppCallAPIMethod)
-- [getVkAccessToken](./src/getVkAccessToken.ts) - получение access token пользователя (VKWebAppGetAuthToken)
-- [setVkViewSettings](./src/setVkViewSettings.ts) - установить настройки status bar и других ui-элементов на мобильных платформах (VKWebAppShowWallPostBox)
-- [shareVkPost](./src/shareVkPost.ts) - поделиться постом на стену (VKWebAppShowWallPostBox)
-- [shareVkStory](./src/shareVkStory.ts) - поделиться историей (VKWebAppShowStoryBox)
+### Утилиты-обертки над [VK Bridge](https://github.com/VKCOM/vk-bridge)
 
-#### Другие методы:
+- [callVkApi](./src/callVkApi.ts)
+- [getVkAccessToken](./src/getVkAccessToken.ts)
+- [setVkViewSettings](./src/setVkViewSettings.ts)
+- [shareVkPost и shareVkPostWithUpload](./src/shareVkPost.ts)
+- [shareVkStory](./src/shareVkStory.ts)
 
-- [checkMobile, checkIOS](./src/checkVkPlatform.ts) - методы для распознавания платформы, на которой открыто приложение (на основе параметра запуска vk_platform)
-- [initializeVkApp](./src/initializeVkApp.ts) - утилита для парсинга и сохранения параметров запуска vk-mini-app
+### Хуки
 
-#### Хуки:
+- [useEventSubscribe](./src/hooks/useEventSubscribe.ts)
+- [usePolling](./src/hooks/usePolling.ts)
 
-- [useEventSubscribe](./src/hooks/useEventSubscribe.ts) - хук для подписки на событие vk-bridge
-- [usePolling](./src/hooks/usePolling.ts) - хук для поллинга внутри мини-приложения ВК
+### Дополнительные утилиты
 
-### Обратная связь
+- [checkVkAvatarIsDefault](./src/checkVkAvatarIsDefault.ts)
+- [checkVkPlatform](./src/checkVkPlatform.ts)
+- [initializeVkApp](./src/initializeVkApp.ts)
 
-Любой фидбэк вы можете передать нам на почту [hello@ktsstudio.ru](mailto:hello@ktsstudio.ru) в письме с темой "mediaproject-vk feedback"
+## Обратная связь
+
+Любой фидбэк вы можете отправить нам на почту [hello@ktsstudio.ru](mailto:hello@ktsstudio.ru) или в личные сообщения [нашего сообщества ВКонтакте](https://vk.com/kts.specials).

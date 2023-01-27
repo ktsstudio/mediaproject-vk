@@ -7,16 +7,17 @@ import {
 import { checkVkPlatform } from './checkVkPlatform';
 import { InitializeVkAppResponseType, VkPlatformType } from './types';
 
-/***
- * Утилита для инициализации параметров vk-mini-app. Берет параметры из строки с квери-параметрами.
- * Сначала инициализирует общие параметры через initializeAppParams из @ktsstudio/mediaproject-utils.
- * Параметры, которые устанавливаются: search, location_hash, is_production, is_dev,
- * app_id, scope, user_id, group_id, platform, is_mobile, page, is_odr, is_ios.
- * Добавляет классы на document.body:
- * - 'mobile' или 'desktop' в зависимости от устройства;
- * - 'ios' или 'android' в зависимости от платформы.
- * Отправляет событие VKWebAppInit в vk-bridge.
- **/
+/**
+ * Утилита для инициализации параметров mini-app ВКонтакте.
+ * Сначала инициализирует общие параметры через initializeAppParams
+ * из {@link https://github.com/ktsstudio/mediaproject-utils @ktsstudio/mediaproject-utils}.
+ * Затем получает {@link https://dev.vk.com/mini-apps/development/launch-params параметры запуска}
+ * из query-параметров и сохраняет их в window ({@link WindowType}).
+ * После этого вызывает утилиту {@link checkVkPlatform}.
+ * В конце отправляет событие {@link https://dev.vk.com/bridge/VKWebAppInit VKWebAppInit} в vk-bridge.
+ *
+ * @returns {Promise<SetViewSettingsResponseType>} Возвращает ответ, полученный на запрос VKWebAppInit.
+ */
 const initializeVkApp = async (): Promise<InitializeVkAppResponseType> => {
   initializeAppParams();
 

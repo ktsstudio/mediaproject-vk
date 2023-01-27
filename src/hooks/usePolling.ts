@@ -1,37 +1,39 @@
-import * as React from 'react';
+import { useRef, useCallback, useEffect } from 'react';
 import bridge, {
   AnyReceiveMethodName,
   VKBridgeEvent,
 } from '@vkontakte/vk-bridge';
 
-/***
- * Вызывает переданную функцию с указанной частотой, останавливая поллинг при сворачивании приложения.
- * @param callback Функция, которую нужно вызывать
- * @param condition Условие, при котором нужно вызывать функцию. По умолчанию она вызывается всегда
- * @param pollingInterval Промежуток времени между вызовами в миллисекундах. По умолчанию минута
- **/
+/**
+ * Хук для вызова переданной функции с указанной частотой.
+ * При сворачивании приложения вызов функции останавливается.
+ *
+ * @param {VoidFunction} callback Функция, которую нужно вызывать.
+ * @param {boolean} [condition=true] Условие, при котором нужно вызывать функцию. По умолчанию она вызывается всегда.
+ * @param {number} [pollingInterval=60000] Промежуток времени между вызовами в миллисекундах. По умолчанию минута.
+ */
 const usePolling = (
   callback: VoidFunction,
   condition = true,
   pollingInterval = 60000
 ): void => {
-  const timer = React.useRef<NodeJS.Timeout | null>(null);
+  const timer = useRef<NodeJS.Timeout | null>(null);
 
-  const stopPolling = React.useCallback(() => {
+  const stopPolling = useCallback(() => {
     if (timer.current) {
       clearInterval(timer.current);
       timer.current = null;
     }
   }, []);
 
-  const startPolling = React.useCallback(() => {
+  const startPolling = useCallback(() => {
     stopPolling();
     callback();
 
     timer.current = setInterval(callback, pollingInterval);
   }, []);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (condition) {
       startPolling();
     }
@@ -39,7 +41,7 @@ const usePolling = (
     return () => stopPolling();
   }, [condition]);
 
-  const hideAppListener = React.useCallback(
+  const hideAppListener = useCallback(
     (event: VKBridgeEvent<AnyReceiveMethodName>) => {
       const eventType = event.detail.type;
 
@@ -56,7 +58,7 @@ const usePolling = (
     [condition]
   );
 
-  React.useEffect(() => {
+  useEffect(() => {
     bridge.subscribe(hideAppListener);
 
     return () => bridge.unsubscribe(hideAppListener);

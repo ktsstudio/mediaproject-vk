@@ -10,7 +10,7 @@ type VkResponseType<M> = M extends AnyReceiveMethodName
 
 /**
  * https://dev.vk.com/mini-apps/development/launch-params#vk_platform
- **/
+ */
 type InternalVkPlatformType =
   | 'desktop_web'
   | 'mobile_android'
