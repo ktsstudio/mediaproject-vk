@@ -32,7 +32,7 @@ const ALLOWED_VK_SCOPES: PersonalAuthScope[] = [
 /**
  * Утилита для вычленения массива scopes из строки.
  *
- * @function
+
  * @param {string=} scopes Строка, в которой через запятую перечислены scope. Допускаются только значения из {@link ALLOWED_VK_SCOPES}.
  * @returns {PersonalAuthScope[]} Массив извлеченных scope. В случае ошибки возвращается пустой массив.
  */
@@ -52,7 +52,7 @@ const parseVkScopes = (scopes?: string): PersonalAuthScope[] => {
 /**
  * Утилита для проверки равенства двух множеств scopes.
  *
- * @function
+
  * @param {Set<PersonalAuthScope>} firstScope Первое множество scopes.
  * @param {Set<PersonalAuthScope>,} secondScope Второе множество scopes.
  * @returns {boolean} Если все значения из первого множества встречаются во втором, возвращает true. Иначе возвращает false.
@@ -69,10 +69,10 @@ const checkVkScopesAreEqual = (
 /**
  * Утилита для получения нового токена доступа без возможности того, что токен мог быть получен ранее.
  *
- * @function
- * @async
+
+ * 
  * @param {GetNewVkAccessTokenParamsType} props
- * @param {PersonalAuthScope[] | null=null} props.scopes Массив необходимых scopes. Если не передан, будет получен токен с пустым scope.
+ * @param {PersonalAuthScope[] | null} [props.scopes=null] Массив необходимых scopes. Если не передан, будет получен токен с пустым scope.
  * @param {number=} props.appId ID текущего приложения. Если не указан, будет взят из window.app_id.
  * @returns {Promise<GetNewVkAccessTokenResponseType>} Возвращает ответ, полученный на запрос VKWebAppGetAuthToken с переданными параметрами.
  *
@@ -105,8 +105,8 @@ const getNewVkAccessToken = async ({
  * Сохраняет новый токен в window.access_token и имеющиеся у него права доступа в window.scope.
  * Если ранее токен с требуемыми правами доступа (scopes) уже был получен, будет взят токен из window.access_token.
  *
- * @function
- * @async
+
+ * 
  * @param {GetVkAccessTokenParamsType} props
  * @param {PersonalAuthScope[] | null=null} props.scopes Массив необходимых scopes. Объединяется с уже имеющимися правами доступа в window.scope.
  * @param {(error?: ErrorData) => void=} props.onUserDeniedAll Коллбэк, вызываемый в случае, если пользователь отказался давать доступ к запрашиваемым scopes.

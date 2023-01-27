@@ -5,7 +5,7 @@ import bridge, {
   ErrorDataClientError,
 } from '@vkontakte/vk-bridge';
 
-import { getVkAccessToken, getNewVkAccessToken } from './getVkAccessToken';
+import { getVkAccessToken } from './getVkAccessToken';
 import { CallVkApiPropsType, CallVkApiResponseType } from './types';
 
 /**
@@ -21,15 +21,13 @@ const VK_TOKEN_ERRORS = [
 /**
  * Утилита для вызова метода API ВКонтакте.
  *
- * @function
- * @async
  * @param {CallVkApiPropsType} props Параметры для вызова метода API ВКонтакте.
- * @param props.method Имя вызываемого {@link https://dev.vk.com/methods|метода API}.
- * @param props.params Параметры метода API, специфичные для указанного метода.
- * @param props.version Версия API, используемая для запроса. По умолчанию 5.131.
- * @param props.accessToken Ключ доступа для обращения к API. Если не передан, будет получен вызовом функции {@link getVkAccessToken} с передчаей в нее параметров из getAccessTokenParams.
- * @param props.getAccessTokenParams Параметры для получения токена доступа, которые будут переданы в {@link getVkAccessToken} в случае, если токена нет, или в {@link getNewVkAccessToken}, если срок действия токена закончился (если передано значение true для renewTokenIfExpired).
- * @param props.renewTokenIfExpired Нужно ли получить новый токен доступа и повторить запрос в случае, если срок действия токена закончился. Если указан как true, то при получении от API ошибки одной из {@link VK_TOKEN_ERRORS} будет вызван метод {@link getNewVkAccessToken} с аргументом getAccessTokenParams.
+ * @param {string} props.method Имя вызываемого {@link https://dev.vk.com/methods|метода API}.
+ * @param {Object} [props.params={}] Параметры метода API, специфичные для указанного метода.
+ * @param {string} [props.version='5.131'] Версия API, используемая для запроса. По умолчанию 5.131.
+ * @param {string|null} [props.accessToken=null] Ключ доступа для обращения к API. Если не передан, будет получен вызовом функции {@link getVkAccessToken} с передчаей в нее параметров из getAccessTokenParams.
+ * @param {string} [props.renewTokenIfExpired=true] Нужно ли получить новый токен доступа и повторить запрос в случае, если срок действия токена закончился. Если указан как true, то при получении от API ошибки одной из {@link VK_TOKEN_ERRORS} будет вызван метод {@link getNewVkAccessToken} с аргументом getAccessTokenParams.
+ * @param {Object} [props.getAccessTokenParams={}] Параметры для получения токена доступа, которые будут переданы в {@link getVkAccessToken} в случае, если токена нет, или в {@link getNewVkAccessToken}, если срок действия токена закончился (если передано значение true для renewTokenIfExpired).
  * @returns {Promise<CallVkApiResponseType>} Возвращает ответ, полученный на запрос VKWebAppCallAPIMethod с переданными параметрами.
  *
  * @see {@link https://dev.vk.com/bridge/VKWebAppCallAPIMethod|VKWebAppCallAPIMethod}
@@ -89,13 +87,14 @@ const callVkApi = async ({
         errorMessage &&
         VK_TOKEN_ERRORS.includes(errorMessage)
       ) {
-        await getNewVkAccessToken(getAccessTokenParams);
+        window.access_token = undefined;
+        const newAccessToken = await getVkAccessToken(getAccessTokenParams);
 
         return await callVkApi({
           method,
           params,
           version,
-          accessToken,
+          accessToken: newAccessToken,
           getAccessTokenParams,
           renewTokenIfExpired: false,
         });

@@ -9,13 +9,13 @@ const OUTPUT_DIR = './dist/';
 
 const IS_PRODUCTION = process.env.NODE_ENV === 'production';
 
-const getPlugins = (minification = false) =>
+const getPlugins = (declarationDir, minification = false) =>
   [
     typescript({
-      tsconfig: './tsconfig.json',
       compilerOptions: {
+        rootDir: INPUT_DIR,
         declaration: true,
-        declarationDir: 'types',
+        declarationDir: `${declarationDir}types`,
       },
     }),
     babel({ babelHelpers: 'bundled' }),
@@ -24,38 +24,21 @@ const getPlugins = (minification = false) =>
     minification && terser(),
   ].filter(Boolean);
 
-const es = {
-  input: `${INPUT_DIR}index.ts`,
-  plugins: getPlugins(),
-  output: {
-    file: `${OUTPUT_DIR}index.es.js`,
-    format: 'es',
-    exports: 'named',
-    sourcemap: true,
-  },
-};
+const getOutput = () => ({
+  exports: 'named',
+  sourcemap: true,
+  preserveModules: true,
+  entryFileNames: (chunkInfo) => `${chunkInfo.name.replace('src/', '')}.js`,
+});
 
-const cjs = {
+const getModule = (format) => ({
   input: `${INPUT_DIR}index.ts`,
-  plugins: getPlugins(true),
+  plugins: getPlugins(`${OUTPUT_DIR}${format}/`, IS_PRODUCTION),
   output: {
-    file: `${OUTPUT_DIR}index.js`,
-    format: 'cjs',
-    exports: 'named',
-    sourcemap: true,
+    ...getOutput(),
+    format: format,
+    dir: `${OUTPUT_DIR}${format}`,
   },
-};
+});
 
-const umd = {
-  input: `${INPUT_DIR}index.ts`,
-  plugins: getPlugins(true),
-  output: {
-    file: `${OUTPUT_DIR}index.umd.js`,
-    format: 'umd',
-    name: 'mediaprojectVk',
-    exports: 'named',
-    sourcemap: true,
-  },
-};
-
-export default IS_PRODUCTION ? [es, cjs, umd] : umd;
+export default [getModule('es'), getModule('cjs')];

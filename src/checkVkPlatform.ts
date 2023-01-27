@@ -77,8 +77,8 @@ const VK_PLATFORM_CLASSNAME = {
  *
  * Если текущая платформа m.vk, устанавливает window.is_mvk = true и добавляет класснеймы 'mobile mvk'.
  *
- * @function
- * @param {VkPlatformType | undefined=window.platform} platform Значение текущей платформы, полученное в параметрах запуска ВКонтакте
+
+ * @param {VkPlatformType | undefined} [platform=window.platform] Значение текущей платформы, полученное в параметрах запуска ВКонтакте
  *
  * @see https://dev.vk.com/mini-apps/development/launch-params#vk_platform
  */

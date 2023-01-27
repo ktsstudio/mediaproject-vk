@@ -1,19 +1,27 @@
 {
   "name": "@ktsstudio/mediaproject-vk",
   "version": "2.0.0",
-  "author": "KTS Studio",
-  "license": "MIT",
-  "description": "Package with utils for vk mini apps",
+  "description": "Package with utils for VK Mini Apps",
+  "author": "KTS Studio <hello@ktsstudio.ru> (https://kts.studio/)",
   "keywords": [
     "vk",
     "vkontakte",
     "vk-mini-app",
     "vk-bridge"
   ],
-  "main": "./dist/index.js",
-  "browser": "dist/index.umd.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ktsstudio/mediaproject-vk.git"
+  },
+  "bugs": {
+    "email": "hello@ktsstudio.ru",
+    "url": "https://github.com/ktsstudio/mediaproject-vk/issues"
+  },
+  "license": "MIT",
+  "main": "./dist/cjs/index.js",
+  "browser": "./dist/es/index.js",
   "module": "./dist/index.es.js",
-  "types": "./dist/types/index.d.ts",
+  "types": "./dist/cjs/types/index.d.ts",
   "files": [
     "dist/",
     "package.json",

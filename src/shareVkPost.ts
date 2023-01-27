@@ -15,8 +15,8 @@ import {
 /**
  * Утилита для шеринга поста на стену.
  *
- * @function
- * @async
+ 
+ * 
  * @param {ShareVkPostPropsType} props - Объект параметров, передаваемый в метод VKWebAppShowWallPostBox. Так же может принимать поля link_image, link_button и link_title, необходимые для шеринга в сниппет.
  * @returns {Promise<ShareVkPostResponseType | void>} Возвращает ответ, полученный на запрос VKWebAppShowWallPostBox с переданными параметрами.
  *
@@ -50,8 +50,8 @@ const shareVkPost = async (
  *
  * 4. Вызывает окно шеринга поста, где во вложениях будет загруженная в альбом картинка.
  *
- * @function
- * @async
+ 
+ * 
  * @param {ShareVkPostWithUploadParamsType} props Параметры для шеринга поста с загрузкой картинки в альбом.
  * @param {ShareVkPostPropsType} props.postProps Параметры для шеринга поста, передаваемые в {@link shareVkPost}.
  * @param {File} props.file Картинка (в виде файла), которую нужно загрузить.

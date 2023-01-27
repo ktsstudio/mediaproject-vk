@@ -8,7 +8,7 @@ import { useCallback, useEffect, DependencyList } from 'react';
  * Хук для подписки на событие vk-bridge.
  * @param {AnyReceiveMethodName} eventName Название события.
  * @param {VoidFunction} callBack Коллбэк, вызываемый при наступлении события.
- * @param {React.DependencyList=[]} deps Зависимости переданного коллбэка. По умолчанию пустой массив.
+ * @param {React.DependencyList} [deps=[]] Зависимости переданного коллбэка. По умолчанию пустой массив.
  */
 const useEventSubscribe = (
   eventName: AnyReceiveMethodName,

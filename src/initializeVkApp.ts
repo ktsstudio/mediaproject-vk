@@ -16,8 +16,8 @@ import { InitializeVkAppResponseType, VkPlatformType } from './types';
  * После этого вызывает утилиту {@link checkVkPlatform}.
  * В конце отправляет событие {@link https://dev.vk.com/bridge/VKWebAppInit VKWebAppInit} в vk-bridge.
  *
- * @function
- * @async
+ 
+ * 
  * @returns {Promise<SetViewSettingsResponseType>} Возвращает ответ, полученный на запрос VKWebAppInit.
  */
 const initializeVkApp = async (): Promise<InitializeVkAppResponseType> => {
