@@ -15,7 +15,7 @@ const getPlugins = (declarationDir, minification = false) =>
       compilerOptions: {
         rootDir: INPUT_DIR,
         declaration: true,
-        declarationDir: `${declarationDir}types`,
+        declarationDir: `${declarationDir}`,
       },
     }),
     babel({ babelHelpers: 'bundled' }),

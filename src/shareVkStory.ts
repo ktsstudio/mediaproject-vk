@@ -6,8 +6,6 @@ import { ShareVkStoryPropsType, ShareVkStoryResponseType } from './types';
 /**
  * Утилита для шеринга истории.
  *
- 
- * 
  * @param {ShareVkStoryPropsType} props - Объект параметров, передаваемый в метод VKWebAppShowStoryBox. Если указан url, использует его. Иначе использует blob, если указан.
  * @returns {Promise<ShareVkStoryResponseType | void>} Возвращает ответ, полученный на запрос VKWebAppShowStoryBox с переданными параметрами.
  *

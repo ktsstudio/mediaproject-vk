@@ -20,8 +20,6 @@ const VK_PLATFORMS_WITH_VIEW_SETTINGS: VkPlatformType[] = [
 /**
  * Утилита для установки темы для значков в статус-баре и цвета статус-бара.
  *
- 
- * 
  * @param {SetViewSettingsPropsType} viewSettings Настройки для статус-бара, экшен-бара, навигейшн-бара.
  * @param {light | dark} viewSettings.status_bar_style Тема для значков статус-бара. Возможные значения: light — светлая. dark — тёмная.
  * @param {string} viewSettings.action_bar_color Цвет экшен-бара в формате HEX-кода (#00ffff). Значение 'none' для прозрачного цвета. Только для Android.

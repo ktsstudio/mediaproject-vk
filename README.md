@@ -2,9 +2,9 @@
 
 # @ktsstudio/mediaproject-vk
 
-Пакет с утилитами для VK Mini Apps.
+Пакет с утилитами для [VK Mini Apps](https://dev.vk.com/mini-apps/overview).
 
-## Использование
+## Установка
 
 `npm install @ktsstudio/mediaproject-vk`
 
@@ -12,11 +12,8 @@
 
 ## О пакете
 
-Пакет содержит тайные знания, накопленные разработчиками [KTS](https://kts.studio/) за время работы над VK Mini Apps. Список утилит приведен ниже.
-
-## Обратная связь
-
-Любой фидбэк вы можете отправить нам на почту [hello@ktsstudio.ru](mailto:hello@ktsstudio.ru)
+Пакет содержит тайные знания, накопленные разработчиками [KTS](https://kts.studio/) за время работы над VK Mini Apps.
+Список основных утилит приведен ниже.
 
 ## Содержимое
 
@@ -38,3 +35,7 @@
 - [checkVkAvatarIsDefault](./src/checkVkAvatarIsDefault.ts)
 - [checkVkPlatform](./src/checkVkPlatform.ts)
 - [initializeVkApp](./src/initializeVkApp.ts)
+
+## Обратная связь
+
+Любой фидбэк вы можете отправить нам на почту [hello@ktsstudio.ru](mailto:hello@ktsstudio.ru) или в личные сообщения [нашего сообщества ВКонтакте](https://vk.com/kts.specials).
