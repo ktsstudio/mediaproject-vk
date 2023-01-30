@@ -46,8 +46,8 @@
 
 #### v1.0.9
 
-- [*] shareVkPost: wrapped try catch
-- [*] shareVkStory: wrapped try catch
+- [*] sharePost: wrapped try catch
+- [*] shareStory: wrapped try catch
 
 #### v1.0.8
 

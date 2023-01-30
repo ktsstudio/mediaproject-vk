@@ -102,7 +102,7 @@ const getNewVkAccessToken = async ({
  * Если ранее токен с требуемыми правами доступа (scopes) уже был получен, будет взят токен из window.access_token.
  *
  * @param {GetVkAccessTokenParamsType} props
- * @param {PersonalAuthScope[] | null=null} props.scopes Массив необходимых scopes. Объединяется с уже имеющимися правами доступа в window.scope.
+ * @param {PersonalAuthScope[] | null} [props.scopes=null] Массив необходимых scopes. Объединяется с уже имеющимися правами доступа в window.scope.
  * @param {(error?: ErrorData) => void=} props.onUserDeniedAll Коллбэк, вызываемый в случае, если пользователь отказался давать доступ к запрашиваемым scopes.
  * @param {(error?: ErrorData) => void=} props.onUserDeniedSomeScopes Коллбэк, вызываемый в случае, если пользователь дал доступ не ко всем требуемым scopes.
  * @param {(error?: ErrorData) => void=} props.onErrorOccurred Коллбэк, вызываемый в случае, если произошла ошибка.
