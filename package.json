@@ -1,25 +1,40 @@
 {
   "name": "@ktsstudio/mediaproject-vk",
-  "version": "1.2.1",
-  "author": "KTS Studio",
-  "license": "MIT",
-  "description": "Package with utils for vk mini apps",
+  "version": "2.0.0",
+  "description": "Package with utils for VK Mini Apps",
+  "author": "KTS Studio <hello@ktsstudio.ru> (https://kts.studio)",
   "keywords": [
     "vk",
     "vkontakte",
     "vk-mini-app",
     "vk-bridge"
   ],
-  "main": "./dist/index.js",
-  "module": "./dist/index.js",
-  "types": "./dist/types/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ktsstudio/mediaproject-vk.git"
+  },
+  "bugs": {
+    "email": "hello@ktsstudio.ru",
+    "url": "https://github.com/ktsstudio/mediaproject-vk/issues"
+  },
+  "license": "MIT",
+  "main": "./dist/cjs/index.js",
+  "browser": "./dist/es/index.js",
+  "module": "./dist/es/index.js",
+  "types": "./dist/es/index.d.ts",
+  "files": [
+    "dist/",
+    "package.json",
+    "README.md",
+    "CHANGELOG.md",
+    "logo.png"
+  ],
   "scripts": {
-    "rm-build": "rm -rf dist",
+    "build": "rm -rf dist && NODE_ENV=production rollup -c",
+    "dev": "rollup -c -w",
     "lint": "eslint src --fix",
     "codestyle": "prettier --write \"src/**/*.{ts,js}?(x)\"",
     "tsc-check": "tsc --skipLibCheck --noEmit --project tsconfig.json",
-    "build": "yarn run rm-build; tsc --module es6 --target es6 --outDir dist --declarationDir dist/types",
-    "build:cjs": "yarn run rm-build; tsc --module commonjs --target es5 --outDir dist --declarationDir dist/types",
     "precommit": "lint-staged"
   },
   "lint-staged": {
@@ -28,17 +43,20 @@
       "prettier --write"
     ]
   },
-  "files": [
-    "dist/",
-    "package.json",
-    "README.md",
-    "CHANGELOG.md",
-    "logo.png"
-  ],
   "devDependencies": {
+    "@babel/core": "^7.20.12",
+    "@babel/preset-env": "^7.20.2",
+    "@ktsstudio/mediaproject-utils": "^4.0.0",
+    "@rollup/plugin-babel": "^6.0.3",
+    "@rollup/plugin-commonjs": "^24.0.1",
+    "@rollup/plugin-node-resolve": "^15.0.1",
+    "@rollup/plugin-terser": "^0.4.0",
+    "@rollup/plugin-typescript": "^11.0.0",
     "@types/node": "^16.4.0",
+    "@types/react": "^17.0.2",
     "@typescript-eslint/eslint-plugin": "^4.13.0",
     "@typescript-eslint/parser": "^4.14.1",
+    "@vkontakte/vk-bridge": "^2.7.2",
     "eslint": "^7.31.0",
     "eslint-config-prettier": "^7.2.0",
     "eslint-import-resolver-typescript": "^2.3.0",
@@ -49,13 +67,14 @@
     "lint-staged": "^11.0.0",
     "prettier": "^2.2.1",
     "react": "^17.0.2",
+    "rollup": "^3.10.1",
+    "rollup-plugin-peer-deps-external": "^2.2.4",
     "typescript": "^4.1.3"
   },
-  "dependencies": {
-    "@ktsstudio/mediaproject-utils": "^4.0.0",
-    "@vkontakte/vk-bridge": "^2.4.4"
-  },
   "peerDependencies": {
+    "@ktsstudio/mediaproject-utils": "^4.0.0",
+    "@types/react": "^17.0.2",
+    "@vkontakte/vk-bridge": "^2.7.2",
     "react": "^17.0.2"
   }
 }

@@ -2,45 +2,40 @@
 
 # @ktsstudio/mediaproject-vk
 
-Пакет с утилитами для медиапроектов vk-mini-app.
+Пакет с утилитами для [VK Mini Apps](https://dev.vk.com/mini-apps/overview).
 
-### Использование
+## Установка
 
 `npm install @ktsstudio/mediaproject-vk`
 
 `yarn add @ktsstudio/mediaproject-vk`
 
-### О пакете
+## О пакете
 
-Содержит обертки для некоторых методов vk-bridge. 
-Также содержит [метод-обертку для работы VK API через vk-bridge](./src/vkApi.ts) и [утилиту для инициализации параметров vk-приложения](./src/initializeVkApp.ts)
-с использованием GET-параметров. Хранит параметры приложения в [Window](./src/types/window.ts).
+Пакет содержит тайные знания, накопленные разработчиками [KTS](https://kts.studio/) за время работы над VK Mini Apps.
+Список основных утилит приведен ниже.
 
-#### Методы-обертки для vk-bridge:
+## Содержимое
 
-- [addToFavorites](./src/addToFavorites.ts) - добавление приложения в список избранных (VKWebAppAddToFavorites)
-- [allowMessagesFromGroup](./src/allowMessagesFromGroup.ts) - запрос у юзера разрешения на получение сообщений от сообщества (VKWebAppAllowMessagesFromGroup)
-- [allowNotifications](./src/allowNotifications.ts) - запрос у юзера разрешения на отправку уведомлений от приложения (VKWebAppAllowNotifications)
-- [getAuthToken](./src/getAuthToken.ts) - получение access token юзера (VKWebAppGetAuthToken)
-- [getUserInfo](./src/getUserInfo.ts) - получение данных юзера, открывшего приложение (VKWebAppGetUserInfo)
-- [setSwipeSettings](./src/setSwipeSettings.ts) - включение swipeBack (VKWebAppSetSwipeSettings)
-- [setViewSettings](./src/setViewSettings.ts) - установка вида statusbar, actionbar, navigationbar на мобильных устройствах (VKWebAppSetViewSettings)
-- [shareLink](./src/shareLink.ts) - поделиться ссылкой (VKWebAppShare)
-- [sharePost](./src/sharePost.ts) - поделиться постом на стену (VKWebAppShowWallPostBox)
-- [shareStory](./src/shareStory.ts) - поделиться историей (VKWebAppShowStoryBox)
-- [vibrateAsImpact, vibrateAsNotification, vibrateAsSelection](./src/vibrate.ts) - утилиты-обертки над методами вибраций (VKWebAppTapticImpactOccurred, VKWebAppTapticNotificationOccurred, VKWebAppTapticSelectionChanged)
-- [vkApi](./src/vkApi.ts) - вызвать метод vk api (VKWebAppCallAPIMethod)
+### Утилиты-обертки над [VK Bridge](https://github.com/VKCOM/vk-bridge)
 
-#### Другие методы:
+- [callVkApi](./src/callVkApi.ts)
+- [getVkAccessToken](./src/getVkAccessToken.ts)
+- [setVkViewSettings](./src/setVkViewSettings.ts)
+- [shareVkPost и shareVkPostWithUpload](./src/shareVkPost.ts)
+- [shareVkStory](./src/shareVkStory.ts)
 
-- [checkIOS](./src/checkIOS.ts) - метод для проверки, является ли текущая платформа IOS на основе параметра платформы, получаемого при инициализации VK-приложения
-- [initializeVkApp](./src/initializeVkApp.ts) - утилита для инициализации параметров vk-mini-app
-- [isAvatarDefault](./src/isAvatarDefault.ts) - метод для проверки отсутствия аватарки по фотографии пользователя
+### Хуки
 
-#### Хуки:
-- [useEventSubscribe](./src/hooks/useEventSubscribe.ts) - хук для подписки на событие vk-bridge
-- [usePolling](./src/hooks/usePolling.ts) - хук для поллинга внутри мини-приложения ВК
+- [useEventSubscribe](./src/hooks/useEventSubscribe.ts)
+- [usePolling](./src/hooks/usePolling.ts)
 
-### Обратная связь
+### Дополнительные утилиты
 
-Любой фидбэк вы можете передать нам на почту [hello@ktsstudio.ru](mailto:hello@ktsstudio.ru) в письме с темой "mediaproject-vk feedback"
+- [checkVkAvatarIsDefault](./src/checkVkAvatarIsDefault.ts)
+- [checkVkPlatform](./src/checkVkPlatform.ts)
+- [initializeVkApp](./src/initializeVkApp.ts)
+
+## Обратная связь
+
+Любой фидбэк вы можете отправить нам на почту [hello@ktsstudio.ru](mailto:hello@ktsstudio.ru) или в личные сообщения [нашего сообщества ВКонтакте](https://vk.com/kts.specials).
