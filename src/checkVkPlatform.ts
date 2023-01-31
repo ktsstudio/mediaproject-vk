@@ -58,25 +58,6 @@ const VK_PLATFORM_CLASSNAME = {
    * Приложение открыто с мобильного устройства на платформе Android.
    */
   android: 'android',
-
-  /**
-   * Приложение открыто с мобильного устройства на платформе m.vk (в мобильном браузере).
-   */
-  mvk: 'mvk',
-};
-
-type PlatformType = keyof typeof VK_PLATFORM_CLASSNAME;
-
-/**
- * Вспомогательная утилита для установки флага
- * платформы в Window и добавления ее класснейма на body
- *
- * @param {string} platform
- */
-const setVkPlatform = (platform: PlatformType) => {
-  // @ts-ignore
-  window[`is_${platform}`] = true;
-  document.body.classList.add(VK_PLATFORM_CLASSNAME[platform]);
 };
 
 /**
@@ -116,37 +97,33 @@ const checkVkPlatform = (
     return;
   }
 
-  setVkPlatform('mobile');
+  window.is_mobile = true;
+  document.body.classList.add(VK_PLATFORM_CLASSNAME.mobile);
 
   /**
-   * Проверяем, открыто ли мобильное приложение для IOS
+   * Проверяем, открыты ли мобильное приложение или мобильный браузер на IOS
    */
-  if (IOS_VK_PLATFORMS.includes(platform)) {
-    setVkPlatform('ios');
+  if (
+    IOS_VK_PLATFORMS.includes(platform) ||
+    /(iPad|iPhone|iPod)/g.test(navigator.userAgent)
+  ) {
+    window.is_ios = true;
+    document.body.classList.add(VK_PLATFORM_CLASSNAME.ios);
 
     return;
   }
 
   /**
-   * Проверяем, открыто ли мобильное приложение для Android
+   * Проверяем, открыты ли мобильное приложение или мобильный браузер на Android
    */
-  if (ANDROID_VK_PLATFORMS.includes(platform)) {
-    setVkPlatform('android');
+  if (
+    ANDROID_VK_PLATFORMS.includes(platform) ||
+    /android/i.test(navigator.userAgent)
+  ) {
+    window.is_android = true;
+    document.body.classList.add(VK_PLATFORM_CLASSNAME.android);
 
     return;
-  }
-
-  /**
-   * Если не отработала ни одна из двух верхних проверок,
-   * считаем, что открыт браузер на мобильном устройстве (m.vk),
-   * и при этом пытаемся определить, на IOS ли открыт браузер
-   */
-  setVkPlatform('mvk');
-
-  const userAgentDetectedIOS = /(iPad|iPhone|iPod)/g.test(navigator.userAgent);
-
-  if (userAgentDetectedIOS) {
-    setVkPlatform('ios');
   }
 };
 
@@ -155,6 +132,5 @@ export {
   IOS_VK_PLATFORMS,
   ANDROID_VK_PLATFORMS,
   VK_PLATFORM_CLASSNAME,
-  setVkPlatform,
   checkVkPlatform,
 };
