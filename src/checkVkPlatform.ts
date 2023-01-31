@@ -50,12 +50,12 @@ const VK_PLATFORM_CLASSNAME = {
   mobile: 'mobile',
 
   /**
-   * Приложение открыто с мобильного устройства на платформе IOS.
+   * Приложение открыто с мобильного устройства или с мобильного браузера на платформе IOS.
    */
   ios: 'ios',
 
   /**
-   * Приложение открыто с мобильного устройства на платформе Android.
+   * Приложение открыто с мобильного устройства или с мобильного браузера на платформе Android.
    */
   android: 'android',
 
@@ -63,16 +63,6 @@ const VK_PLATFORM_CLASSNAME = {
    * Приложение открыто в браузере мобильного устройства.
    */
   mvk: 'mvk',
-
-  /**
-   * Приложение открыто в браузере мобильного устройства на платформе IOS.
-   */
-  mvk_ios: 'mvk_ios',
-
-  /**
-   * Приложение открыто в браузере мобильного устройства на платформе Android.
-   */
-  mvk_android: 'mvk_android',
 };
 
 /**
@@ -91,8 +81,16 @@ const VK_PLATFORM_CLASSNAME = {
  * Если приложение открыто в браузере на мобильном устройстве (m.vk),
  * устанавливает в true window.is_mobile и window.is_mvk = true и добавляет класснеймы 'mobile mvk'.
  * Также по регулярным выражениям для UserAgent проверяет, открыт ли m.vk на Android
- * (помимо предыдущих значений еще устанавливает в true window.is_android и добавляет класснейм 'mvk_android'),
- * или на IOS (помимо предыдущих значений еще устанавливает в true window.is_ios и добавляет класснейм 'mvk_ios').
+ * (помимо предыдущих значений еще устанавливает в true window.is_android и добавляет класснейм 'android'),
+ * или на IOS (помимо предыдущих значений еще устанавливает в true window.is_ios и добавляет класснейм 'ios').
+ *
+ * Возможные варианты сочетаний:
+ * - desktop - браузер на компьютере
+ * - mobile ios - мобильное приложение ВКонтакте на платформе IOS
+ * - mobile android - мобильное приложение ВКонтакте на платформе Android
+ * - mobile mvk - мобильный браузер на неизвестной платформе (например, m.vk открыт с браузера компьютера)
+ * - mobile mvk ios - мобильный браузер на платформе IOS
+ * - mobile mvk android - мобильный браузер на платформе Android
  *
  * @param {VkPlatformType | undefined} [platform=window.platform] Значение текущей платформы, полученное в параметрах запуска ВКонтакте
  *
@@ -147,14 +145,14 @@ const checkVkPlatform = (
 
   if (/(iPad|iPhone|iPod)/g.test(navigator.userAgent)) {
     window.is_ios;
-    document.body.classList.add(VK_PLATFORM_CLASSNAME.mvk_ios);
+    document.body.classList.add(VK_PLATFORM_CLASSNAME.ios);
 
     return;
   }
 
   if (/android/i.test(navigator.userAgent)) {
     window.is_android;
-    document.body.classList.add(VK_PLATFORM_CLASSNAME.mvk_android);
+    document.body.classList.add(VK_PLATFORM_CLASSNAME.android);
 
     return;
   }
