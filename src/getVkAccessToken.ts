@@ -55,7 +55,7 @@ const parseVkScopes = (scopes?: string): PersonalAuthScope[] => {
  * @param {Set<PersonalAuthScope>,} secondScope Второе множество scopes.
  * @returns {boolean} Если все значения из первого множества встречаются во втором, возвращает true. Иначе возвращает false.
  */
-const checkVkScopesAreEqual = (
+const checkOneScopesSetIncludesAnother = (
   firstScope: Set<PersonalAuthScope>,
   secondScope: Set<PersonalAuthScope>
 ): boolean =>
@@ -121,7 +121,7 @@ const getVkAccessToken = async ({
   const neededScopesSet = new Set(scopes || []);
   const availableScopesSet = new Set(parseVkScopes(window.scope));
 
-  const requiredScopesAreAlreadyAvailable = checkVkScopesAreEqual(
+  const requiredScopesAreAlreadyAvailable = checkOneScopesSetIncludesAnother(
     neededScopesSet,
     availableScopesSet
   );
@@ -148,7 +148,7 @@ const getVkAccessToken = async ({
   if (data.access_token) {
     const receivedScopesSet = new Set(parseVkScopes(data.scope));
 
-    const allNeededScopesReceived = checkVkScopesAreEqual(
+    const allNeededScopesReceived = checkOneScopesSetIncludesAnother(
       neededScopesSet,
       receivedScopesSet
     );
@@ -189,7 +189,7 @@ const getVkAccessToken = async ({
 export {
   ALLOWED_VK_SCOPES,
   parseVkScopes,
-  checkVkScopesAreEqual,
+  checkOneScopesSetIncludesAnother,
   getNewVkAccessToken,
   getVkAccessToken,
 };
