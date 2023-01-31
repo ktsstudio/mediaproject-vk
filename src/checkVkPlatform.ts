@@ -58,6 +58,21 @@ const VK_PLATFORM_CLASSNAME = {
    * Приложение открыто с мобильного устройства на платформе Android.
    */
   android: 'android',
+
+  /**
+   * Приложение открыто в браузере мобильного устройства.
+   */
+  mvk: 'mvk',
+
+  /**
+   * Приложение открыто в браузере мобильного устройства на платформе IOS.
+   */
+  mvk_ios: 'mvk_ios',
+
+  /**
+   * Приложение открыто в браузере мобильного устройства на платформе Android.
+   */
+  mvk_android: 'mvk_android',
 };
 
 /**
@@ -103,10 +118,7 @@ const checkVkPlatform = (
   /**
    * Проверяем, открыты ли мобильное приложение или мобильный браузер на IOS
    */
-  if (
-    IOS_VK_PLATFORMS.includes(platform) ||
-    /(iPad|iPhone|iPod)/g.test(navigator.userAgent)
-  ) {
+  if (IOS_VK_PLATFORMS.includes(platform)) {
     window.is_ios = true;
     document.body.classList.add(VK_PLATFORM_CLASSNAME.ios);
 
@@ -116,12 +128,26 @@ const checkVkPlatform = (
   /**
    * Проверяем, открыты ли мобильное приложение или мобильный браузер на Android
    */
-  if (
-    ANDROID_VK_PLATFORMS.includes(platform) ||
-    /android/i.test(navigator.userAgent)
-  ) {
+  if (ANDROID_VK_PLATFORMS.includes(platform)) {
     window.is_android = true;
     document.body.classList.add(VK_PLATFORM_CLASSNAME.android);
+
+    return;
+  }
+
+  window.is_mvk = true;
+  document.body.classList.add(VK_PLATFORM_CLASSNAME.mvk);
+
+  if (/(iPad|iPhone|iPod)/g.test(navigator.userAgent)) {
+    window.is_ios;
+    document.body.classList.add(VK_PLATFORM_CLASSNAME.mvk_ios);
+
+    return;
+  }
+
+  if (/android/i.test(navigator.userAgent)) {
+    window.is_android;
+    document.body.classList.add(VK_PLATFORM_CLASSNAME.mvk_android);
 
     return;
   }
