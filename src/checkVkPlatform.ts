@@ -77,15 +77,22 @@ const VK_PLATFORM_CLASSNAME = {
 
 /**
  * Утилита для установки настроек под текущую платформу, на которой запущено приложение ВКонтакте.
- * В зависимости от платформы устанавливает нужный флаг в window и добавляет нужный класснейм на тег body.
+ * В зависимости от платформы устанавливает нужные флаги в window и добавляет нужные класснеймы на тег body.
  *
- * Если текущая платформа desktop (одна из {@link DESKTOP_VK_PLATFORMS}), устанавливает window.is_mobile = false и добавляет класснейм 'desktop' на тег body.
+ * Если приложение открыто на desktop (window.platform одна из {@link DESKTOP_VK_PLATFORMS}),
+ * устанавливает window.is_mobile = false и добавляет класснейм 'desktop' на тег body.
  *
- * Если текущая платформа IOS (одна из {@link IOS_VK_PLATFORMS}), устанавливает window.is_ios = true и добавляет класснеймы 'mobile ios'.
+ * Если приложение открыто в мобильном приложении ВКонтакте на IOS (window.platform одна из {@link IOS_VK_PLATFORMS}),
+ * устанавливает в true window.is_mobile и window.is_ios и добавляет класснеймы 'mobile ios'.
  *
- * Если текущая платформа Android (одна из {@link ANDROID_VK_PLATFORMS}), устанавливает window.is_android = true и добавляет класснеймы 'mobile android'.
+ * Если приложение открыто в мобильном приложении ВКонтакте на Android (window.platform одна из {@link ANDROID_VK_PLATFORMS}),
+ * устанавливает в true window.is_mobile и window.is_android и добавляет класснеймы 'mobile android'.
  *
- * Если текущая платформа m.vk, устанавливает window.is_mvk = true и добавляет класснеймы 'mobile mvk'.
+ * Если приложение открыто в браузере на мобильном устройстве (m.vk),
+ * устанавливает в true window.is_mobile и window.is_mvk = true и добавляет класснеймы 'mobile mvk'.
+ * Также по регулярным выражениям для UserAgent проверяет, открыт ли m.vk на Android
+ * (помимо предыдущих значений еще устанавливает в true window.is_android и добавляет класснейм 'mvk_android'),
+ * или на IOS (помимо предыдущих значений еще устанавливает в true window.is_ios и добавляет класснейм 'mvk_ios').
  *
  * @param {VkPlatformType | undefined} [platform=window.platform] Значение текущей платформы, полученное в параметрах запуска ВКонтакте
  *
