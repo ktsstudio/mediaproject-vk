@@ -65,6 +65,20 @@ const VK_PLATFORM_CLASSNAME = {
   mvk: 'mvk',
 };
 
+type PlatformType = keyof typeof VK_PLATFORM_CLASSNAME;
+
+/**
+ * Вспомогательная утилита для установки флага
+ * платформы в Window и добавления ее класснейма на body
+ *
+ * @param {string} platform
+ */
+const setVkPlatform = (platform: PlatformType) => {
+  // @ts-ignore
+  window[`is_${platform}`] = true;
+  document.body.classList.add(VK_PLATFORM_CLASSNAME[platform]);
+};
+
 /**
  * Утилита для установки настроек под текущую платформу, на которой запущено приложение ВКонтакте.
  * В зависимости от платформы устанавливает нужный флаг в window и добавляет нужный класснейм на тег body.
@@ -92,32 +106,47 @@ const checkVkPlatform = (
     platform && !DESKTOP_VK_PLATFORMS.includes(platform)
   );
 
+  /**
+   * Если обнаружили, что открыта десктопная версия,
+   * дальнейших проверок на платформу не делаем
+   */
   if (!isMobile) {
     document.body.classList.add(VK_PLATFORM_CLASSNAME.desktop);
 
     return;
   }
 
-  if (isMobile) {
-    window.is_mobile = true;
-    document.body.classList.add(VK_PLATFORM_CLASSNAME.mobile);
+  setVkPlatform('mobile');
 
-    if (IOS_VK_PLATFORMS.includes(platform)) {
-      window.is_ios = true;
-      document.body.classList.add(VK_PLATFORM_CLASSNAME.ios);
+  /**
+   * Проверяем, открыто ли мобильное приложение для IOS
+   */
+  if (IOS_VK_PLATFORMS.includes(platform)) {
+    setVkPlatform('ios');
 
-      return;
-    }
+    return;
+  }
 
-    if (ANDROID_VK_PLATFORMS.includes(platform)) {
-      window.is_android = true;
-      document.body.classList.add(VK_PLATFORM_CLASSNAME.android);
+  /**
+   * Проверяем, открыто ли мобильное приложение для Android
+   */
+  if (ANDROID_VK_PLATFORMS.includes(platform)) {
+    setVkPlatform('android');
 
-      return;
-    }
+    return;
+  }
 
-    window.is_mvk = true;
-    document.body.classList.add(VK_PLATFORM_CLASSNAME.mvk);
+  /**
+   * Если не отработала ни одна из двух верхних проверок,
+   * считаем, что открыт браузер на мобильном устройстве (m.vk),
+   * и при этом пытаемся определить, на IOS ли открыт браузер
+   */
+  setVkPlatform('mvk');
+
+  const userAgentDetectedIOS = /(iPad|iPhone|iPod)/g.test(navigator.userAgent);
+
+  if (userAgentDetectedIOS) {
+    setVkPlatform('ios');
   }
 };
 
@@ -126,5 +155,6 @@ export {
   IOS_VK_PLATFORMS,
   ANDROID_VK_PLATFORMS,
   VK_PLATFORM_CLASSNAME,
+  setVkPlatform,
   checkVkPlatform,
 };
