@@ -19,3 +19,5 @@ export * from './setVkViewSettings';
 export * from './shareVkPost';
 
 export * from './shareVkStory';
+
+export * from './styles';

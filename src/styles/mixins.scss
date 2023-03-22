@@ -1,0 +1,4 @@
+@mixin headerCenterElement($restTransform...) {
+  top: calc(var(--vkui_internal--safe_area_inset_top) + var(--vkui--size_panel_header_height--regular) / 2);
+  transform: translateY(-50%) join($restTransform, (), space);
+}

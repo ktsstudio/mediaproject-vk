@@ -30,11 +30,14 @@
     "logo.png"
   ],
   "scripts": {
-    "build": "rm -rf dist && NODE_ENV=production rollup -c",
+    "rm-build": "rimraf dist",
     "dev": "rollup -c -w",
     "lint": "eslint src --fix",
-    "codestyle": "prettier --write \"src/**/*.{ts,js}?(x)\"",
+    "codestyle": "prettier --write \"src/**/*.{ts,tsx,js,jsx,scss}\"",
     "tsc-check": "tsc --skipLibCheck --noEmit --project tsconfig.json",
+    "build-ts": "rm -rf dist && NODE_ENV=production rollup -c",
+    "build-styles": "cpx \"src/**/*.*css\" dist",
+    "build": "yarn run rm-build && yarn run build-ts && yarn run build-styles",
     "precommit": "lint-staged"
   },
   "lint-staged": {
@@ -54,9 +57,11 @@
     "@rollup/plugin-typescript": "^11.0.0",
     "@types/node": "^16.4.0",
     "@types/react": "^17.0.2",
-    "@typescript-eslint/eslint-plugin": "^4.13.0",
-    "@typescript-eslint/parser": "^4.14.1",
+    "@types/styled-components": "^5.1.26",
+    "@typescript-eslint/eslint-plugin": "^5.56.0",
+    "@typescript-eslint/parser": "^5.56.0",
     "@vkontakte/vk-bridge": "^2.7.2",
+    "cpx": "^1.5.0",
     "eslint": "^7.31.0",
     "eslint-config-prettier": "^7.2.0",
     "eslint-import-resolver-typescript": "^2.3.0",
@@ -69,12 +74,16 @@
     "react": "^17.0.2",
     "rollup": "^3.10.1",
     "rollup-plugin-peer-deps-external": "^2.2.4",
-    "typescript": "^4.1.3"
+    "styled-components": "^5.3.3",
+    "typescript": "^4.7.4"
   },
   "peerDependencies": {
-    "@ktsstudio/mediaproject-utils": "^4.0.0",
-    "@types/react": "^17.0.2",
+    "@ktsstudio/mediaproject-utils": "^4.1.0",
+    "@types/react": "^17.0.0 || ^18.0.0",
+    "@types/styled-components": "^5.1.26",
     "@vkontakte/vk-bridge": "^2.7.2",
-    "react": "^17.0.2"
+    "@vkontakte/vkui": "~5.0.0",
+    "react": "^17.0.0 || ^18.0.0",
+    "styled-components": "^5.3.1"
   }
 }
