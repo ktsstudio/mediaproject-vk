@@ -1,7 +1,7 @@
-@function getTopPadding($extraPadding: '0px') {
+@function calcTopPadding($extraPadding: '0px') {
   @return calc(var(--vkui_internal--safe_area_inset_top) + #{$extraPadding});
 }
 
-@function getBottomPadding($extraPadding: '0px') {
+@function calcBottomPadding($extraPadding: '0px') {
   @return calc(var(--vkui_internal--safe_area_inset_bottom) + #{$extraPadding});
 }
