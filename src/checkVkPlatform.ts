@@ -144,14 +144,14 @@ const checkVkPlatform = (
   document.body.classList.add(VK_PLATFORM_CLASSNAME.mvk);
 
   if (/(iPad|iPhone|iPod)/g.test(navigator.userAgent)) {
-    window.is_ios;
+    window.is_ios = true;
     document.body.classList.add(VK_PLATFORM_CLASSNAME.ios);
 
     return;
   }
 
   if (/android/i.test(navigator.userAgent)) {
-    window.is_android;
+    window.is_android = true;
     document.body.classList.add(VK_PLATFORM_CLASSNAME.android);
 
     return;
