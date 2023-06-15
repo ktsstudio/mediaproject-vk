@@ -26,9 +26,9 @@ const IOS_VK_PLATFORMS: VkPlatformType[] = [
  * @constant {VkPlatformType[]}
  */
 const ANDROID_VK_PLATFORMS: VkPlatformType[] = [
-  'mobile_ipad',
-  'mobile_iphone',
-  'mobile_iphone_messenger',
+  'mobile_android',
+  'mobile_android_messenger',
+  'android_external',
 ];
 
 /**
