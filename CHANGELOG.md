@@ -1,5 +1,6 @@
 ### v2.1.0
 
+- [*] дополнена обработка сообщений из API VK об отказе пользователя от какого-либо действия
 - [*] исправлено определение window.notifications_enabled ([issue](https://github.com/ktsstudio/mediaproject-vk/issues/11))
 - [*] исправлено определение window.is_ios и window.is_android в mvk ([issue](https://github.com/ktsstudio/mediaproject-vk/issues/13))
 - [*] исправлено определение того, что приложение открыто на Android ([issue](https://github.com/ktsstudio/mediaproject-vk/issues/14))
