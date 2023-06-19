@@ -1,3 +1,11 @@
+### v2.1.0
+
+- [*] исправлено определение window.notifications_enabled ([issue](https://github.com/ktsstudio/mediaproject-vk/issues/11))
+- [*] исправлено определение window.is_ios и window.is_android в mvk ([issue](https://github.com/ktsstudio/mediaproject-vk/issues/13))
+- [*] исправлено определение того, что приложение открыто на Android ([issue](https://github.com/ktsstudio/mediaproject-vk/issues/14))
+- [*] расширена поддержка react до версии 18 ([issue](https://github.com/ktsstudio/mediaproject-vk/issues/12))
+- [+] добавлена возможность указания типа ответа для функции callVkApi
+
 ## v2.0.0
 
 - [-] удалены утилиты, которые не несли смысловой нагрузки и являлись просто оберткой try catch над вызовом метода VK ([issue](https://github.com/ktsstudio/mediaproject-vk/issues/5))
