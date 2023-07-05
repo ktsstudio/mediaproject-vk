@@ -1,6 +1,5 @@
-import { RequestPropsMap } from '@vkontakte/vk-bridge';
+import { ErrorData, RequestPropsMap } from '@vkontakte/vk-bridge';
 
-import { VkResponseType } from './common';
 import { GetVkAccessTokenParamsType } from './getVkAccessToken';
 
 type CallVkApiRequestBasePropsType = RequestPropsMap['VKWebAppCallAPIMethod'];
@@ -22,7 +21,11 @@ type CallVkApiPropsType = {
   accessToken?: CallVkApiRequestBasePropsType['params']['access_token'] | null;
 } & CallVkApiAccessTokenPropsType;
 
-type CallVkApiResponseType = VkResponseType<'VKWebAppCallAPIMethod'>;
+type CallVkApiResponseType<D> = Partial<
+  {
+    response: D;
+  } & ErrorData
+>;
 
 export type {
   CallVkApiRequestBasePropsType,

@@ -36,13 +36,13 @@ type UploadFromApiToVkResponseType = ApiResponse<{
   };
 }>;
 
-type SaveVkWallPhotoResponseType = Omit<CallVkApiResponseType, 'response'> & {
-  response?: {
+type SaveVkWallPhotoResponseType = CallVkApiResponseType<
+  {
     id: number;
     album_id: number;
     owner_id: number;
-  }[];
-};
+  }[]
+>;
 
 export type {
   ShareVkPostPropsType,

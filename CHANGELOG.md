@@ -1,8 +1,17 @@
-#### v2.0.1
+## v2.1.0
 
-[+] checkVkUserDenied: добавлена обработка нового кода ошибки от ВК в случае отказа от ручного действия
+- [*] исправлено определение window.notifications_enabled ([issue](https://github.com/ktsstudio/mediaproject-vk/issues/11))
+- [*] исправлено определение window.is_ios и window.is_android в mvk ([issue](https://github.com/ktsstudio/mediaproject-vk/issues/13))
+- [*] исправлено определение того, что приложение открыто на Android ([issue](https://github.com/ktsstudio/mediaproject-vk/issues/14))
+- [*] расширена поддержка react до версии 18 ([issue](https://github.com/ktsstudio/mediaproject-vk/issues/12))
+- [+] добавлена возможность указания типа ответа для функции callVkApi
+- [*] поднята версия @ktsstudio/mediaproject-utils до 4.1.1
 
-## v2.0.0
+### v2.0.1
+
+- [+] checkVkUserDenied: добавлена обработка нового кода ошибки от ВК в случае отказа от ручного действия
+
+# v2.0.0
 
 - [-] удалены утилиты, которые не несли смысловой нагрузки и являлись просто оберткой try catch над вызовом метода VK ([issue](https://github.com/ktsstudio/mediaproject-vk/issues/5))
 - [*] изменен метод вызова VK API через bridge, в него добавлена проверка на ошибки токена и возможность ретрая в их случае
@@ -17,11 +26,11 @@
 - [*] улучшены JSDoc
 - [*] хук useEventSubscribe передает полученный event в callback ([issue](https://github.com/ktsstudio/mediaproject-vk/issues/1))
 
-#### v1.2.1
+### v1.2.1
 
-- [*] @ktsstudio/mediaprojetc-utils@4.0.0
+- [*] @ktsstudio/mediaproject-utils@4.0.0
 
-### v1.2.0
+## v1.2.0
 
 - [+] useEventSubscribe
 - [+] usePolling
@@ -29,47 +38,47 @@
 - [*] getAuthToken проверяет наличие всех скоупов в ответе
 - [+] isAvatarDefault
 
-### v1.1.0
+## v1.1.0
 
 - [+] checkMobile
 - [*] checkIOS: add platform 'mobile_ipad', adding classname 'android'
 - [*] fix JSDoc syntax
 
-#### v1.0.12
+### v1.0.12
 
 - [*] swipe back
 - [*] view settings
 
-#### v1.0.11
+### v1.0.11
 
 - [+] odr param in window
 
-#### v1.0.10
+### v1.0.10
 
 - [*] params
 
-#### v1.0.9
+### v1.0.9
 
 - [*] sharePost: wrapped try catch
 - [*] shareStory: wrapped try catch
 
-#### v1.0.8
+### v1.0.8
 
 - [*] getUserInfo: wrapped try catch
 
-#### v1.0.7
+### v1.0.7
 
 - [*] getAuthToken: added exception handling, changed returned value
 
-#### v1.0.6
+### v1.0.6
 
 - [*] initializeVkApp
 
-#### v1.0.5
+### v1.0.5
 
 - [*] README
 
-#### v1.0.4
+### v1.0.4
 
 - [+] types moved to src/types
 - [*] Window type inherited
@@ -77,19 +86,19 @@
 - [+] checkIOS
 - [*] README
 
-#### v1.0.3
+### v1.0.3
 
 - [*] Code style
 
-#### v1.0.2
+### v1.0.2
 
 - [*] Code style
 
-#### v1.0.1
+### v1.0.1
 
 [+] Метод для инициализации приложения с получением квери-параметров и отправки VKWebAppInit
 
-## v1.0.0
+# v1.0.0
 
 [+] Обертки для методов:
 

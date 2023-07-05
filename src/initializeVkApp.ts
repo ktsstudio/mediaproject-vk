@@ -23,9 +23,8 @@ const initializeVkApp = async (): Promise<InitializeVkAppResponseType> => {
 
   window.user_id = Number(findGetParameter('vk_user_id'));
   window.app_id = Number(findGetParameter('vk_app_id'));
-  window.notifications_enabled = Boolean(
-    findGetParameter('vk_are_notifications_enabled')
-  );
+  window.notifications_enabled =
+    findGetParameter('vk_are_notifications_enabled') === '1';
   window.language = findGetParameter('vk_language') || undefined;
   window.ref = findGetParameter('vk_ref') || undefined;
   window.scope = findGetParameter('vk_access_token_settings') || undefined;
