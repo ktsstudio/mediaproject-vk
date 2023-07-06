@@ -29,11 +29,9 @@ type ShareVkPostWithUploadResponseType =
   | VkResponseType<'VKWebAppCallAPIMethod'>;
 
 type UploadFromApiToVkResponseType = ApiResponse<{
-  response: {
-    hash: string;
-    photo: string;
-    server: string;
-  };
+  hash: string;
+  photo: string;
+  server: string;
 }>;
 
 type SaveVkWallPhotoResponseType = Omit<CallVkApiResponseType, 'response'> & {

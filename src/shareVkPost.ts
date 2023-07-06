@@ -112,13 +112,13 @@ const shareVkPostWithUpload = async ({
      * Если загрузить картинку на сервер не получилось,
      * обрабатываем ошибку и дальше не идем
      */
-    if (!apiUploadResponse?.response || error) {
+    if (!apiUploadResponse || error) {
       onErrorOccurred?.(error, errorData);
 
       return;
     }
 
-    const { hash, photo, server } = apiUploadResponse.response; // получили картинку, id сервера и хэш
+    const { hash, photo, server } = apiUploadResponse; // получили картинку, id сервера и хэш
 
     /**
      * Сохраняем фото к пользователю,
