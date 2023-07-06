@@ -1,3 +1,7 @@
+#### v2.1.1
+
+[-] shareVkPostWithUpload: убрана вложенность response
+
 ## v2.1.0
 
 - [*] исправлено определение window.notifications_enabled ([issue](https://github.com/ktsstudio/mediaproject-vk/issues/11))
@@ -10,6 +14,7 @@
 #### v2.0.2
 
 [-] shareVkPostWithUpload: убрана вложенность response
+
 
 ### v2.0.1
 
