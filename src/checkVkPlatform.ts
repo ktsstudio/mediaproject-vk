@@ -1,4 +1,4 @@
-import { VkPlatformType } from './types';
+import { DeviceInfo, VkPlatformType } from './types';
 
 /**
  * Платформы ВКонтакте, для которых можно считать, что приложение открыто на десктопе.
@@ -66,23 +66,23 @@ const VK_PLATFORM_CLASSNAME = {
 };
 
 /**
- * Утилита для установки настроек под текущую платформу, на которой запущено приложение ВКонтакте.
- * В зависимости от платформы устанавливает нужные флаги в window и добавляет нужные класснеймы на тег body.
+ * Утилита для вычисления информации о текущей платформе, на которой запущено приложение ВКонтакте.
+ * В зависимости от платформы возвращает нужные параметры и добавляет нужные класснеймы на тег body.
  *
- * Если приложение открыто на desktop (window.platform одна из {@link DESKTOP_VK_PLATFORMS}),
- * устанавливает window.is_mobile = false и добавляет класснейм 'desktop' на тег body.
+ * Если приложение открыто на desktop (vk_platform одна из {@link DESKTOP_VK_PLATFORMS}),
+ * устанавливает isMobile в false и добавляет класснейм 'desktop' на тег body.
  *
- * Если приложение открыто в мобильном приложении ВКонтакте на IOS (window.platform одна из {@link IOS_VK_PLATFORMS}),
- * устанавливает в true window.is_mobile и window.is_ios и добавляет класснеймы 'mobile ios'.
+ * Если приложение открыто в мобильном приложении ВКонтакте на IOS (vk_platform одна из {@link IOS_VK_PLATFORMS}),
+ * устанавливает в true isMobile и isIos и добавляет класснеймы 'mobile ios'.
  *
- * Если приложение открыто в мобильном приложении ВКонтакте на Android (window.platform одна из {@link ANDROID_VK_PLATFORMS}),
- * устанавливает в true window.is_mobile и window.is_android и добавляет класснеймы 'mobile android'.
+ * Если приложение открыто в мобильном приложении ВКонтакте на Android (vk_platform одна из {@link ANDROID_VK_PLATFORMS}),
+ * устанавливает в true isMobile и isAndroid и добавляет класснеймы 'mobile android'.
  *
  * Если приложение открыто в браузере на мобильном устройстве (m.vk),
- * устанавливает в true window.is_mobile и window.is_mvk = true и добавляет класснеймы 'mobile mvk'.
+ * устанавливает в true isMobile и isMvk и добавляет класснеймы 'mobile mvk'.
  * Также по регулярным выражениям для UserAgent проверяет, открыт ли m.vk на Android
- * (помимо предыдущих значений еще устанавливает в true window.is_android и добавляет класснейм 'android'),
- * или на IOS (помимо предыдущих значений еще устанавливает в true window.is_ios и добавляет класснейм 'ios').
+ * (помимо предыдущих значений еще устанавливает в true isAndroid и добавляет класснейм 'android',
+ * или на IOS устанавливает в true isIos и добавляет класснейм 'ios').
  *
  * Возможные варианты сочетаний:
  * - desktop - браузер на компьютере
@@ -92,13 +92,14 @@ const VK_PLATFORM_CLASSNAME = {
  * - mobile mvk ios - мобильный браузер на платформе IOS
  * - mobile mvk android - мобильный браузер на платформе Android
  *
- * @param {VkPlatformType | undefined} [platform=window.platform] Значение текущей платформы, полученное в параметрах запуска ВКонтакте
+ * @param {VkPlatformType | undefined} [platform] Значение текущей платформы, полученное в параметрах запуска ВКонтакте
  *
  * @see https://dev.vk.com/mini-apps/development/launch-params#vk_platform
  */
+
 const checkVkPlatform = (
-  platform: VkPlatformType | undefined = window.platform
-): void => {
+  platform: VkPlatformType | undefined
+): DeviceInfo | void => {
   if (!platform) {
     return;
   }
@@ -114,47 +115,41 @@ const checkVkPlatform = (
   if (!isMobile) {
     document.body.classList.add(VK_PLATFORM_CLASSNAME.desktop);
 
-    return;
+    return { isMobile: false, isIos: false, isAndroid: false, isMvk: false };
   }
 
-  window.is_mobile = true;
   document.body.classList.add(VK_PLATFORM_CLASSNAME.mobile);
 
   /**
    * Проверяем, открыты ли мобильное приложение или мобильный браузер на IOS
    */
   if (IOS_VK_PLATFORMS.includes(platform)) {
-    window.is_ios = true;
     document.body.classList.add(VK_PLATFORM_CLASSNAME.ios);
 
-    return;
+    return { isMobile: true, isIos: true, isAndroid: false, isMvk: false };
   }
 
   /**
    * Проверяем, открыты ли мобильное приложение или мобильный браузер на Android
    */
   if (ANDROID_VK_PLATFORMS.includes(platform)) {
-    window.is_android = true;
     document.body.classList.add(VK_PLATFORM_CLASSNAME.android);
 
-    return;
+    return { isMobile: true, isIos: false, isAndroid: true, isMvk: false };
   }
 
-  window.is_mvk = true;
   document.body.classList.add(VK_PLATFORM_CLASSNAME.mvk);
 
   if (/(iPad|iPhone|iPod)/g.test(navigator.userAgent)) {
-    window.is_ios = true;
     document.body.classList.add(VK_PLATFORM_CLASSNAME.ios);
 
-    return;
+    return { isMobile: true, isIos: true, isAndroid: false, isMvk: true };
   }
 
   if (/android/i.test(navigator.userAgent)) {
-    window.is_android = true;
     document.body.classList.add(VK_PLATFORM_CLASSNAME.android);
 
-    return;
+    return { isMobile: true, isIos: false, isAndroid: true, isMvk: true };
   }
 };
 

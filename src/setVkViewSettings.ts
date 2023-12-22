@@ -29,21 +29,22 @@ const VK_PLATFORMS_WITH_VIEW_SETTINGS: VkPlatformType[] = [
  * @see {@link https://dev.vk.com/bridge/VKWebAppSetViewSettings}
  */
 const setVkViewSettings = async (
+  platform: VkPlatformType,
   viewSettings: SetViewSettingsPropsType
 ): Promise<SetViewSettingsResponseType | undefined> => {
   try {
     let settingsForCurrentPlatform = { ...viewSettings };
 
     if (
-      window.platform &&
-      VK_PLATFORMS_WITH_VIEW_SETTINGS.includes(window.platform) &&
+      platform &&
+      VK_PLATFORMS_WITH_VIEW_SETTINGS.includes(platform) &&
       bridge.supports('VKWebAppSetViewSettings')
     ) {
       /**
        * Все настройки поддерживаются только на android,
        * так что если платформа не android, то используем только цвет status bar
        */
-      if (window.platform !== 'mobile_android') {
+      if (platform !== 'mobile_android') {
         settingsForCurrentPlatform = {
           status_bar_style: viewSettings.status_bar_style,
         };
