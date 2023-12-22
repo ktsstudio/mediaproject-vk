@@ -39,7 +39,7 @@ const callVkApi = async <D = any>({
   version = '5.131',
   accessToken = null,
   renewTokenIfExpired = true,
-  getAccessTokenParams = {},
+  getAccessTokenParams,
 }: CallVkApiPropsType): Promise<CallVkApiResponseType<D>> => {
   try {
     let token: string | null = accessToken;
@@ -48,7 +48,7 @@ const callVkApi = async <D = any>({
      * Если access token нет,
      * получаем новый перед запросом к API
      */
-    if (!accessToken) {
+    if (!accessToken && getAccessTokenParams) {
       token = await getVkAccessToken(getAccessTokenParams);
     }
 
@@ -86,7 +86,8 @@ const callVkApi = async <D = any>({
       if (
         renewTokenIfExpired &&
         errorMessage &&
-        VK_TOKEN_ERRORS.includes(errorMessage)
+        VK_TOKEN_ERRORS.includes(errorMessage) &&
+        getAccessTokenParams
       ) {
         window.access_token = undefined;
         const newAccessToken = await getVkAccessToken(getAccessTokenParams);

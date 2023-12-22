@@ -18,6 +18,7 @@ type ShareVkPostWithUploadParamsType = {
   file: File;
   apiUploadUrl: UrlConfigType;
   userId: number;
+  appId: number;
   accessToken?: string;
   onUserDeniedAccess?: VoidFunction;
   // eslint-disable-next-line

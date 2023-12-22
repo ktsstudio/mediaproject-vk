@@ -76,7 +76,7 @@ const checkOneScopesSetIncludesAnother = (
  */
 const getNewVkAccessToken = async ({
   scopes = null,
-  appId = window.app_id,
+  appId,
 }: GetNewVkAccessTokenParamsType): Promise<GetNewVkAccessTokenResponseType> => {
   try {
     /**
