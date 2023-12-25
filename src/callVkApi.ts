@@ -48,7 +48,7 @@ const callVkApi = async <D = any>({
      * Если access token нет,
      * получаем новый перед запросом к API
      */
-    if (!accessToken && getAccessTokenParams) {
+    if (!accessToken) {
       token = await getVkAccessToken(getAccessTokenParams);
     }
 
@@ -86,8 +86,7 @@ const callVkApi = async <D = any>({
       if (
         renewTokenIfExpired &&
         errorMessage &&
-        VK_TOKEN_ERRORS.includes(errorMessage) &&
-        getAccessTokenParams
+        VK_TOKEN_ERRORS.includes(errorMessage)
       ) {
         window.access_token = undefined;
         const newAccessToken = await getVkAccessToken(getAccessTokenParams);

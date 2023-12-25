@@ -29,8 +29,8 @@ const VK_PLATFORMS_WITH_VIEW_SETTINGS: VkPlatformType[] = [
  * @see {@link https://dev.vk.com/bridge/VKWebAppSetViewSettings}
  */
 const setVkViewSettings = async (
-  platform: VkPlatformType,
-  viewSettings: SetViewSettingsPropsType
+  viewSettings: SetViewSettingsPropsType,
+  platform: VkPlatformType
 ): Promise<SetViewSettingsResponseType | undefined> => {
   try {
     let settingsForCurrentPlatform = { ...viewSettings };

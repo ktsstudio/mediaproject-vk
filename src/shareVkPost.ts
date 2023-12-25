@@ -141,6 +141,7 @@ const shareVkPostWithUpload = async ({
         server: Number(server),
         user_id: userId,
       },
+      getAccessTokenParams: { appId },
     });
 
     if (saveWallPhotoData.error_type || !saveWallPhotoData.response?.[0]) {

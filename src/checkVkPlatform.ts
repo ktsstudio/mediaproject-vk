@@ -99,9 +99,9 @@ const VK_PLATFORM_CLASSNAME = {
 
 const checkVkPlatform = (
   platform: VkPlatformType | undefined
-): DeviceInfo | void => {
+): DeviceInfo | null => {
   if (!platform) {
-    return;
+    return null;
   }
 
   const isMobile = Boolean(
@@ -151,6 +151,8 @@ const checkVkPlatform = (
 
     return { isMobile: true, isIos: false, isAndroid: true, isMvk: true };
   }
+
+  return null;
 };
 
 export {
