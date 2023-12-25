@@ -34,7 +34,6 @@
 
 - [checkVkAvatarIsDefault](./src/checkVkAvatarIsDefault.ts)
 - [checkVkPlatform](./src/checkVkPlatform.ts)
-- [initializeVkApp](./src/initializeVkApp.ts)
 
 ## Обратная связь
 

@@ -1,7 +1,8 @@
 # v3.0.0
 
-- [*] отрефакторены утилиты `checkVkPlatform`, `setVkViewSettings` и `initializeVkApp` – удалены обращения к `window`
+- [*] отрефакторены утилиты `checkVkPlatform` и `setVkViewSettings` – удалены обращения к `window`
 - [*] из `WindowType` убраны поля, которые не должны храниться в `window`: параметры запуска и параметры определения платформы
+- [-] удалена утилита `initializeVkApp`
 
 ### v2.1.1
 
