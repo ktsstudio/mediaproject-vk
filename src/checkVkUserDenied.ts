@@ -15,11 +15,7 @@ const checkVkUserDenied = (error: ErrorData): boolean => {
     return false;
   }
 
-  const {
-    error_data: { error_reason, error_code },
-  } = error;
-
-  return error_code === 4 && userDeniedReasons.has(error_reason);
+  return userDeniedReasons.has(error.error_data.error_reason);
 };
 
 export { checkVkUserDenied };
