@@ -12,6 +12,7 @@ const IS_PRODUCTION = process.env.NODE_ENV === 'production';
 const getPlugins = (declarationDir, minification = false) =>
   [
     typescript({
+      tsconfig: IS_PRODUCTION ? './tsconfig.build.json' : './tsconfig.json',
       compilerOptions: {
         rootDir: INPUT_DIR,
         declaration: true,
