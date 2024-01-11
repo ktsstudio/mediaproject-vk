@@ -16,6 +16,19 @@ const vkErrorTypes = new Set<ErrorData['error_type']>([
  * будет считать, что переданное значение имеет тип {@link ErrorData}.
  * Иначе функция возвращает false, а TypeScript считает,
  * что переданное значение не имеет тип {@link ErrorData}
+ *
+ * @example
+ * try {
+ *   await bridge.send(...);
+ * } catch (error) {
+ *   if (!isVkError(error)) {
+ *     return;
+ *   }
+ *
+ *   if (checkVkUserDenied(error)) {
+ *     return;
+ *   }
+ * }
  */
 const isVkError = (value: any): value is ErrorData => {
   return (
