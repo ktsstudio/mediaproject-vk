@@ -6,9 +6,4 @@ const vkErrorTypes = new Set<ErrorData['error_type']>([
   'auth_error',
 ]);
 
-const userDeniedErrorReasons = new Set([
-  'User denied',
-  'Operation denied by user',
-]);
-
-export { vkErrorTypes, userDeniedErrorReasons };
+export { vkErrorTypes };

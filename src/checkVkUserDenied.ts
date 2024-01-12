@@ -1,6 +1,9 @@
 import { ErrorData } from '@vkontakte/vk-bridge';
 
-import { userDeniedErrorReasons } from './consts';
+const userDeniedErrorReasons = new Set([
+  'User denied',
+  'Operation denied by user',
+]);
 
 /**
  * Утилита для проверки, что пришедшая от API ВКонтакте ошибка,
@@ -22,4 +25,4 @@ const checkVkUserDenied = (error: ErrorData): boolean => {
   return userDeniedErrorReasons.has(error_reason) || error_code === 4;
 };
 
-export { checkVkUserDenied };
+export { checkVkUserDenied, userDeniedErrorReasons };

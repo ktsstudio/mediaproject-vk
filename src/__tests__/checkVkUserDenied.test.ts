@@ -1,7 +1,9 @@
 import { ErrorData } from '@vkontakte/vk-bridge/dist/types/src/types/bridge';
 
-import { checkVkUserDenied } from '../checkVkUserDenied';
-import { userDeniedErrorReasons } from '../consts';
+import {
+  checkVkUserDenied,
+  userDeniedErrorReasons,
+} from '../checkVkUserDenied';
 
 import { randomNumberUpTo, randomString, range } from './utils';
 
