@@ -65,6 +65,7 @@ const shareVkPostWithUpload = async ({
   file,
   apiUploadUrl,
   userId,
+  appId,
   accessToken = window.access_token,
   onUserDeniedAccess,
   onErrorOccurred,
@@ -77,6 +78,7 @@ const shareVkPostWithUpload = async ({
       method: 'photos.getWallUploadServer',
       accessToken,
       getAccessTokenParams: {
+        appId,
         scopes: ['photos'],
         onUserDeniedAll: onUserDeniedAccess,
         onUserDeniedSomeScopes: onUserDeniedAccess,
@@ -139,6 +141,7 @@ const shareVkPostWithUpload = async ({
         server: Number(server),
         user_id: userId,
       },
+      getAccessTokenParams: { appId },
     });
 
     if (saveWallPhotoData.error_type || !saveWallPhotoData.response?.[0]) {
