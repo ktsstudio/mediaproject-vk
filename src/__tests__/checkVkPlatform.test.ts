@@ -233,6 +233,9 @@ const vkPlatformCases: Record<
   },
 };
 
+// Todo: После мёржа обновлений про запись параметров в window дополнить тесты
+//  проверкой возвращаемых функцией значений.
+//  https://github.com/ktsstudio/mediaproject-vk/pull/18
 describe('Функция checkVkPlatform', () => {
   let userAgentGetter: jest.SpyInstance<string>;
   let initialBodyClassList: DOMTokenList;
