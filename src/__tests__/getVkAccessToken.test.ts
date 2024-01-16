@@ -529,7 +529,7 @@ describe('Функция getVkAccessToken', () => {
     bridge.send.mockImplementation(() =>
       Promise.resolve<ReceiveData<'VKWebAppGetAuthToken'>>({
         scope: '',
-        access_token: '',
+        access_token: MOCK_TOKEN,
       })
     );
 
@@ -539,9 +539,9 @@ describe('Функция getVkAccessToken', () => {
       ...getErrorCallbacks(),
     });
 
-    expect(result).toEqual('');
+    expect(result).toEqual(MOCK_TOKEN);
     expect(window.scope).toBe('');
-    expect(window.access_token).toBe('');
+    expect(window.access_token).toBe(MOCK_TOKEN);
     expect(bridge.send).toHaveBeenCalledTimes(1);
     expectNoErrorsOccurred();
   });

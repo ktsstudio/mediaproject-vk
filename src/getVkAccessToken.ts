@@ -147,7 +147,7 @@ const getVkAccessToken = async ({
   });
 
   /** Если получен ответ */
-  if (data.access_token || data.access_token === '') {
+  if (data.access_token) {
     const receivedScopesSet = new Set(parseVkScopes(data.scope));
 
     const allNeededScopesReceived = checkOneScopesSetIncludesAnother(
