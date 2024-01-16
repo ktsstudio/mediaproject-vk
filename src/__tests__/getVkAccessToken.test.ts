@@ -78,7 +78,8 @@ const getNonOverlappingScopes = (): ScopesPair[] => [
 
 /**
  * Получить множества имеющихся и запрашиваемых скоупов,
- * где запрашиваемый скоуп является подмножеством имеющегося.
+ * где запрашиваемый скоуп является подмножеством имеющегося
+ * или полностью совпадает с ним.
  */
 const getScopesWithRequestPartlyOverlapping = (): ScopesPair[] => [
   { available: ['stats', 'docs'], toRequest: ['docs'] },
@@ -86,6 +87,10 @@ const getScopesWithRequestPartlyOverlapping = (): ScopesPair[] => [
   {
     available: ['stats', 'docs', 'groups', 'market'],
     toRequest: ['groups', 'market'],
+  },
+  {
+    available: ['stats', 'docs', 'groups', 'market'],
+    toRequest: ['stats', 'docs', 'groups', 'market'],
   },
 ];
 
@@ -379,7 +384,7 @@ describe('Функция getVkAccessToken', () => {
     it(
       'Успешный запрос. Множество имеющихся скоупов ' +
         'полностью не совпадает с множеством запрашиваемых скоупов ' +
-        'или множество имеющихся скоупов является подножеством запрашиваемых. ' +
+        'или множество имеющихся скоупов является подмножеством запрашиваемых. ' +
         `Имеющиеся скоупы: ${available}. Запрашиваемые скоупы: ${toRequest}`,
       async () => {
         window.access_token = MOCK_AVAILABLE_TOKEN;
@@ -546,34 +551,40 @@ describe('Функция getVkAccessToken', () => {
     expectNoErrorsOccurred();
   });
 
-  getScopesCounts().forEach((count) => {
-    it(`Отказ от всех скоупов. Количество скоупов: ${count}`, async () => {
-      const requestScopes = getRandomScopes(count);
+  getNonOverlappingScopes().forEach(({ toRequest, available }) => {
+    it(
+      'Отказ от всех скоупов (множество запрашиваемых не является подмножеством имеющихся) ' +
+        `Имеющийся: ${available.join(',')}. Запрашиваемый: ${toRequest.join(
+          ','
+        )}`,
+      async () => {
+        const availableScopeString = available.join(',');
 
-      window.access_token = MOCK_AVAILABLE_TOKEN;
-      window.scope = MOCK_SCOPES_STRING;
+        window.access_token = MOCK_AVAILABLE_TOKEN;
+        window.scope = availableScopeString;
 
-      const deniedAllError = getUserDeniedCommonError();
+        const deniedAllError = getUserDeniedCommonError();
 
-      bridge.send.mockImplementation(() => {
-        throw deniedAllError;
-      });
+        bridge.send.mockImplementation(() => {
+          throw deniedAllError;
+        });
 
-      const result = await getVkAccessToken({
-        scopes: requestScopes,
-        appId: MOCK_APP_ID,
-        ...getErrorCallbacks(),
-      });
+        const result = await getVkAccessToken({
+          scopes: toRequest,
+          appId: MOCK_APP_ID,
+          ...getErrorCallbacks(),
+        });
 
-      expect(result).toEqual(null);
-      expect(window.scope).toBe(MOCK_SCOPES_STRING);
-      expect(window.access_token).toBe(MOCK_AVAILABLE_TOKEN);
-      expect(bridge.send).toHaveBeenCalledTimes(1);
+        expect(result).toEqual(null);
+        expect(window.scope).toBe(availableScopeString);
+        expect(window.access_token).toBe(MOCK_AVAILABLE_TOKEN);
+        expect(bridge.send).toHaveBeenCalledTimes(1);
 
-      expect(mockOnUserDeniedSomeScopes).not.toHaveBeenCalled();
-      expect(mockOnErrorOccurred).not.toHaveBeenCalled();
-      expect(mockOnUserDeniedAll).toHaveBeenCalledWith(deniedAllError);
-    });
+        expect(mockOnUserDeniedSomeScopes).not.toHaveBeenCalled();
+        expect(mockOnErrorOccurred).not.toHaveBeenCalled();
+        expect(mockOnUserDeniedAll).toHaveBeenCalledWith(deniedAllError);
+      }
+    );
   });
 
   getRequestToResultScopes().forEach(({ requestScopes, resultScopes }) => {
@@ -586,7 +597,7 @@ describe('Функция getVkAccessToken', () => {
 
         bridge.send.mockImplementation(() =>
           Promise.resolve<ReceiveData<'VKWebAppGetAuthToken'>>({
-            access_token: MOCK_AVAILABLE_TOKEN,
+            access_token: MOCK_TOKEN,
             scope: resultScopes.join(','),
           })
         );
