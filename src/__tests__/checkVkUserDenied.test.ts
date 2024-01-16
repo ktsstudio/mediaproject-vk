@@ -44,7 +44,7 @@ const getVkAuthTypeError = ({
 
 const getVKClientTypeError = ({
   errorReason = randomString(10),
-  // +5, чтобы точно не было правильного кода ошибки
+  // +5, чтобы точно не было ошибки с кодом отказа 4
   errorCode = 5 + randomNumberUpTo(100),
 } = {}): ErrorData => ({
   error_type: 'client_error',
@@ -63,8 +63,8 @@ describe('Функция checkVkUserDenied', () => {
 
   userDeniedErrorReasons.forEach((reason) => {
     it(
-      'Объект ошибки, соответствующий типу ошибки api_error' +
-        ` но с error_reason "${reason}" и кодом ошибки 4`,
+      'Объект ошибки, соответствующий типу ошибки api_error, ' +
+        `но с error_reason "${reason}" и кодом ошибки 4`,
       () => {
         expect(
           checkVkUserDenied(
@@ -81,8 +81,8 @@ describe('Функция checkVkUserDenied', () => {
 
   userDeniedErrorReasons.forEach((reason) => {
     it(
-      'Объект ошибки, соответствующий типу ошибки auth_error,' +
-        ` но с error_reason "${reason}" и кодом ошибки 4`,
+      'Объект ошибки, соответствующий типу ошибки auth_error, ' +
+        `но с error_reason "${reason}" и кодом ошибки 4`,
       () => {
         expect(
           checkVkUserDenied(
@@ -95,8 +95,8 @@ describe('Функция checkVkUserDenied', () => {
 
   userDeniedErrorReasons.forEach((reason) => {
     it(
-      'Объект ошибки, соответствующий типу ошибки client_error' +
-        ` с правильным error_reason "${reason}" и кодом ошибки 4`,
+      'Объект ошибки, соответствующий типу ошибки client_error ' +
+        `с правильным error_reason "${reason}" и кодом ошибки 4`,
       () => {
         expect(
           checkVkUserDenied(
@@ -109,8 +109,8 @@ describe('Функция checkVkUserDenied', () => {
 
   userDeniedErrorReasons.forEach((reason) => {
     it(
-      'Объект ошибки, соответствующий типу ошибки client_error с произвольным кодом ошибки,' +
-        ` с правильным error_reason "${reason}", но в нижнем регистре`,
+      'Объект ошибки, соответствующий типу ошибки client_error с произвольным кодом ошибки, ' +
+        `с правильным error_reason "${reason}", но в нижнем регистре`,
       () => {
         expect(
           checkVkUserDenied(
@@ -125,9 +125,9 @@ describe('Функция checkVkUserDenied', () => {
 
   userDeniedErrorReasons.forEach((reason) => {
     it(
-      'Объект ошибки, соответствующий типу ошибки client_error,' +
-        ' с произвольным кодом ошибки,' +
-        ` с правильным error_reason "${reason}"`,
+      'Объект ошибки, соответствующий типу ошибки client_error, ' +
+        'с произвольным кодом ошибки, ' +
+        `с правильным error_reason "${reason}"`,
       () => {
         expect(
           checkVkUserDenied(getVKClientTypeError({ errorReason: reason }))
@@ -137,8 +137,8 @@ describe('Функция checkVkUserDenied', () => {
   });
 
   it(
-    'Объект ошибки, соответствующий типу ошибки client_error с кодом ошибки 4,' +
-      ' с произвольной причиной ошибки',
+    'Объект ошибки, соответствующий типу ошибки client_error с кодом ошибки 4, ' +
+      'с произвольной причиной ошибки',
     () => {
       expect(checkVkUserDenied(getVKClientTypeError({ errorCode: 4 }))).toBe(
         true
@@ -147,9 +147,9 @@ describe('Функция checkVkUserDenied', () => {
   );
 
   it(
-    'Объект ошибки, соответствующий типу ошибки client_error' +
-      ' с произвольным кодом ошибки,' +
-      ' с произвольной причиной ошибки',
+    'Объект ошибки, соответствующий типу ошибки client_error ' +
+      'с произвольным кодом ошибки, ' +
+      'с произвольной причиной ошибки',
     () => {
       expect(checkVkUserDenied(getVKClientTypeError())).toBe(false);
     }
@@ -157,8 +157,8 @@ describe('Функция checkVkUserDenied', () => {
 
   userDeniedErrorReasons.forEach((reason) => {
     it(
-      'Объект, содержащий минимально достаточные поля, с типом ошибки client_error' +
-        ` с причиной ошибки "${reason}" и кодом ошибки 4`,
+      'Объект, содержащий минимально достаточные поля, с типом ошибки client_error ' +
+        `с причиной ошибки "${reason}" и кодом ошибки 4`,
       () => {
         expect(
           checkVkUserDenied({

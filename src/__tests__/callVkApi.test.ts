@@ -68,8 +68,6 @@ const getMockTokenExpiredErrorCases = () =>
 
 /**
  * Проверка на передачу в бридж токена
- * @param token
- * @param nthTime
  */
 const expectBridgeCalledWithToken = ({
   token,

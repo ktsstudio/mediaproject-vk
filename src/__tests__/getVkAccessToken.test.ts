@@ -103,7 +103,8 @@ const getScopesWithAvailablePartlyOverlapping = (): ScopesPair[] => [
 ];
 
 /**
- * Получить пары запрашиваемых и получаемых скоупов
+ * Получить пары запрашиваемых и фактически получаемых скоупов
+ * для теста поведения пользователя
  */
 const getRequestToResultScopes = (): {
   requestScopes: PersonalAuthScope[];
@@ -539,7 +540,7 @@ describe('Функция getVkAccessToken', () => {
     });
 
     expect(result).toEqual('');
-    expect(window.scope?.split(',').sort().join(',')).toBe('');
+    expect(window.scope).toBe('');
     expect(window.access_token).toBe('');
     expect(bridge.send).toHaveBeenCalledTimes(1);
     expectNoErrorsOccurred();

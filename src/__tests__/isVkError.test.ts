@@ -82,18 +82,20 @@ describe('Функция isVkError', () => {
   });
 
   it('Объект с произвольным значением поля error_data, но отсутствующим error_type', () => {
-    expect(isVkError({ error_data: randomString(6) }));
+    expect(isVkError({ error_data: randomString(6) })).toBe(false);
   });
 
   it('Объект с произвольным значением поля error_data и неправильным error_type', () => {
     expect(
       isVkError({ error_data: randomString(6), error_type: randomString(6) })
-    );
+    ).toBe(false);
   });
 
   vkErrorTypes.forEach((errorType) => {
     it(`Объект с произвольным error_data и error_type, равным "${errorType}"`, () => {
-      expect(isVkError({ error_data: randomString(6), error_type: errorType }));
+      expect(
+        isVkError({ error_data: randomString(6), error_type: errorType })
+      ).toBe(true);
     });
   });
 
@@ -108,7 +110,7 @@ describe('Функция isVkError', () => {
             error_type: errorType,
             [randomString(6)]: randomNumberUpTo(100),
           })
-        );
+        ).toBe(true);
       }
     );
   });
