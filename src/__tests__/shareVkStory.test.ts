@@ -2,12 +2,17 @@ import originalBridge, { ReceiveData } from '@vkontakte/vk-bridge';
 
 import { ShareVkStoryPropsType } from '../types';
 import { shareVkStory } from '../shareVkStory';
+import { userDeniedErrorReasons } from '../checkVkUserDenied';
+
+import { getRandomVkApiError, getUserDeniedCommonError } from './utils';
 
 jest.mock('@vkontakte/vk-bridge');
 
 const bridge = originalBridge as jest.Mocked<typeof originalBridge>;
 
 const VK_BRIDGE_SHARE_STORY_METHOD = 'VKWebAppShowStoryBox';
+
+const MOCK_ANY_ERROR = getRandomVkApiError();
 
 const MOCK_STORY_BACKGROUND_TYPE = 'none';
 
@@ -125,5 +130,33 @@ describe('Функция shareVkStory', () => {
         attachment: MOCK_STORY_ATTACHMENT,
       })
     );
+  });
+
+  [...userDeniedErrorReasons].forEach((reason) => {
+    it(`Отказ пользователя, причина ошибки: "${reason}"`, async () => {
+      bridge.send.mockImplementation(() => {
+        throw getUserDeniedCommonError({ reason });
+      });
+
+      const result = await shareVkStory(
+        getMockShareStoryParams({ url: MOCK_STORY_URL })
+      );
+
+      expect(bridge.send).toBeCalledTimes(1);
+      expect(result).toBe(undefined);
+    });
+  });
+
+  it('Неизвестная ошибка', async () => {
+    bridge.send.mockImplementation(() => {
+      throw MOCK_ANY_ERROR;
+    });
+
+    const result = await shareVkStory(
+      getMockShareStoryParams({ url: MOCK_STORY_URL })
+    );
+
+    expect(bridge.send).toBeCalledTimes(1);
+    expect(result).toBe(MOCK_ANY_ERROR);
   });
 });

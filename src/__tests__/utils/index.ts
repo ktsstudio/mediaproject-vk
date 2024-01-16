@@ -7,3 +7,5 @@ export * from './randomString';
 export * from './shuffle';
 
 export * from './getRandomElements';
+
+export * from './mockErrors';

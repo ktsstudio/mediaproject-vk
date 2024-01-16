@@ -1,10 +1,9 @@
 import originalBridge, { ReceiveData } from '@vkontakte/vk-bridge';
-import { ErrorData } from '@vkontakte/vk-bridge/dist/types/src/types/bridge';
 
 import { SetViewSettingsPropsType, VkPlatformType } from '../types';
 import { setVkViewSettings } from '../setVkViewSettings';
 
-import { randomNumberUpTo, randomString, range } from './utils';
+import { getRandomVkApiError } from './utils';
 
 jest.mock('@vkontakte/vk-bridge');
 
@@ -49,14 +48,7 @@ const MOCK_BRIDGE_SUCCESS_RESULT: ReceiveData<'VKWebAppSetViewSettings'> = {
   result: true,
 };
 
-const MOCK_ANY_ERROR: ErrorData = {
-  error_type: 'api_error',
-  error_data: {
-    error_code: randomNumberUpTo(100),
-    error_msg: randomString(10),
-    request_params: range(3).map(() => randomString(3)),
-  },
-};
+const MOCK_ANY_ERROR = getRandomVkApiError();
 
 describe('setVkViewSettings', () => {
   afterEach(() => {

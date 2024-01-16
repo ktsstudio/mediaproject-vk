@@ -1,14 +1,11 @@
 import originalBridge from '@vkontakte/vk-bridge';
-import {
-  AnyRequestMethodName,
-  ErrorData,
-} from '@vkontakte/vk-bridge/dist/types/src/types/bridge';
+import { AnyRequestMethodName } from '@vkontakte/vk-bridge/dist/types/src/types/bridge';
 
 import { getVkAccessToken as originalGetVkAccessToken } from '../getVkAccessToken';
 import { callVkApi, VK_TOKEN_ERRORS } from '../callVkApi';
 import { GetVkAccessTokenParamsType } from '../types';
 
-import { randomNumberUpTo, randomString, range } from './utils';
+import { getRandomVkApiError, randomNumberUpTo, randomString } from './utils';
 
 jest.mock('@vkontakte/vk-bridge');
 jest.mock('../getVkAccessToken');
@@ -32,14 +29,7 @@ const MOCK_NEW_TOKEN = 'MOCK_NEW_TOKEN';
 
 const MOCK_SUCCESS = 'MOCK_SUCCESS' as unknown as BridgeSendReturn;
 
-const MOCK_ANY_ERROR: ErrorData = {
-  error_type: 'api_error',
-  error_data: {
-    error_code: randomNumberUpTo(100),
-    error_msg: randomString(10),
-    request_params: range(3).map(() => randomString(3)),
-  },
-};
+const MOCK_ANY_ERROR = getRandomVkApiError();
 
 const MOCK_GET_TOKEN_PARAMS = {
   [randomString(5)]: randomString(5),

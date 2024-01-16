@@ -2,10 +2,7 @@ import originalBridge, {
   PersonalAuthScope,
   ReceiveData,
 } from '@vkontakte/vk-bridge';
-import {
-  ErrorData,
-  RequestProps,
-} from '@vkontakte/vk-bridge/dist/types/src/types/bridge';
+import { RequestProps } from '@vkontakte/vk-bridge/dist/types/src/types/bridge';
 import { ReceiveDataMap } from '@vkontakte/vk-bridge/dist/types/src/types/data';
 
 import {
@@ -19,6 +16,8 @@ import { GetVkAccessTokenParamsType } from '../types';
 
 import {
   getRandomElements,
+  getRandomVkApiError,
+  getUserDeniedCommonError,
   randomNumberUpTo,
   randomString,
   range,
@@ -50,14 +49,7 @@ const MOCK_TOKEN_ANSWER: ReceiveDataMap['VKWebAppGetAuthToken'] = {
   scope: 'MOCK_SCOPE',
 };
 
-const MOCK_ANY_ERROR: ErrorData = {
-  error_type: 'api_error',
-  error_data: {
-    error_code: randomNumberUpTo(100),
-    error_msg: randomString(10),
-    request_params: range(3).map(() => randomString(3)),
-  },
-};
+const MOCK_ANY_ERROR = getRandomVkApiError();
 
 const getRandomScopes = (count: number) =>
   getRandomElements(ALLOWED_VK_SCOPES, count);
@@ -126,14 +118,6 @@ const getRequestToResultScopes = (): {
     resultScopes: ['docs', 'friends'],
   },
 ];
-
-const getUserDeniedError = (): ErrorData => ({
-  error_type: 'client_error',
-  error_data: {
-    error_reason: 'User denied',
-    error_code: 4,
-  },
-});
 
 describe('Функция parseVkScopes', () => {
   getScopesCounts().forEach((count) => {
@@ -568,7 +552,7 @@ describe('Функция getVkAccessToken', () => {
       window.access_token = MOCK_AVAILABLE_TOKEN;
       window.scope = MOCK_SCOPES_STRING;
 
-      const deniedAllError = getUserDeniedError();
+      const deniedAllError = getUserDeniedCommonError();
 
       bridge.send.mockImplementation(() => {
         throw deniedAllError;
