@@ -1,9 +1,6 @@
 import { ErrorData } from '@vkontakte/vk-bridge/dist/types/src/types/bridge';
 
-import {
-  checkVkUserDenied,
-  userDeniedErrorReasons,
-} from '../checkVkUserDenied';
+import { checkVkUserDenied, userDeniedReasons } from '../checkVkUserDenied';
 
 import { randomNumberUpTo, randomString, range } from './utils';
 
@@ -61,7 +58,7 @@ describe('Функция checkVkUserDenied', () => {
     expect(checkVkUserDenied(getVkApiTypeError())).toBe(false);
   });
 
-  userDeniedErrorReasons.forEach((reason) => {
+  userDeniedReasons.forEach((reason) => {
     it(
       'Объект ошибки, соответствующий типу ошибки api_error, ' +
         `но с error_reason "${reason}" и кодом ошибки 4`,
@@ -79,7 +76,7 @@ describe('Функция checkVkUserDenied', () => {
     expect(checkVkUserDenied(getVkAuthTypeError())).toBe(false);
   });
 
-  userDeniedErrorReasons.forEach((reason) => {
+  userDeniedReasons.forEach((reason) => {
     it(
       'Объект ошибки, соответствующий типу ошибки auth_error, ' +
         `но с error_reason "${reason}" и кодом ошибки 4`,
@@ -93,7 +90,7 @@ describe('Функция checkVkUserDenied', () => {
     );
   });
 
-  userDeniedErrorReasons.forEach((reason) => {
+  userDeniedReasons.forEach((reason) => {
     it(
       'Объект ошибки, соответствующий типу ошибки client_error ' +
         `с правильным error_reason "${reason}" и кодом ошибки 4`,
@@ -107,7 +104,7 @@ describe('Функция checkVkUserDenied', () => {
     );
   });
 
-  userDeniedErrorReasons.forEach((reason) => {
+  userDeniedReasons.forEach((reason) => {
     it(
       'Объект ошибки, соответствующий типу ошибки client_error с произвольным кодом ошибки, ' +
         `с правильным error_reason "${reason}", но в нижнем регистре`,
@@ -123,7 +120,7 @@ describe('Функция checkVkUserDenied', () => {
     );
   });
 
-  userDeniedErrorReasons.forEach((reason) => {
+  userDeniedReasons.forEach((reason) => {
     it(
       'Объект ошибки, соответствующий типу ошибки client_error, ' +
         'с произвольным кодом ошибки, ' +
@@ -155,7 +152,7 @@ describe('Функция checkVkUserDenied', () => {
     }
   );
 
-  userDeniedErrorReasons.forEach((reason) => {
+  userDeniedReasons.forEach((reason) => {
     it(
       'Объект, содержащий минимально достаточные поля, с типом ошибки client_error ' +
         `с причиной ошибки "${reason}" и кодом ошибки 4`,

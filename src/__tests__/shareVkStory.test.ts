@@ -2,7 +2,7 @@ import originalBridge, { ReceiveData } from '@vkontakte/vk-bridge';
 
 import { ShareVkStoryPropsType } from '../types';
 import { shareVkStory } from '../shareVkStory';
-import { userDeniedErrorReasons } from '../checkVkUserDenied';
+import { userDeniedReasons } from '../checkVkUserDenied';
 
 import { getRandomVkApiError, getUserDeniedCommonError } from './utils';
 
@@ -132,7 +132,7 @@ describe('Функция shareVkStory', () => {
     );
   });
 
-  [...userDeniedErrorReasons].forEach((reason) => {
+  [...userDeniedReasons].forEach((reason) => {
     it(`Отказ пользователя, причина ошибки: "${reason}"`, async () => {
       bridge.send.mockImplementation(() => {
         throw getUserDeniedCommonError({ reason });
