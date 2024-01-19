@@ -24,6 +24,7 @@ const VK_PLATFORMS_WITH_VIEW_SETTINGS: VkPlatformType[] = [
  * @param {light | dark} viewSettings.status_bar_style Тема для значков статус-бара. Возможные значения: light — светлая. dark — тёмная.
  * @param {string} viewSettings.action_bar_color Цвет экшен-бара в формате HEX-кода (#00ffff). Значение 'none' для прозрачного цвета. Только для Android.
  * @param {string} viewSettings.navigation_bar_color Цвет навигационного бара в формате HEX-кода (#00ffff). Только для Android.
+ * @param {VkPlatformType} platform текущая платформа, на которой было запущено приложение.
  * @returns {Promise<SetViewSettingsResponseType>} Возвращает ответ, полученный на запрос VKWebAppSetViewSettings с переданными параметрами.
  *
  * @see {@link https://dev.vk.com/bridge/VKWebAppSetViewSettings}
