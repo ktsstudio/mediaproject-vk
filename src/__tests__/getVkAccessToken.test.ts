@@ -59,8 +59,11 @@ const getRandomScopes = (count: number) =>
  * * Один скоуп (минимальное количество)
  * * Случайное количество от 2 до 11 включительно
  * * 12 скоупов (максимальное количество)
+ *
+ * Опционально можно включить ноль
  */
-const getScopesCounts = () => [
+const getScopesCounts = ({ withZero = true }: { withZero?: boolean } = {}) => [
+  ...(withZero ? [0] : []),
   1,
   2 + randomNumberUpTo(ALLOWED_VK_SCOPES.length - 2),
   ALLOWED_VK_SCOPES.length,
@@ -128,7 +131,10 @@ const getRequestToResultScopes = (): {
 describe('Функция parseVkScopes', () => {
   getScopesCounts().forEach((count) => {
     it(`Правильный парсинг скоупов, количество скоупов: ${count}`, () => {
+      // Если количество скоупов равно 0, будет пустой массив
       const randomScopes = getRandomScopes(count);
+
+      // Если количество скоупов равно 0, будет пустая строка
       const scopesString = randomScopes.join(',');
 
       expect(parseVkScopes(scopesString)).toEqual(randomScopes);
@@ -142,10 +148,6 @@ describe('Функция parseVkScopes', () => {
 
       expect(parseVkScopes(scopesString)).not.toEqual(scopes);
     });
-  });
-
-  it('Пустая строка', () => {
-    expect(parseVkScopes('')).toEqual([]);
   });
 
   it('Случайная строка', () => {
@@ -164,6 +166,7 @@ describe('Функция parseVkScopes', () => {
 describe('Функция checkOneScopesSetIncludesAnother', () => {
   getScopesCounts().forEach((count) => {
     it(`Правильное сравнение одинаковых наборов скоупов, количество скоупов: ${count}`, () => {
+      // Если количество скоупов равно 0, будет пустой массив
       const scopes = getRandomScopes(count);
 
       expect(
@@ -219,7 +222,7 @@ describe('Функция getNewVkAccessToken', () => {
     bridge.send.mockImplementation(() => Promise.resolve());
   });
 
-  [0, ...getScopesCounts()].forEach((count) => {
+  getScopesCounts().forEach((count) => {
     it(`Получение токена по переданным скоупам, количество скоупов: ${count}`, async () => {
       bridge.send.mockImplementation(() => Promise.resolve(MOCK_TOKEN_ANSWER));
 
@@ -233,7 +236,7 @@ describe('Функция getNewVkAccessToken', () => {
     });
   });
 
-  [0, ...getScopesCounts()].forEach((count) => {
+  getScopesCounts().forEach((count) => {
     it('В бридж передаётся строка со скоупами, переданными в массиве в аргументе', async () => {
       bridge.send.mockImplementation(() => Promise.resolve(MOCK_TOKEN_ANSWER));
 
@@ -346,7 +349,7 @@ describe('Функция getVkAccessToken', () => {
     mockOnErrorOccurred.mockClear();
   });
 
-  [0, ...getScopesCounts()].forEach((count) => {
+  getScopesCounts().forEach((count) => {
     it(
       'Успешный запрос за токеном при отсутствии ' +
         'доступных токена и скоупов (поля в window равны undefined). ' +
@@ -471,7 +474,7 @@ describe('Функция getVkAccessToken', () => {
         bridge.send.mockImplementation(() =>
           Promise.resolve<ReceiveData<'VKWebAppGetAuthToken'>>({
             scope: availableScopesString,
-            access_token: MOCK_AVAILABLE_TOKEN,
+            access_token: MOCK_TOKEN,
           })
         );
 
@@ -497,7 +500,10 @@ describe('Функция getVkAccessToken', () => {
       'Запрашивается множество скоупов при уже имеющемся пустом множестве скоупов. ' +
         `Количество запрашиваемых скоупов: ${count}`,
       async () => {
+        // Если количество запрашиваемых скоупов равно 0, будет пустой массив
         const requestScopes = getRandomScopes(count).sort();
+
+        // Если количество запрашиваемых скоупов равно 0, будет пустая строка
         const requestScopesString = requestScopes.join(',');
 
         window.access_token = '';
@@ -525,30 +531,6 @@ describe('Функция getVkAccessToken', () => {
         expectNoErrorsOccurred();
       }
     );
-  });
-
-  it('Доступное и запрашиваемое множества скоупов пустые', async () => {
-    window.access_token = '';
-    window.scope = '';
-
-    bridge.send.mockImplementation(() =>
-      Promise.resolve<ReceiveData<'VKWebAppGetAuthToken'>>({
-        scope: '',
-        access_token: MOCK_TOKEN,
-      })
-    );
-
-    const result = await getVkAccessToken({
-      scopes: [],
-      appId: MOCK_APP_ID,
-      ...getErrorCallbacks(),
-    });
-
-    expect(result).toEqual(MOCK_TOKEN);
-    expect(window.scope).toBe('');
-    expect(window.access_token).toBe(MOCK_TOKEN);
-    expect(bridge.send).toHaveBeenCalledTimes(1);
-    expectNoErrorsOccurred();
   });
 
   getNonOverlappingScopes().forEach(({ toRequest, available }) => {

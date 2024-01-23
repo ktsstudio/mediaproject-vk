@@ -61,14 +61,18 @@ describe('Функция isVkError', () => {
   });
 
   vkErrorTypes.forEach((errorType) => {
-    it(`Объект с error_type, равным "${errorType}", но с отсутствующим error_data`, () => {
-      expect(isVkError({ error_type: errorType })).toBe(false);
-    });
+    it(
+      `Попытка обмана проверки: объект с error_type, равным "${errorType}", ` +
+        'но с отсутствующим error_data',
+      () => {
+        expect(isVkError({ error_type: errorType })).toBe(false);
+      }
+    );
   });
 
   vkErrorTypes.forEach((errorType) => {
     it(
-      `Объект с error_type, равным "${errorType}", ` +
+      `Попытка обмана проверки: объект с error_type, равным "${errorType}", ` +
         'с произвольным request_id, но с отсутствующим error_data',
       () => {
         expect(
@@ -81,15 +85,23 @@ describe('Функция isVkError', () => {
     );
   });
 
-  it('Объект с произвольным значением поля error_data, но отсутствующим error_type', () => {
-    expect(isVkError({ error_data: randomString(6) })).toBe(false);
-  });
+  it(
+    'Попытка обмана проверки: объект с произвольным значением поля error_data, ' +
+      'но отсутствующим error_type',
+    () => {
+      expect(isVkError({ error_data: randomString(6) })).toBe(false);
+    }
+  );
 
-  it('Объект с произвольным значением поля error_data и неправильным error_type', () => {
-    expect(
-      isVkError({ error_data: randomString(6), error_type: randomString(6) })
-    ).toBe(false);
-  });
+  it(
+    'Попытка обмана проверки: объект с произвольным значением поля error_data ' +
+      'и неправильным error_type',
+    () => {
+      expect(
+        isVkError({ error_data: randomString(6), error_type: randomString(6) })
+      ).toBe(false);
+    }
+  );
 
   vkErrorTypes.forEach((errorType) => {
     it(`Объект с произвольным error_data и error_type, равным "${errorType}"`, () => {
@@ -101,7 +113,7 @@ describe('Функция isVkError', () => {
 
   vkErrorTypes.forEach((errorType) => {
     it(
-      'Объект с произвольным error_data, произвольным полем' +
+      'Объект с произвольным error_data, произвольным полем ' +
         `и error_type, равным "${errorType}"`,
       () => {
         expect(

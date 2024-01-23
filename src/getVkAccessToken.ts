@@ -54,7 +54,7 @@ const parseVkScopes = (scopes?: string): PersonalAuthScope[] => {
  * Внимание: пустое множество является подмножеством любого множества.
  *
  * @param {Set<PersonalAuthScope>} firstScope Первое множество scopes.
- * @param {Set<PersonalAuthScope>,} secondScope Второе множество scopes.
+ * @param {Set<PersonalAuthScope>} secondScope Второе множество scopes.
  * @returns {boolean} Если все значения из первого множества встречаются во втором, возвращает true. Иначе возвращает false.
  */
 const checkOneScopesSetIncludesAnother = (
