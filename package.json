@@ -36,6 +36,7 @@
     "codestyle": "prettier --write \"src/**/*.{ts,js}?(x)\"",
     "tsc-check": "tsc --skipLibCheck --noEmit --project tsconfig.json",
     "test": "jest",
+    "test:list": "jest --verbose --no-color 2> ./src/__tests__/testsList.txt",
     "test:cover": "jest --coverage --collectCoverageFrom='src/**/*.{ts,tsx}'",
     "precommit": "lint-staged"
   },

@@ -1,3 +1,10 @@
+# v3.0.0
+[*] исправлена проверка на пустую строку в функции `checkVkAvatarIsDefault`
+[*] в десктоп-платформы добавлены платформы десктопного ВК Мессенджера в функции `checkVkPlatform`
+[*] в функции `setVkViewSettings` удалено обращение к `window`
+[*] в функции `shareVkPostWithUpload` добавлен аргумент `appId`, прокидываемый в параметры для получения токена в `callVkApi`
+[+] добавлены автотесты на функции `callVkApi`, `parseVkScopes`, `checkOneScopesSetIncludesAnother`, `getNewVkAccessToken`, `getVkAccessToken`, `checkVkPlatform`, `callVkApi`, `checkVkAvatarIsDefault`, `setVkViewSettings`, `shareVkStory`, `isVkError`, `checkVkUserDenied`, хуки `usePolling`, `useEventSubscribe`
+
 #### v2.1.1
 
 [-] shareVkPostWithUpload: убрана вложенность response
