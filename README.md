@@ -36,6 +36,26 @@
 - [checkVkPlatform](./src/checkVkPlatform.ts)
 - [initializeVkApp](./src/initializeVkApp.ts)
 
+## Покрытие тестами
+
+Все утилиты покрыты автотестами. Исключениями являются утилиты [initializeVkApp](./src/initializeVkApp.ts)
+(вскоре будет удалена в соответствии с обновлениями об [отказе от использования window для записи параметров приложения](https://github.com/ktsstudio/mediaproject-vk/pull/18))
+и [shareVkPost](./src/shareVkPost.ts) (будет покрыта автотестами после внедрения [mediaproject-utils версии 5](https://github.com/ktsstudio/mediaproject-utils/pull/18)
+
+Для запуска автотестов воспользуйтесь следующей командой:
+
+`yarn test`
+
+Для запуска тестов и сбора статистики по покрытию автотестами проекта, запустите команду:
+
+`yarn test:cover`
+
+Ниже представлена команда для запуска тестов и сбора списка названий всех выполненных тест-кейсов в файл по пути `./src/__test__/testsList.txt`.
+Команда предназначена для удобства обзора всех тест-кейсов. Запускайте её, если меняете названия тест-кейсов,
+их структуру или количество:
+
+`yarn test:list`
+
 ## Обратная связь
 
 Любой фидбэк вы можете отправить нам на почту [hello@ktsstudio.ru](mailto:hello@ktsstudio.ru) или в личные сообщения [нашего сообщества ВКонтакте](https://vk.com/kts.specials).
