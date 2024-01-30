@@ -69,14 +69,14 @@ const checkOneScopesSetIncludesAnother = (
  *
  * @param {GetNewVkAccessTokenParamsType} props
  * @param {PersonalAuthScope[] | null} [props.scopes=null] Массив необходимых scopes. Если не передан, будет получен токен с пустым scope.
- * @param {number=} props.appId ID текущего приложения. Если не указан, будет взят из window.app_id.
+ * @param {number=} props.appId ID текущего приложения.
  * @returns {Promise<GetNewVkAccessTokenResponseType>} Возвращает ответ, полученный на запрос VKWebAppGetAuthToken с переданными параметрами.
  *
  * @see {@link https://dev.vk.com/bridge/VKWebAppGetAuthToken}
  */
 const getNewVkAccessToken = async ({
   scopes = null,
-  appId = window.app_id,
+  appId,
 }: GetNewVkAccessTokenParamsType): Promise<GetNewVkAccessTokenResponseType> => {
   try {
     /**
@@ -106,7 +106,7 @@ const getNewVkAccessToken = async ({
  * @param {(error?: ErrorData) => void=} props.onUserDeniedAll Коллбэк, вызываемый в случае, если пользователь отказался давать доступ к запрашиваемым scopes.
  * @param {(error?: ErrorData) => void=} props.onUserDeniedSomeScopes Коллбэк, вызываемый в случае, если пользователь дал доступ не ко всем требуемым scopes.
  * @param {(error?: ErrorData) => void=} props.onErrorOccurred Коллбэк, вызываемый в случае, если произошла ошибка.
- * @param {number=} props.appId ID текущего приложения. Если не указан, будет взят из window.app_id.
+ * @param {number=} props.appId ID текущего приложения.
  * @returns {Promise<string | null>} В случае успеха возвращает токен доступа. Иначе возвращает null.
  *
  * @see {@link https://dev.vk.com/bridge/VKWebAppGetAuthToken}

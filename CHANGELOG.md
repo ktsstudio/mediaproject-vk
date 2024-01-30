@@ -1,6 +1,12 @@
-#### v2.1.1
+# v3.0.0
 
-[-] shareVkPostWithUpload: убрана вложенность response
+- [*] отрефакторены утилиты `checkVkPlatform` и `setVkViewSettings` – удалены обращения к `window`
+- [*] из `WindowType` убраны поля, которые не должны храниться в `window`: параметры запуска и параметры определения платформы
+- [-] удалена утилита `initializeVkApp`
+
+### v2.1.1
+
+- [-] shareVkPostWithUpload: убрана вложенность response
 
 ## v2.1.0
 
@@ -14,7 +20,6 @@
 #### v2.0.2
 
 [-] shareVkPostWithUpload: убрана вложенность response
-
 
 ### v2.0.1
 
