@@ -1,6 +1,5 @@
 import { RequestPropsMap } from '@vkontakte/vk-bridge';
-import { ApiResponse } from '@ktsstudio/mediaproject-utils';
-import { UrlConfigType } from '@ktsstudio/mediaproject-utils/dist/types/types/api';
+import { ApiResponse, UrlConfigType } from '@ktsstudio/mediaproject-utils';
 
 import { VkResponseType } from './common';
 import { CallVkApiResponseType } from './callVkApi';
