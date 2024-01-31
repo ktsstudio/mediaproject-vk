@@ -9,6 +9,7 @@
     "jsx": "react",
     "strictNullChecks": true,
     "resolveJsonModule": true,
+    "lib": ["ES2019.Array"]
   },
   "include": ["src", "jest.config.ts"]
 }

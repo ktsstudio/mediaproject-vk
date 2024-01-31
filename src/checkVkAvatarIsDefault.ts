@@ -12,6 +12,6 @@ const checkVkAvatarIsDefault = ({
   photo,
   size = 100,
 }: CheckVkAvatarIsDefaultParamsType): boolean =>
-  !!photo && photo === `https://vk.com/images/camera_${size}.png`;
+  photo === `https://vk.com/images/camera_${size}.png`;
 
 export { checkVkAvatarIsDefault };

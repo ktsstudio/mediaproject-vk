@@ -58,12 +58,8 @@ const getMockTokenExpiredError = ({
  * Подготовить кейсы возникновения ошибки о протухшем токене: на вебе/мобиле и с различным сообщением об ошибке
  */
 const getMockTokenExpiredErrorCases = () =>
-  [true, false].reduce<{ isWeb: boolean; message: string }[]>(
-    (acc, isWeb) => [
-      ...acc,
-      ...VK_TOKEN_ERRORS.map((message) => ({ isWeb, message })),
-    ],
-    []
+  [true, false].flatMap((isWeb) =>
+    VK_TOKEN_ERRORS.map((message) => ({ isWeb, message }))
   );
 
 /**
