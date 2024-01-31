@@ -6,8 +6,6 @@ export * from './common';
 
 export * from './getVkAccessToken';
 
-export * from './initializeVkApp';
-
 export * from './setVkViewSettings';
 
 export * from './shareVkPost';
