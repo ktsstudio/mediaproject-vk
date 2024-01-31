@@ -1,7 +1,9 @@
 # v3.0.0
 
+- [+] добавлена утилита `isVkError` для проверки произвольного значения на соответствие типу ошибки от API ВК ([issue](https://github.com/ktsstudio/mediaproject-vk/issues/16))
 - [*] отрефакторены утилиты `checkVkPlatform` и `setVkViewSettings` – удалены обращения к `window`
 - [*] из `WindowType` убраны поля, которые не должны храниться в `window`: параметры запуска и параметры определения платформы
+- [*] расширено количество кейсов, которые подпадают под отказ пользователя, в утилите `checkVkUserDenied` ([issue](https://github.com/ktsstudio/mediaproject-vk/issues/17))
 - [-] удалена утилита `initializeVkApp`
 
 ### v2.1.1
