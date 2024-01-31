@@ -31,8 +31,11 @@ const MOCK_SUCCESS = 'MOCK_SUCCESS' as unknown as BridgeSendReturn;
 
 const MOCK_ANY_ERROR = getRandomVkApiError();
 
+const MOCK_APP_ID = 999;
+
 const MOCK_GET_TOKEN_PARAMS = {
   [randomString(5)]: randomString(5),
+  appId: MOCK_APP_ID,
 } as GetVkAccessTokenParamsType;
 
 const getMockTokenExpiredError = ({
@@ -142,7 +145,9 @@ describe('Функция callVkApi', () => {
       accessToken: MOCK_TOKEN,
       method: MOCK_VK_BRIDGE_CUSTOM_METHOD,
       renewTokenIfExpired: true,
-      getAccessTokenParams: {},
+      getAccessTokenParams: {
+        appId: MOCK_APP_ID,
+      },
     });
 
     expect(bridge.send).toBeCalledTimes(1);
@@ -158,7 +163,9 @@ describe('Функция callVkApi', () => {
       method: MOCK_VK_BRIDGE_CUSTOM_METHOD,
       accessToken: MOCK_TOKEN,
       renewTokenIfExpired: true,
-      getAccessTokenParams: {},
+      getAccessTokenParams: {
+        appId: MOCK_APP_ID,
+      },
     });
 
     expect(result).toBe(MOCK_ANY_ERROR);
@@ -170,7 +177,9 @@ describe('Функция callVkApi', () => {
     const result = await callVkApi({
       method: MOCK_VK_BRIDGE_CUSTOM_METHOD,
       renewTokenIfExpired: true,
-      getAccessTokenParams: {},
+      getAccessTokenParams: {
+        appId: MOCK_APP_ID,
+      },
     });
 
     expect(result).toBe(MOCK_SUCCESS);
@@ -189,7 +198,9 @@ describe('Функция callVkApi', () => {
       const result = await callVkApi({
         method: MOCK_VK_BRIDGE_CUSTOM_METHOD,
         renewTokenIfExpired: true,
-        getAccessTokenParams: {},
+        getAccessTokenParams: {
+          appId: MOCK_APP_ID,
+        },
       });
 
       expect(result).toBe(MOCK_ANY_ERROR);
@@ -220,7 +231,9 @@ describe('Функция callVkApi', () => {
           method: MOCK_VK_BRIDGE_CUSTOM_METHOD,
           accessToken: MOCK_TOKEN,
           renewTokenIfExpired: true,
-          getAccessTokenParams: {},
+          getAccessTokenParams: {
+            appId: MOCK_APP_ID,
+          },
         });
 
         expect(result).toBe(MOCK_SUCCESS);
@@ -254,7 +267,9 @@ describe('Функция callVkApi', () => {
           method: MOCK_VK_BRIDGE_CUSTOM_METHOD,
           accessToken: MOCK_TOKEN,
           renewTokenIfExpired: true,
-          getAccessTokenParams: {},
+          getAccessTokenParams: {
+            appId: MOCK_APP_ID,
+          },
         });
 
         expect(result).toBe(MOCK_ANY_ERROR);
@@ -283,7 +298,9 @@ describe('Функция callVkApi', () => {
           method: MOCK_VK_BRIDGE_CUSTOM_METHOD,
           accessToken: MOCK_TOKEN,
           renewTokenIfExpired: false,
-          getAccessTokenParams: {},
+          getAccessTokenParams: {
+            appId: MOCK_APP_ID,
+          },
         });
 
         expect(result).toBe(tokenExpiredError);
@@ -299,7 +316,9 @@ describe('Функция callVkApi', () => {
     const result = await callVkApi({
       accessToken: MOCK_TOKEN,
       method: MOCK_VK_BRIDGE_CUSTOM_METHOD,
-      getAccessTokenParams: {},
+      getAccessTokenParams: {
+        appId: MOCK_APP_ID,
+      },
     });
 
     expect(result).toBe(MOCK_SUCCESS);
@@ -319,7 +338,9 @@ describe('Функция callVkApi', () => {
       version: MOCK_VK_API_VERSION,
       accessToken: MOCK_TOKEN,
       method: MOCK_VK_BRIDGE_CUSTOM_METHOD,
-      getAccessTokenParams: {},
+      getAccessTokenParams: {
+        appId: MOCK_APP_ID,
+      },
     });
 
     expect(result).toBe(MOCK_SUCCESS);
@@ -365,7 +386,9 @@ describe('Функция callVkApi', () => {
     const result = await callVkApi({
       accessToken: MOCK_TOKEN,
       method: MOCK_VK_BRIDGE_CUSTOM_METHOD,
-      getAccessTokenParams: {},
+      getAccessTokenParams: {
+        appId: MOCK_APP_ID,
+      },
     });
 
     expect(result).toBe(MOCK_SUCCESS);
@@ -418,7 +441,9 @@ describe('Функция callVkApi', () => {
       accessToken: MOCK_TOKEN,
       method: MOCK_VK_BRIDGE_CUSTOM_METHOD,
       params: customParams,
-      getAccessTokenParams: {},
+      getAccessTokenParams: {
+        appId: MOCK_APP_ID,
+      },
     });
 
     expect(result).toBe(MOCK_SUCCESS);
