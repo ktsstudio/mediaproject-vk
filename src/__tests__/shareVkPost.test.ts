@@ -788,13 +788,13 @@ describe('Функция shareVkPostWithUpload', () => {
       expect(result).toBe(MOCK_SUCCESS_POST_RESULT);
     };
 
-    it('Картинка со стены добавляется к переданным attachments, отправляемым в shareVkPost', async () => {
+    it('Картинка со стены добавляется к переданным attachments, отправляемым в VKWebAppShowWallPostBox', async () => {
       testShareVkPostAttachmentPassing(getMockAttachments());
     });
 
     it(
       'Если дополнительные attachments не переданы, ' +
-        'в параметр attachments shareVkPost передаётся только картинка со стены пользователя',
+        'в параметр attachments VKWebAppShowWallPostBox передаётся только картинка со стены пользователя',
       () => {
         testShareVkPostAttachmentPassing(undefined);
       }
