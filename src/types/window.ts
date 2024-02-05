@@ -18,6 +18,7 @@ export interface WindowType
   is_ios?: boolean;
   is_android?: boolean;
   is_mvk?: boolean;
+  is_messenger?: boolean;
 
   /** Токен доступа и его права */
   access_token?: string;

@@ -5,7 +5,12 @@ import { VkPlatformType } from './types';
  *
  * @constant {VkPlatformType[]}
  */
-const DESKTOP_VK_PLATFORMS: VkPlatformType[] = ['desktop_web', 'web_external'];
+const DESKTOP_VK_PLATFORMS: VkPlatformType[] = [
+  'desktop_web',
+  'web_external',
+  'desktop_app_messenger',
+  'desktop_web_messenger',
+];
 
 /**
  * Платформы ВКонтакте, для которых можно считать, что приложение открыто на IOS.
@@ -29,6 +34,20 @@ const ANDROID_VK_PLATFORMS: VkPlatformType[] = [
   'mobile_android',
   'mobile_android_messenger',
   'android_external',
+];
+
+/**
+ * Платформы ВКонтакте, для которых можно считать, что приложение открыто в мессенджере
+ * в рамках одной из платформ: нативный Android, нативный iOS, нативный прил для десктопа
+ * или веб-версия ВК Месседжера
+ *
+ * @constant {VkPlatformType[]}
+ */
+const MESSENGER_VK_PLATFORMS: VkPlatformType[] = [
+  'mobile_android_messenger',
+  'mobile_iphone_messenger',
+  'desktop_web_messenger',
+  'desktop_app_messenger',
 ];
 
 /**
@@ -102,6 +121,8 @@ const checkVkPlatform = (
   if (!platform) {
     return;
   }
+
+  window.is_messenger = MESSENGER_VK_PLATFORMS.includes(platform);
 
   const isMobile = Boolean(
     platform && !DESKTOP_VK_PLATFORMS.includes(platform)
