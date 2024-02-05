@@ -152,7 +152,7 @@ const checkVkPlatform = (
     return { isMobile: true, isIos: false, isAndroid: true, isMvk: true };
   }
 
-  return null;
+  return { isMobile: true, isIos: false, isAndroid: false, isMvk: true };
 };
 
 export {
