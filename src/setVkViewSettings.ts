@@ -37,7 +37,6 @@ const setVkViewSettings = async (
     let settingsForCurrentPlatform = { ...viewSettings };
 
     if (
-      platform &&
       VK_PLATFORMS_WITH_VIEW_SETTINGS.includes(platform) &&
       bridge.supports('VKWebAppSetViewSettings')
     ) {
