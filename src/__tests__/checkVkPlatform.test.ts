@@ -1,5 +1,5 @@
 import { checkVkPlatform, VK_PLATFORM_CLASSNAME } from '../checkVkPlatform';
-import { VkPlatformType } from '../types';
+import { DeviceInfo, VkPlatformType } from '../types';
 
 type MvkDeviceUnion = 'android' | 'iphone' | 'ipad' | 'ipod' | 'desktop';
 
@@ -35,6 +35,7 @@ const vkPlatformCases: Record<
     name: string;
     userAgent: string;
     bodyClassesToExpect: string[];
+    deviceInfoToExpect: DeviceInfo;
   }
 > = {
   desktop_web: {
@@ -42,18 +43,36 @@ const vkPlatformCases: Record<
     name: 'Десктопная версия сайта ВКонтакте',
     userAgent: NO_MATTER_USERAGENT,
     bodyClassesToExpect: [VK_PLATFORM_CLASSNAME.desktop],
+    deviceInfoToExpect: {
+      isAndroid: false,
+      isIos: false,
+      isMobile: false,
+      isMvk: false,
+    },
   },
   desktop_web_messenger: {
     vkPlatform: 'desktop_web_messenger',
     name: 'Десктопная версия VK Мессенджера (сайт)',
     userAgent: NO_MATTER_USERAGENT,
     bodyClassesToExpect: [VK_PLATFORM_CLASSNAME.desktop],
+    deviceInfoToExpect: {
+      isAndroid: false,
+      isIos: false,
+      isMobile: false,
+      isMvk: false,
+    },
   },
   desktop_app_messenger: {
     vkPlatform: 'desktop_app_messenger',
     name: 'Десктопное приложение VK Мессенджер',
     userAgent: NO_MATTER_USERAGENT,
     bodyClassesToExpect: [VK_PLATFORM_CLASSNAME.desktop],
+    deviceInfoToExpect: {
+      isAndroid: false,
+      isIos: false,
+      isMobile: false,
+      isMvk: false,
+    },
   },
   mobile_android: {
     vkPlatform: 'mobile_android',
@@ -63,6 +82,12 @@ const vkPlatformCases: Record<
       VK_PLATFORM_CLASSNAME.mobile,
       VK_PLATFORM_CLASSNAME.android,
     ],
+    deviceInfoToExpect: {
+      isAndroid: true,
+      isIos: false,
+      isMobile: true,
+      isMvk: false,
+    },
   },
   mobile_android_messenger: {
     vkPlatform: 'mobile_android_messenger',
@@ -72,6 +97,12 @@ const vkPlatformCases: Record<
       VK_PLATFORM_CLASSNAME.mobile,
       VK_PLATFORM_CLASSNAME.android,
     ],
+    deviceInfoToExpect: {
+      isAndroid: true,
+      isIos: false,
+      isMobile: true,
+      isMvk: false,
+    },
   },
   mobile_ipad: {
     vkPlatform: 'mobile_ipad',
@@ -81,6 +112,12 @@ const vkPlatformCases: Record<
       VK_PLATFORM_CLASSNAME.ios,
       VK_PLATFORM_CLASSNAME.mobile,
     ],
+    deviceInfoToExpect: {
+      isAndroid: false,
+      isIos: true,
+      isMobile: true,
+      isMvk: false,
+    },
   },
   mobile_iphone: {
     vkPlatform: 'mobile_iphone',
@@ -90,6 +127,12 @@ const vkPlatformCases: Record<
       VK_PLATFORM_CLASSNAME.ios,
       VK_PLATFORM_CLASSNAME.mobile,
     ],
+    deviceInfoToExpect: {
+      isAndroid: false,
+      isIos: true,
+      isMobile: true,
+      isMvk: false,
+    },
   },
   mobile_iphone_messenger: {
     vkPlatform: 'mobile_iphone_messenger',
@@ -99,6 +142,12 @@ const vkPlatformCases: Record<
       VK_PLATFORM_CLASSNAME.ios,
       VK_PLATFORM_CLASSNAME.mobile,
     ],
+    deviceInfoToExpect: {
+      isAndroid: false,
+      isIos: true,
+      isMobile: true,
+      isMvk: false,
+    },
   },
   mobile_web_desktop: {
     vkPlatform: 'mobile_web',
@@ -108,6 +157,12 @@ const vkPlatformCases: Record<
       VK_PLATFORM_CLASSNAME.mvk,
       VK_PLATFORM_CLASSNAME.mobile,
     ],
+    deviceInfoToExpect: {
+      isAndroid: false,
+      isIos: false,
+      isMobile: true,
+      isMvk: true,
+    },
   },
   mobile_web_android: {
     vkPlatform: 'mobile_web',
@@ -118,6 +173,12 @@ const vkPlatformCases: Record<
       VK_PLATFORM_CLASSNAME.mobile,
       VK_PLATFORM_CLASSNAME.android,
     ],
+    deviceInfoToExpect: {
+      isAndroid: true,
+      isIos: false,
+      isMobile: true,
+      isMvk: true,
+    },
   },
   mobile_web_iphone: {
     vkPlatform: 'mobile_web',
@@ -128,6 +189,12 @@ const vkPlatformCases: Record<
       VK_PLATFORM_CLASSNAME.mobile,
       VK_PLATFORM_CLASSNAME.ios,
     ],
+    deviceInfoToExpect: {
+      isAndroid: false,
+      isIos: true,
+      isMobile: true,
+      isMvk: true,
+    },
   },
   mobile_web_ipad: {
     vkPlatform: 'mobile_web',
@@ -138,6 +205,12 @@ const vkPlatformCases: Record<
       VK_PLATFORM_CLASSNAME.mobile,
       VK_PLATFORM_CLASSNAME.ios,
     ],
+    deviceInfoToExpect: {
+      isAndroid: false,
+      isIos: true,
+      isMobile: true,
+      isMvk: true,
+    },
   },
   mobile_web_ipod: {
     vkPlatform: 'mobile_web',
@@ -148,6 +221,12 @@ const vkPlatformCases: Record<
       VK_PLATFORM_CLASSNAME.mobile,
       VK_PLATFORM_CLASSNAME.ios,
     ],
+    deviceInfoToExpect: {
+      isAndroid: false,
+      isIos: true,
+      isMobile: true,
+      isMvk: true,
+    },
   },
   android_external: {
     vkPlatform: 'android_external',
@@ -157,6 +236,12 @@ const vkPlatformCases: Record<
       VK_PLATFORM_CLASSNAME.mobile,
       VK_PLATFORM_CLASSNAME.android,
     ],
+    deviceInfoToExpect: {
+      isAndroid: true,
+      isIos: false,
+      isMobile: true,
+      isMvk: false,
+    },
   },
   iphone_external: {
     vkPlatform: 'iphone_external',
@@ -166,6 +251,12 @@ const vkPlatformCases: Record<
       VK_PLATFORM_CLASSNAME.mobile,
       VK_PLATFORM_CLASSNAME.ios,
     ],
+    deviceInfoToExpect: {
+      isAndroid: false,
+      isIos: true,
+      isMobile: true,
+      isMvk: false,
+    },
   },
   ipad_external: {
     vkPlatform: 'ipad_external',
@@ -175,12 +266,24 @@ const vkPlatformCases: Record<
       VK_PLATFORM_CLASSNAME.mobile,
       VK_PLATFORM_CLASSNAME.ios,
     ],
+    deviceInfoToExpect: {
+      isAndroid: false,
+      isIos: true,
+      isMobile: true,
+      isMvk: false,
+    },
   },
   web_external: {
     vkPlatform: 'web_external',
     name: 'Внешний сайт ВК, запущенный на десктопном браузере',
     userAgent: NO_MATTER_USERAGENT,
     bodyClassesToExpect: [VK_PLATFORM_CLASSNAME.desktop],
+    deviceInfoToExpect: {
+      isAndroid: false,
+      isIos: false,
+      isMobile: false,
+      isMvk: false,
+    },
   },
   mvk_external_desktop: {
     vkPlatform: 'mvk_external',
@@ -190,6 +293,12 @@ const vkPlatformCases: Record<
       VK_PLATFORM_CLASSNAME.mobile,
       VK_PLATFORM_CLASSNAME.mvk,
     ],
+    deviceInfoToExpect: {
+      isAndroid: false,
+      isIos: false,
+      isMobile: true,
+      isMvk: true,
+    },
   },
   mvk_external_android: {
     vkPlatform: 'mvk_external',
@@ -200,6 +309,12 @@ const vkPlatformCases: Record<
       VK_PLATFORM_CLASSNAME.mvk,
       VK_PLATFORM_CLASSNAME.android,
     ],
+    deviceInfoToExpect: {
+      isAndroid: true,
+      isIos: false,
+      isMobile: true,
+      isMvk: true,
+    },
   },
   mvk_external_iphone: {
     vkPlatform: 'mvk_external',
@@ -210,6 +325,12 @@ const vkPlatformCases: Record<
       VK_PLATFORM_CLASSNAME.mvk,
       VK_PLATFORM_CLASSNAME.ios,
     ],
+    deviceInfoToExpect: {
+      isAndroid: false,
+      isIos: true,
+      isMobile: true,
+      isMvk: true,
+    },
   },
   mvk_external_ipad: {
     vkPlatform: 'mvk_external',
@@ -220,6 +341,12 @@ const vkPlatformCases: Record<
       VK_PLATFORM_CLASSNAME.mvk,
       VK_PLATFORM_CLASSNAME.ios,
     ],
+    deviceInfoToExpect: {
+      isAndroid: false,
+      isIos: true,
+      isMobile: true,
+      isMvk: true,
+    },
   },
   mvk_external_ipod: {
     vkPlatform: 'mvk_external',
@@ -230,12 +357,17 @@ const vkPlatformCases: Record<
       VK_PLATFORM_CLASSNAME.mvk,
       VK_PLATFORM_CLASSNAME.ios,
     ],
+    deviceInfoToExpect: {
+      isAndroid: false,
+      isIos: true,
+      isMobile: true,
+      isMvk: true,
+    },
   },
 };
 
-// Todo: После мёржа обновлений про запись параметров в window дополнить тесты
-//  проверкой возвращаемых функцией значений.
-//  https://github.com/ktsstudio/mediaproject-vk/pull/18
+// Todo: После мёржа обновлений про ВК Мессенджер, обновить тесты
+//  (https://github.com/ktsstudio/mediaproject-vk/pull/24)
 describe('Функция checkVkPlatform', () => {
   let userAgentGetter: jest.SpyInstance<string>;
   let initialBodyClassList: DOMTokenList;
@@ -257,11 +389,17 @@ describe('Функция checkVkPlatform', () => {
   });
 
   Object.values(vkPlatformCases).forEach(
-    ({ vkPlatform, name, bodyClassesToExpect, userAgent }) => {
+    ({
+      vkPlatform,
+      name,
+      bodyClassesToExpect,
+      userAgent,
+      deviceInfoToExpect,
+    }) => {
       it(name, () => {
         userAgentGetter.mockReturnValue(userAgent);
 
-        checkVkPlatform(vkPlatform);
+        const result = checkVkPlatform(vkPlatform);
 
         const bodyClasses = [...document.body.classList];
 
@@ -274,6 +412,8 @@ describe('Функция checkVkPlatform', () => {
             getExcludedVkPlatformClasses(bodyClassesToExpect)
           )
         );
+
+        expect(result).toEqual(deviceInfoToExpect);
       });
     }
   );
