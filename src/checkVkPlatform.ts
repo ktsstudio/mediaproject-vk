@@ -64,7 +64,8 @@ const VK_PLATFORM_CLASSNAME = {
   /**
    * Приложение открыто с какого-то мобильного устройства.
    * После этого класснейма так же должен добавиться класснейм,
-   * указывающий, с какой именно мобильной платформы - ios, android или mvk.
+   * указывающий, с какой именно мобильной платформы:
+   * ios, android или web (m.vk.com или web.vk.me).
    */
   mobile: 'mobile',
 
@@ -79,9 +80,9 @@ const VK_PLATFORM_CLASSNAME = {
   android: 'android',
 
   /**
-   * Приложение открыто в браузере мобильного устройства.
+   * Приложение открыто в браузере мобильного устройства (m.vk.com или web.vk.me)
    */
-  mvk: 'mvk',
+  web: 'web',
 };
 
 /**
@@ -97,19 +98,20 @@ const VK_PLATFORM_CLASSNAME = {
  * Если приложение открыто в мобильном приложении ВКонтакте на Android (window.platform одна из {@link ANDROID_VK_PLATFORMS}),
  * устанавливает в true window.is_mobile и window.is_android и добавляет класснеймы 'mobile android'.
  *
- * Если приложение открыто в браузере на мобильном устройстве (m.vk),
- * устанавливает в true window.is_mobile и window.is_mvk = true и добавляет класснеймы 'mobile mvk'.
- * Также по регулярным выражениям для UserAgent проверяет, открыт ли m.vk на Android
+ * Если приложение открыто в браузере на мобильном устройстве (m.vk.com или web.vk.me),
+ * устанавливает в true window.is_mobile и window.is_web = true и добавляет класснеймы 'mobile web'.
+ * Также по регулярным выражениям для UserAgent проверяет, открыт ли m.vk.com (или web.vk.me) на Android
  * (помимо предыдущих значений еще устанавливает в true window.is_android и добавляет класснейм 'android'),
  * или на IOS (помимо предыдущих значений еще устанавливает в true window.is_ios и добавляет класснейм 'ios').
  *
  * Возможные варианты сочетаний:
- * - desktop - браузер на компьютере
- * - mobile ios - мобильное приложение ВКонтакте на платформе IOS
- * - mobile android - мобильное приложение ВКонтакте на платформе Android
- * - mobile mvk - мобильный браузер на неизвестной платформе (например, m.vk открыт с браузера компьютера)
- * - mobile mvk ios - мобильный браузер на платформе IOS
- * - mobile mvk android - мобильный браузер на платформе Android
+ * - desktop - браузер или нативный мессенджер на компьютере
+ * - desktop web - веб-мессенджер на компьютере
+ * - mobile ios - нативное мобильное приложение ВКонтакте или Мессенджер на платформе IOS
+ * - mobile android - нативное мобильное приложение ВКонтакте или Мессенджер на платформе Android
+ * - mobile web - мобильный браузер на неизвестной платформе (например, m.vk.com открыт с браузера компьютера)
+ * - mobile web ios - мобильный браузер на платформе IOS (m.vk.com или web.vk.me в мобильном браузере на IOS)
+ * - mobile web android - мобильный браузер на платформе Android (m.vk.com или web.vk.me в мобильном браузере на Android)
  *
  * @param {VkPlatformType | undefined} [platform=window.platform] Значение текущей платформы, полученное в параметрах запуска ВКонтакте
  *
@@ -134,6 +136,7 @@ const checkVkPlatform = (
    */
   if (!isMobile) {
     document.body.classList.add(VK_PLATFORM_CLASSNAME.desktop);
+    window.is_web = platform === 'desktop_web_messenger';
 
     return;
   }
@@ -142,7 +145,8 @@ const checkVkPlatform = (
   document.body.classList.add(VK_PLATFORM_CLASSNAME.mobile);
 
   /**
-   * Проверяем, открыты ли мобильное приложение или мобильный браузер на IOS
+   * Проверяем, открыты ли мобильное приложение (ВК или Мессенджер)
+   * или мобильный браузер на IOS
    */
   if (IOS_VK_PLATFORMS.includes(platform)) {
     window.is_ios = true;
@@ -152,7 +156,8 @@ const checkVkPlatform = (
   }
 
   /**
-   * Проверяем, открыты ли мобильное приложение или мобильный браузер на Android
+   * Проверяем, открыты ли мобильное приложение (ВК или Мессенджер)
+   * или мобильный браузер на Android
    */
   if (ANDROID_VK_PLATFORMS.includes(platform)) {
     window.is_android = true;
@@ -161,8 +166,8 @@ const checkVkPlatform = (
     return;
   }
 
-  window.is_mvk = true;
-  document.body.classList.add(VK_PLATFORM_CLASSNAME.mvk);
+  window.is_web = true;
+  document.body.classList.add(VK_PLATFORM_CLASSNAME.web);
 
   if (/(iPad|iPhone|iPod)/g.test(navigator.userAgent)) {
     window.is_ios = true;
