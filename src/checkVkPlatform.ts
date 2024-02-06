@@ -5,7 +5,12 @@ import { DeviceInfo, VkPlatformType } from './types';
  *
  * @constant {VkPlatformType[]}
  */
-const DESKTOP_VK_PLATFORMS: VkPlatformType[] = ['desktop_web', 'web_external'];
+const DESKTOP_VK_PLATFORMS: VkPlatformType[] = [
+  'desktop_web',
+  'web_external',
+  'desktop_app_messenger',
+  'desktop_web_messenger',
+];
 
 /**
  * Платформы ВКонтакте, для которых можно считать, что приложение открыто на IOS.

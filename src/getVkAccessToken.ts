@@ -49,10 +49,12 @@ const parseVkScopes = (scopes?: string): PersonalAuthScope[] => {
 };
 
 /**
- * Утилита для проверки равенства двух множеств scopes.
+ * Утилита для проверки того, является ли первое множество scopes подмножеством
+ * второго множества scopes.
+ * Внимание: пустое множество является подмножеством любого множества.
  *
  * @param {Set<PersonalAuthScope>} firstScope Первое множество scopes.
- * @param {Set<PersonalAuthScope>,} secondScope Второе множество scopes.
+ * @param {Set<PersonalAuthScope>} secondScope Второе множество scopes.
  * @returns {boolean} Если все значения из первого множества встречаются во втором, возвращает true. Иначе возвращает false.
  */
 const checkOneScopesSetIncludesAnother = (

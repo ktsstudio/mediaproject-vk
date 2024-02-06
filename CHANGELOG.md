@@ -1,3 +1,9 @@
+## v3.1.0
+
+[*] исправлена проверка на пустую строку в функции `checkVkAvatarIsDefault`
+[*] в десктоп-платформы добавлены платформы десктопного ВК Мессенджера в функции `checkVkPlatform`
+[+] добавлены автотесты на функции `callVkApi`, `parseVkScopes`, `checkOneScopesSetIncludesAnother`, `getNewVkAccessToken`, `getVkAccessToken`, `checkVkPlatform`, `callVkApi`, `checkVkAvatarIsDefault`, `setVkViewSettings`, `shareVkStory`, `isVkError`, `checkVkUserDenied`, `shareVkPost`, `shareVkPostWithUpload`, хуки `usePolling`, `useEventSubscribe`
+
 # v3.0.0
 
 - [+] добавлена утилита `isVkError` для проверки произвольного значения на соответствие типу ошибки от API ВК ([issue](https://github.com/ktsstudio/mediaproject-vk/issues/16))
