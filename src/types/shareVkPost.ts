@@ -1,6 +1,5 @@
 import { RequestPropsMap } from '@vkontakte/vk-bridge';
-import { ApiResponse } from '@ktsstudio/mediaproject-utils';
-import { UrlConfigType } from '@ktsstudio/mediaproject-utils/dist/types/types/api';
+import { ApiResponse, UrlConfigType } from '@ktsstudio/mediaproject-utils';
 
 import { VkResponseType } from './common';
 import { CallVkApiResponseType } from './callVkApi';
@@ -18,6 +17,7 @@ type ShareVkPostWithUploadParamsType = {
   file: File;
   apiUploadUrl: UrlConfigType;
   userId: number;
+  appId: number;
   accessToken?: string;
   onUserDeniedAccess?: VoidFunction;
   // eslint-disable-next-line
