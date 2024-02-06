@@ -379,7 +379,7 @@ const vkPlatformCases: Record<
   },
   mvk_external_desktop: {
     vkPlatform: 'mvk_external',
-    name: 'Cайт, открытый в мобильном браузере на десктопе (mvk)',
+    name: 'Cайт, открытый в мобильном браузере на десктопе (m.vk.com)',
     userAgent: NO_MATTER_USERAGENT,
     bodyClassesToExpect: [
       VK_PLATFORM_CLASSNAME.mobile,

@@ -117,7 +117,7 @@ const isMobileUserAgent = () =>
  * устанавливает в true isMobile и isAndroid и добавляет класснеймы 'mobile android'.
  *
  * Если приложение открыто в браузере на мобильном устройстве (m.vk.com или web.vk.me),
- * устанавливает в true isMobile и isMvk = true и добавляет класснеймы 'mobile web'.
+ * устанавливает в true isMobile и isWeb = true и добавляет класснеймы 'mobile web'.
  * Также по регулярным выражениям для UserAgent проверяет, открыт ли m.vk.com (или web.vk.me) на Android
  * (помимо предыдущих значений еще устанавливает в true isAndroid и добавляет класснейм 'android',
  * или на IOS устанавливает в true isIos и добавляет класснейм 'ios').
