@@ -1,12 +1,16 @@
 import { checkVkPlatform, VK_PLATFORM_CLASSNAME } from '../checkVkPlatform';
 import { DeviceInfo, VkPlatformType } from '../types';
 
-type MvkDeviceUnion = 'android' | 'iphone' | 'ipad' | 'ipod' | 'desktop';
+type DeviceUnion = 'android' | 'iphone' | 'ipad' | 'ipod' | 'desktop';
 
 type PlatformToTest =
-  | Exclude<VkPlatformType, 'mobile_web' | 'mvk_external'>
-  | `mobile_web_${MvkDeviceUnion}`
-  | `mvk_external_${MvkDeviceUnion}`;
+  | Exclude<
+      VkPlatformType,
+      'mobile_web' | 'mvk_external' | 'desktop_web_messenger'
+    >
+  | `mobile_web_${DeviceUnion}`
+  | `mvk_external_${DeviceUnion}`
+  | `desktop_web_messenger_on_${DeviceUnion}`;
 
 const clearCurrentBodyClassList = () =>
   document.body.classList.remove(...document.body.classList);
@@ -47,19 +51,92 @@ const vkPlatformCases: Record<
       isAndroid: false,
       isIos: false,
       isMobile: false,
-      isWeb: false,
+      isWeb: true,
+      isMessenger: false,
     },
   },
-  desktop_web_messenger: {
+  desktop_web_messenger_on_desktop: {
     vkPlatform: 'desktop_web_messenger',
     name: 'Десктопная версия VK Мессенджера (сайт)',
     userAgent: NO_MATTER_USERAGENT,
-    bodyClassesToExpect: [VK_PLATFORM_CLASSNAME.desktop],
+    bodyClassesToExpect: [
+      VK_PLATFORM_CLASSNAME.desktop,
+      VK_PLATFORM_CLASSNAME.web,
+    ],
     deviceInfoToExpect: {
       isAndroid: false,
       isIos: false,
       isMobile: false,
-      isWeb: false,
+      isWeb: true,
+      isMessenger: true,
+    },
+  },
+  desktop_web_messenger_on_android: {
+    vkPlatform: 'desktop_web_messenger',
+    name: 'ВК Мессенджер в вебе на Android',
+    userAgent: MOCK_ANDROID_USERAGENT,
+    bodyClassesToExpect: [
+      VK_PLATFORM_CLASSNAME.mobile,
+      VK_PLATFORM_CLASSNAME.mobile,
+      VK_PLATFORM_CLASSNAME.android,
+    ],
+    deviceInfoToExpect: {
+      isAndroid: true,
+      isIos: false,
+      isMobile: true,
+      isWeb: true,
+      isMessenger: true,
+    },
+  },
+  desktop_web_messenger_on_iphone: {
+    vkPlatform: 'desktop_web_messenger',
+    name: 'ВК Мессенджер в вебе на iPhone',
+    userAgent: MOCK_IPHONE_USERAGENT,
+    bodyClassesToExpect: [
+      VK_PLATFORM_CLASSNAME.mobile,
+      VK_PLATFORM_CLASSNAME.web,
+      VK_PLATFORM_CLASSNAME.ios,
+    ],
+    deviceInfoToExpect: {
+      isAndroid: false,
+      isIos: true,
+      isMobile: true,
+      isWeb: true,
+      isMessenger: true,
+    },
+  },
+  desktop_web_messenger_on_ipad: {
+    vkPlatform: 'desktop_web_messenger',
+    name: 'ВК Мессенджер в вебе на iPad',
+    userAgent: MOCK_IPAD_USERAGENT,
+    bodyClassesToExpect: [
+      VK_PLATFORM_CLASSNAME.ios,
+      VK_PLATFORM_CLASSNAME.web,
+      VK_PLATFORM_CLASSNAME.mobile,
+    ],
+    deviceInfoToExpect: {
+      isAndroid: false,
+      isIos: true,
+      isMobile: true,
+      isWeb: true,
+      isMessenger: true,
+    },
+  },
+  desktop_web_messenger_on_ipod: {
+    vkPlatform: 'desktop_web_messenger',
+    name: 'ВК Мессенджер в вебе на iPod',
+    userAgent: MOCK_IPOD_USERAGENT,
+    bodyClassesToExpect: [
+      VK_PLATFORM_CLASSNAME.ios,
+      VK_PLATFORM_CLASSNAME.web,
+      VK_PLATFORM_CLASSNAME.mobile,
+    ],
+    deviceInfoToExpect: {
+      isAndroid: false,
+      isIos: true,
+      isMobile: true,
+      isWeb: true,
+      isMessenger: true,
     },
   },
   desktop_app_messenger: {
@@ -72,6 +149,7 @@ const vkPlatformCases: Record<
       isIos: false,
       isMobile: false,
       isWeb: false,
+      isMessenger: true,
     },
   },
   mobile_android: {
@@ -87,6 +165,7 @@ const vkPlatformCases: Record<
       isIos: false,
       isMobile: true,
       isWeb: false,
+      isMessenger: false,
     },
   },
   mobile_android_messenger: {
@@ -102,6 +181,7 @@ const vkPlatformCases: Record<
       isIos: false,
       isMobile: true,
       isWeb: false,
+      isMessenger: true,
     },
   },
   mobile_ipad: {
@@ -117,6 +197,7 @@ const vkPlatformCases: Record<
       isIos: true,
       isMobile: true,
       isWeb: false,
+      isMessenger: false,
     },
   },
   mobile_iphone: {
@@ -132,6 +213,7 @@ const vkPlatformCases: Record<
       isIos: true,
       isMobile: true,
       isWeb: false,
+      isMessenger: false,
     },
   },
   mobile_iphone_messenger: {
@@ -147,14 +229,15 @@ const vkPlatformCases: Record<
       isIos: true,
       isMobile: true,
       isWeb: false,
+      isMessenger: true,
     },
   },
   mobile_web_desktop: {
     vkPlatform: 'mobile_web',
-    name: 'Мобильная версия сайта ВКонтакте, открытая в десктопном браузере (mvk)',
+    name: 'Мобильная версия сайта ВКонтакте, открытая в десктопном браузере (m.vk.com)',
     userAgent: NO_MATTER_USERAGENT,
     bodyClassesToExpect: [
-      VK_PLATFORM_CLASSNAME.mvk,
+      VK_PLATFORM_CLASSNAME.web,
       VK_PLATFORM_CLASSNAME.mobile,
     ],
     deviceInfoToExpect: {
@@ -162,6 +245,7 @@ const vkPlatformCases: Record<
       isIos: false,
       isMobile: true,
       isWeb: true,
+      isMessenger: false,
     },
   },
   mobile_web_android: {
@@ -169,7 +253,7 @@ const vkPlatformCases: Record<
     name: 'Мобильная версия сайта ВКонтакте, открытая в мобильном браузере на андроиде',
     userAgent: MOCK_ANDROID_USERAGENT,
     bodyClassesToExpect: [
-      VK_PLATFORM_CLASSNAME.mvk,
+      VK_PLATFORM_CLASSNAME.web,
       VK_PLATFORM_CLASSNAME.mobile,
       VK_PLATFORM_CLASSNAME.android,
     ],
@@ -178,6 +262,7 @@ const vkPlatformCases: Record<
       isIos: false,
       isMobile: true,
       isWeb: true,
+      isMessenger: false,
     },
   },
   mobile_web_iphone: {
@@ -185,7 +270,7 @@ const vkPlatformCases: Record<
     name: 'Мобильная версия сайта ВКонтакте, открытая в мобильном браузере на айфоне',
     userAgent: MOCK_IPHONE_USERAGENT,
     bodyClassesToExpect: [
-      VK_PLATFORM_CLASSNAME.mvk,
+      VK_PLATFORM_CLASSNAME.web,
       VK_PLATFORM_CLASSNAME.mobile,
       VK_PLATFORM_CLASSNAME.ios,
     ],
@@ -194,6 +279,7 @@ const vkPlatformCases: Record<
       isIos: true,
       isMobile: true,
       isWeb: true,
+      isMessenger: false,
     },
   },
   mobile_web_ipad: {
@@ -201,7 +287,7 @@ const vkPlatformCases: Record<
     name: 'Мобильная версия сайта ВКонтакте, открытая в мобильном браузере на айпаде',
     userAgent: MOCK_IPAD_USERAGENT,
     bodyClassesToExpect: [
-      VK_PLATFORM_CLASSNAME.mvk,
+      VK_PLATFORM_CLASSNAME.web,
       VK_PLATFORM_CLASSNAME.mobile,
       VK_PLATFORM_CLASSNAME.ios,
     ],
@@ -210,6 +296,7 @@ const vkPlatformCases: Record<
       isIos: true,
       isMobile: true,
       isWeb: true,
+      isMessenger: false,
     },
   },
   mobile_web_ipod: {
@@ -217,7 +304,7 @@ const vkPlatformCases: Record<
     name: 'Мобильная версия сайта ВКонтакте, открытая в мобильном браузере на айподе',
     userAgent: MOCK_IPOD_USERAGENT,
     bodyClassesToExpect: [
-      VK_PLATFORM_CLASSNAME.mvk,
+      VK_PLATFORM_CLASSNAME.web,
       VK_PLATFORM_CLASSNAME.mobile,
       VK_PLATFORM_CLASSNAME.ios,
     ],
@@ -226,6 +313,7 @@ const vkPlatformCases: Record<
       isIos: true,
       isMobile: true,
       isWeb: true,
+      isMessenger: false,
     },
   },
   android_external: {
@@ -241,6 +329,7 @@ const vkPlatformCases: Record<
       isIos: false,
       isMobile: true,
       isWeb: false,
+      isMessenger: false,
     },
   },
   iphone_external: {
@@ -256,6 +345,7 @@ const vkPlatformCases: Record<
       isIos: true,
       isMobile: true,
       isWeb: false,
+      isMessenger: false,
     },
   },
   ipad_external: {
@@ -271,6 +361,7 @@ const vkPlatformCases: Record<
       isIos: true,
       isMobile: true,
       isWeb: false,
+      isMessenger: false,
     },
   },
   web_external: {
@@ -282,7 +373,8 @@ const vkPlatformCases: Record<
       isAndroid: false,
       isIos: false,
       isMobile: false,
-      isWeb: false,
+      isWeb: true,
+      isMessenger: false,
     },
   },
   mvk_external_desktop: {
@@ -291,13 +383,14 @@ const vkPlatformCases: Record<
     userAgent: NO_MATTER_USERAGENT,
     bodyClassesToExpect: [
       VK_PLATFORM_CLASSNAME.mobile,
-      VK_PLATFORM_CLASSNAME.mvk,
+      VK_PLATFORM_CLASSNAME.web,
     ],
     deviceInfoToExpect: {
       isAndroid: false,
       isIos: false,
       isMobile: true,
       isWeb: true,
+      isMessenger: false,
     },
   },
   mvk_external_android: {
@@ -306,7 +399,7 @@ const vkPlatformCases: Record<
     userAgent: MOCK_ANDROID_USERAGENT,
     bodyClassesToExpect: [
       VK_PLATFORM_CLASSNAME.mobile,
-      VK_PLATFORM_CLASSNAME.mvk,
+      VK_PLATFORM_CLASSNAME.web,
       VK_PLATFORM_CLASSNAME.android,
     ],
     deviceInfoToExpect: {
@@ -314,6 +407,7 @@ const vkPlatformCases: Record<
       isIos: false,
       isMobile: true,
       isWeb: true,
+      isMessenger: false,
     },
   },
   mvk_external_iphone: {
@@ -322,7 +416,7 @@ const vkPlatformCases: Record<
     userAgent: MOCK_IPHONE_USERAGENT,
     bodyClassesToExpect: [
       VK_PLATFORM_CLASSNAME.mobile,
-      VK_PLATFORM_CLASSNAME.mvk,
+      VK_PLATFORM_CLASSNAME.web,
       VK_PLATFORM_CLASSNAME.ios,
     ],
     deviceInfoToExpect: {
@@ -330,6 +424,7 @@ const vkPlatformCases: Record<
       isIos: true,
       isMobile: true,
       isWeb: true,
+      isMessenger: false,
     },
   },
   mvk_external_ipad: {
@@ -338,7 +433,7 @@ const vkPlatformCases: Record<
     userAgent: MOCK_IPAD_USERAGENT,
     bodyClassesToExpect: [
       VK_PLATFORM_CLASSNAME.mobile,
-      VK_PLATFORM_CLASSNAME.mvk,
+      VK_PLATFORM_CLASSNAME.web,
       VK_PLATFORM_CLASSNAME.ios,
     ],
     deviceInfoToExpect: {
@@ -346,6 +441,7 @@ const vkPlatformCases: Record<
       isIos: true,
       isMobile: true,
       isWeb: true,
+      isMessenger: false,
     },
   },
   mvk_external_ipod: {
@@ -354,7 +450,7 @@ const vkPlatformCases: Record<
     userAgent: MOCK_IPOD_USERAGENT,
     bodyClassesToExpect: [
       VK_PLATFORM_CLASSNAME.mobile,
-      VK_PLATFORM_CLASSNAME.mvk,
+      VK_PLATFORM_CLASSNAME.web,
       VK_PLATFORM_CLASSNAME.ios,
     ],
     deviceInfoToExpect: {
@@ -362,12 +458,11 @@ const vkPlatformCases: Record<
       isIos: true,
       isMobile: true,
       isWeb: true,
+      isMessenger: false,
     },
   },
 };
 
-// Todo: После мёржа обновлений про ВК Мессенджер, обновить тесты
-//  (https://github.com/ktsstudio/mediaproject-vk/pull/24)
 describe('Функция checkVkPlatform', () => {
   let userAgentGetter: jest.SpyInstance<string>;
   let initialBodyClassList: DOMTokenList;
