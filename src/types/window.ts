@@ -1,5 +1,6 @@
 import { WindowType as CommonWindowType } from '@ktsstudio/mediaproject-utils';
 
+<<<<<<< HEAD
 import { VkPlatformType } from './common';
 
 export interface WindowType
@@ -20,6 +21,9 @@ export interface WindowType
   is_web?: boolean;
   is_messenger?: boolean;
 
+=======
+export interface WindowType extends CommonWindowType {
+>>>>>>> release-3.1.0
   /** Токен доступа и его права */
   access_token?: string;
   scope?: string;

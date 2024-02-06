@@ -53,6 +53,7 @@ const shareVkPost = async (
  * @param {File} props.file Картинка (в виде файла), которую нужно загрузить.
  * @param {UrlConfigType} props.apiUploadUrl Endpoint бэкенда KTS, на который нужно отправить запрос для загрузки картинки на сервер ВКонтакте.
  * @param {number} props.userId ID пользователя, на стену к которому нужно загрузить картинку и пошерить пост.
+ * @param {number} props.appId ID текущего приложения.
  * @param {string} props.accessToken Токен доступа для обращения к API ВКонтакте (передается в {@link callVkApi}). По умолчанию берется из window.access_token.
  * @param {VoidFunction} props.onUserDeniedAccess Коллбэк, вызываемый в случае, если пользователь не дал разрешение на получение прав доступа внутри {@link callVkApi}.
  * @param {VoidFunction} props.onErrorOccurred Коллбэк, вызываемый в случае, если произошла ошибка.
@@ -65,6 +66,7 @@ const shareVkPostWithUpload = async ({
   file,
   apiUploadUrl,
   userId,
+  appId,
   accessToken = window.access_token,
   onUserDeniedAccess,
   onErrorOccurred,
@@ -77,6 +79,7 @@ const shareVkPostWithUpload = async ({
       method: 'photos.getWallUploadServer',
       accessToken,
       getAccessTokenParams: {
+        appId,
         scopes: ['photos'],
         onUserDeniedAll: onUserDeniedAccess,
         onUserDeniedSomeScopes: onUserDeniedAccess,
@@ -139,6 +142,7 @@ const shareVkPostWithUpload = async ({
         server: Number(server),
         user_id: userId,
       },
+      getAccessTokenParams: { appId },
     });
 
     if (saveWallPhotoData.error_type || !saveWallPhotoData.response?.[0]) {

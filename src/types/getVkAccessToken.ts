@@ -10,7 +10,7 @@ export type GetVkAccessTokenPropsType = RequestPropsMap['VKWebAppGetAuthToken'];
 
 export type GetNewVkAccessTokenParamsType = {
   scopes?: PersonalAuthScope[] | null;
-  appId?: GetVkAccessTokenPropsType['app_id'];
+  appId: GetVkAccessTokenPropsType['app_id'];
 };
 
 export type GetVkAccessTokenParamsType = GetNewVkAccessTokenParamsType & {

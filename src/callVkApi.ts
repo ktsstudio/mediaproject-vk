@@ -27,7 +27,7 @@ const VK_TOKEN_ERRORS = [
  * @param {string} [props.version='5.131'] Версия API, используемая для запроса. По умолчанию 5.131.
  * @param {string|null} [props.accessToken=null] Ключ доступа для обращения к API. Если не передан, будет получен вызовом функции {@link getVkAccessToken} с передчаей в нее параметров из getAccessTokenParams.
  * @param {string} [props.renewTokenIfExpired=true] Нужно ли получить новый токен доступа и повторить запрос в случае, если срок действия токена закончился. Если указан как true, то при получении от API ошибки одной из {@link VK_TOKEN_ERRORS} будет вызван метод {@link getNewVkAccessToken} с аргументом getAccessTokenParams.
- * @param {Object} [props.getAccessTokenParams={}] Параметры для получения токена доступа, которые будут переданы в {@link getVkAccessToken} в случае, если токена нет, или в {@link getNewVkAccessToken}, если срок действия токена закончился (если передано значение true для renewTokenIfExpired).
+ * @param {Object} [props.getAccessTokenParams] Параметры для получения токена доступа, которые будут переданы в {@link getVkAccessToken} в случае, если токена нет, или в {@link getNewVkAccessToken}, если срок действия токена закончился (если передано значение true для renewTokenIfExpired).
  * @returns {Promise<CallVkApiResponseType>} Возвращает ответ, полученный на запрос VKWebAppCallAPIMethod с переданными параметрами. Поле результата response, присутствующее в случае успешного запроса, может быть типизировано с помощью дженерика
  *
  * @see {@link https://dev.vk.com/bridge/VKWebAppCallAPIMethod|VKWebAppCallAPIMethod}
@@ -39,7 +39,7 @@ const callVkApi = async <D = any>({
   version = '5.131',
   accessToken = null,
   renewTokenIfExpired = true,
-  getAccessTokenParams = {},
+  getAccessTokenParams,
 }: CallVkApiPropsType): Promise<CallVkApiResponseType<D>> => {
   try {
     let token: string | null = accessToken;

@@ -8,6 +8,8 @@
     "esModuleInterop": true,
     "jsx": "react",
     "strictNullChecks": true,
+    "resolveJsonModule": true,
+    "lib": ["ES2019.Array"]
   },
-  "include": ["src"]
+  "include": ["src", "jest.config.ts"]
 }

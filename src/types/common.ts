@@ -31,9 +31,18 @@ type ExternalVkPlatformType =
 
 type VkPlatformType = InternalVkPlatformType | ExternalVkPlatformType;
 
+type DeviceInfo = {
+  isMobile: boolean;
+  isIos: boolean;
+  isAndroid: boolean;
+  isWeb: boolean;
+  isMessenger: boolean;
+};
+
 export type {
   VkResponseType,
   InternalVkPlatformType,
   ExternalVkPlatformType,
   VkPlatformType,
+  DeviceInfo,
 };

@@ -1,11 +1,24 @@
-#### v3.0.0
-[*] введение в window параметра is_web вместо is_mvk
-[+] запись в window поля is_messenger, означающего, что приложение открыто в ВК Мессенджере
+#### v4.0.0
+
 [*] в перечни ВК-платформ добавлены платформы ВК Мессенджера
 
-#### v2.1.1
+## v3.1.0
 
-[-] shareVkPostWithUpload: убрана вложенность response
+[*] исправлена проверка на пустую строку в функции `checkVkAvatarIsDefault`
+[*] в десктоп-платформы добавлены платформы десктопного ВК Мессенджера в функции `checkVkPlatform`
+[+] добавлены автотесты на функции `callVkApi`, `parseVkScopes`, `checkOneScopesSetIncludesAnother`, `getNewVkAccessToken`, `getVkAccessToken`, `checkVkPlatform`, `callVkApi`, `checkVkAvatarIsDefault`, `setVkViewSettings`, `shareVkStory`, `isVkError`, `checkVkUserDenied`, `shareVkPost`, `shareVkPostWithUpload`, хуки `usePolling`, `useEventSubscribe`
+
+# v3.0.0
+
+- [+] добавлена утилита `isVkError` для проверки произвольного значения на соответствие типу ошибки от API ВК ([issue](https://github.com/ktsstudio/mediaproject-vk/issues/16))
+- [*] отрефакторены утилиты `checkVkPlatform` и `setVkViewSettings` – удалены обращения к `window`
+- [*] из `WindowType` убраны поля, которые не должны храниться в `window`: параметры запуска и параметры определения платформы
+- [*] расширено количество кейсов, которые подпадают под отказ пользователя, в утилите `checkVkUserDenied` ([issue](https://github.com/ktsstudio/mediaproject-vk/issues/17))
+- [-] удалена утилита `initializeVkApp`
+
+### v2.1.1
+
+- [-] shareVkPostWithUpload: убрана вложенность response
 
 ## v2.1.0
 
@@ -16,10 +29,9 @@
 - [+] добавлена возможность указания типа ответа для функции callVkApi
 - [*] поднята версия @ktsstudio/mediaproject-utils до 4.1.1
 
-#### v2.0.2
+### v2.0.2
 
 [-] shareVkPostWithUpload: убрана вложенность response
-
 
 ### v2.0.1
 

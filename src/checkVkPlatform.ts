@@ -1,4 +1,4 @@
-import { VkPlatformType } from './types';
+import { DeviceInfo, VkPlatformType } from './types';
 
 /**
  * Платформы ВКонтакте, для которых можно считать, что приложение открыто на десктопе.
@@ -80,29 +80,30 @@ const VK_PLATFORM_CLASSNAME = {
   android: 'android',
 
   /**
-   * Приложение открыто в браузере мобильного устройства (m.vk.com или web.vk.me)
+   * Приложение открыто в браузере (m.vk.com или web.vk.me), то есть это браузер,
+   * который может быть открыт как на мобильном устройстве, так и на десктопе
    */
   web: 'web',
 };
 
 /**
- * Утилита для установки настроек под текущую платформу, на которой запущено приложение ВКонтакте.
- * В зависимости от платформы устанавливает нужные флаги в window и добавляет нужные класснеймы на тег body.
+ * Утилита для вычисления информации о текущей платформе, на которой запущено приложение ВКонтакте.
+ * В зависимости от платформы возвращает нужные параметры и добавляет нужные класснеймы на тег body.
  *
- * Если приложение открыто на desktop (window.platform одна из {@link DESKTOP_VK_PLATFORMS}),
- * устанавливает window.is_mobile = false и добавляет класснейм 'desktop' на тег body.
+ * Если приложение открыто на desktop (vk_platform одна из {@link DESKTOP_VK_PLATFORMS}),
+ * устанавливает isMobile в false и добавляет класснейм 'desktop' на тег body.
  *
- * Если приложение открыто в мобильном приложении ВКонтакте на IOS (window.platform одна из {@link IOS_VK_PLATFORMS}),
- * устанавливает в true window.is_mobile и window.is_ios и добавляет класснеймы 'mobile ios'.
+ * Если приложение открыто в мобильном приложении ВКонтакте на IOS (vk_platform одна из {@link IOS_VK_PLATFORMS}),
+ * устанавливает в true isMobile и isIos и добавляет класснеймы 'mobile ios'.
  *
- * Если приложение открыто в мобильном приложении ВКонтакте на Android (window.platform одна из {@link ANDROID_VK_PLATFORMS}),
- * устанавливает в true window.is_mobile и window.is_android и добавляет класснеймы 'mobile android'.
+ * Если приложение открыто в мобильном приложении ВКонтакте на Android (vk_platform одна из {@link ANDROID_VK_PLATFORMS}),
+ * устанавливает в true isMobile и isAndroid и добавляет класснеймы 'mobile android'.
  *
  * Если приложение открыто в браузере на мобильном устройстве (m.vk.com или web.vk.me),
- * устанавливает в true window.is_mobile и window.is_web = true и добавляет класснеймы 'mobile web'.
+ * устанавливает в true isMobile и isMvk = true и добавляет класснеймы 'mobile web'.
  * Также по регулярным выражениям для UserAgent проверяет, открыт ли m.vk.com (или web.vk.me) на Android
- * (помимо предыдущих значений еще устанавливает в true window.is_android и добавляет класснейм 'android'),
- * или на IOS (помимо предыдущих значений еще устанавливает в true window.is_ios и добавляет класснейм 'ios').
+ * (помимо предыдущих значений еще устанавливает в true isAndroid и добавляет класснейм 'android',
+ * или на IOS устанавливает в true isIos и добавляет класснейм 'ios').
  *
  * Возможные варианты сочетаний:
  * - desktop - браузер или нативный мессенджер на компьютере
@@ -113,18 +114,19 @@ const VK_PLATFORM_CLASSNAME = {
  * - mobile web ios - мобильный браузер на платформе IOS (m.vk.com или web.vk.me в мобильном браузере на IOS)
  * - mobile web android - мобильный браузер на платформе Android (m.vk.com или web.vk.me в мобильном браузере на Android)
  *
- * @param {VkPlatformType | undefined} [platform=window.platform] Значение текущей платформы, полученное в параметрах запуска ВКонтакте
+ * @param {VkPlatformType | undefined} [platform] Значение текущей платформы, полученное в параметрах запуска ВКонтакте
  *
  * @see https://dev.vk.com/mini-apps/development/launch-params#vk_platform
  */
+
 const checkVkPlatform = (
-  platform: VkPlatformType | undefined = window.platform
-): void => {
+  platform: VkPlatformType | undefined
+): DeviceInfo | null => {
   if (!platform) {
-    return;
+    return null;
   }
 
-  window.is_messenger = MESSENGER_VK_PLATFORMS.includes(platform);
+  const isMessenger = MESSENGER_VK_PLATFORMS.includes(platform);
 
   const isMobile = Boolean(
     platform && !DESKTOP_VK_PLATFORMS.includes(platform)
@@ -136,12 +138,16 @@ const checkVkPlatform = (
    */
   if (!isMobile) {
     document.body.classList.add(VK_PLATFORM_CLASSNAME.desktop);
-    window.is_web = platform === 'desktop_web_messenger';
 
-    return;
+    return {
+      isMobile: false,
+      isIos: false,
+      isAndroid: false,
+      isWeb: platform === 'desktop_web_messenger',
+      isMessenger,
+    };
   }
 
-  window.is_mobile = true;
   document.body.classList.add(VK_PLATFORM_CLASSNAME.mobile);
 
   /**
@@ -149,10 +155,15 @@ const checkVkPlatform = (
    * или мобильный браузер на IOS
    */
   if (IOS_VK_PLATFORMS.includes(platform)) {
-    window.is_ios = true;
     document.body.classList.add(VK_PLATFORM_CLASSNAME.ios);
 
-    return;
+    return {
+      isMobile: true,
+      isIos: true,
+      isAndroid: false,
+      isWeb: false,
+      isMessenger,
+    };
   }
 
   /**
@@ -160,28 +171,50 @@ const checkVkPlatform = (
    * или мобильный браузер на Android
    */
   if (ANDROID_VK_PLATFORMS.includes(platform)) {
-    window.is_android = true;
     document.body.classList.add(VK_PLATFORM_CLASSNAME.android);
 
-    return;
+    return {
+      isMobile: true,
+      isIos: false,
+      isAndroid: true,
+      isWeb: false,
+      isMessenger,
+    };
   }
 
-  window.is_web = true;
   document.body.classList.add(VK_PLATFORM_CLASSNAME.web);
 
   if (/(iPad|iPhone|iPod)/g.test(navigator.userAgent)) {
-    window.is_ios = true;
     document.body.classList.add(VK_PLATFORM_CLASSNAME.ios);
 
-    return;
+    return {
+      isMobile: true,
+      isIos: true,
+      isAndroid: false,
+      isWeb: true,
+      isMessenger,
+    };
   }
 
   if (/android/i.test(navigator.userAgent)) {
-    window.is_android = true;
     document.body.classList.add(VK_PLATFORM_CLASSNAME.android);
 
-    return;
+    return {
+      isMobile: true,
+      isIos: false,
+      isAndroid: true,
+      isWeb: true,
+      isMessenger,
+    };
   }
+
+  return {
+    isMobile: true,
+    isIos: false,
+    isAndroid: false,
+    isWeb: true,
+    isMessenger,
+  };
 };
 
 export {
