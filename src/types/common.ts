@@ -13,6 +13,8 @@ type VkResponseType<M> = M extends AnyReceiveMethodName
  */
 type InternalVkPlatformType =
   | 'desktop_web'
+  | 'desktop_web_messenger'
+  | 'desktop_app_messenger'
   | 'mobile_android'
   | 'mobile_android_messenger'
   | 'mobile_ipad'

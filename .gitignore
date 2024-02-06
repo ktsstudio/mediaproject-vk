@@ -6,3 +6,6 @@ node_modules/
 .DS_Store
 index.js
 index.d.ts
+
+# jest
+coverage
