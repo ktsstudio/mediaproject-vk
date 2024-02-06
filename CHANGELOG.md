@@ -19,7 +19,7 @@
 - [+] добавлена возможность указания типа ответа для функции callVkApi
 - [*] поднята версия @ktsstudio/mediaproject-utils до 4.1.1
 
-#### v2.0.2
+### v2.0.2
 
 [-] shareVkPostWithUpload: убрана вложенность response
 
