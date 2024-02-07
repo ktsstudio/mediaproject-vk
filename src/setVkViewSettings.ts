@@ -7,7 +7,8 @@ import {
 } from './types';
 
 /**
- * Массив платформ, которые поддерживают view settings.
+ * Массив платформ, которые поддерживают view settings
+ * (по крайней мере status_bar)
  *
  * @constant {VkPlatformType[]}
  */
@@ -15,6 +16,18 @@ const VK_PLATFORMS_WITH_VIEW_SETTINGS: VkPlatformType[] = [
   'mobile_iphone',
   'mobile_ipad',
   'mobile_android',
+  'mobile_android_messenger',
+  'mobile_iphone_messenger',
+];
+
+/**
+ * Массив платформ, которые поддерживают view settings полностью.
+ *
+ * @constant {VkPlatformType[]}
+ */
+const VK_PLATFORMS_WITH_FULL_VIEW_SETTINGS: VkPlatformType[] = [
+  'mobile_android',
+  'mobile_android_messenger',
 ];
 
 /**
@@ -44,7 +57,7 @@ const setVkViewSettings = async (
        * Все настройки поддерживаются только на android,
        * так что если платформа не android, то используем только цвет status bar
        */
-      if (platform !== 'mobile_android') {
+      if (!VK_PLATFORMS_WITH_FULL_VIEW_SETTINGS.includes(platform)) {
         settingsForCurrentPlatform = {
           status_bar_style: viewSettings.status_bar_style,
         };

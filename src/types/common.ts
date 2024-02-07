@@ -35,7 +35,8 @@ type DeviceInfo = {
   isMobile: boolean;
   isIos: boolean;
   isAndroid: boolean;
-  isMvk: boolean;
+  isWeb: boolean;
+  isMessenger: boolean;
 };
 
 export type {
