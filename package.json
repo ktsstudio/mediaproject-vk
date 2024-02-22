@@ -1,6 +1,6 @@
 {
   "name": "@ktsstudio/mediaproject-vk",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "Package with utils for VK Mini Apps",
   "author": "KTS Studio <hello@ktsstudio.ru> (https://kts.studio)",
   "keywords": [
@@ -46,7 +46,7 @@
   "devDependencies": {
     "@babel/core": "^7.20.12",
     "@babel/preset-env": "^7.20.2",
-    "@ktsstudio/mediaproject-utils": "^5.0.0",
+    "@ktsstudio/mediaproject-utils": "^6.0.0",
     "@rollup/plugin-babel": "^6.0.3",
     "@rollup/plugin-commonjs": "^24.0.1",
     "@rollup/plugin-node-resolve": "^15.0.1",
@@ -72,7 +72,7 @@
     "typescript": "^4.1.3"
   },
   "peerDependencies": {
-    "@ktsstudio/mediaproject-utils": "^5.0.0",
+    "@ktsstudio/mediaproject-utils": "^6.0.0",
     "@types/react": ">=17",
     "@vkontakte/vk-bridge": "^2.7.2",
     "react": ">=17"

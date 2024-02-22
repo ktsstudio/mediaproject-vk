@@ -1229,10 +1229,10 @@
     "@jridgewell/resolve-uri" "3.1.0"
     "@jridgewell/sourcemap-codec" "1.4.14"
 
-"@ktsstudio/mediaproject-utils@^5.0.0":
-  version "5.0.0"
-  resolved "https://registry.yarnpkg.com/@ktsstudio/mediaproject-utils/-/mediaproject-utils-5.0.0.tgz#038c48bdace542095fa61092a2c78adc5a4cfd39"
-  integrity sha512-WyrrKuMT3b9BXpMbSy9//hwaFv/mfO3lpzlJTfAsaPNNfswYENov9m7JZJ6oPwXg3lFUl4c/RoX/xk5XY4mJxA==
+"@ktsstudio/mediaproject-utils@^6.0.0":
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/@ktsstudio/mediaproject-utils/-/mediaproject-utils-6.0.0.tgz#a1cb1f4f381b5346cd2edcca46f7bb71c4a68d86"
+  integrity sha512-z8n+FiIx7vvPlx25AmUaegKX+nHh8HvprvQiPHIwLT0P+si1Ahx7uqB7UqZeYAk8GWEUnA8ifnTMDofYaDfeLg==
   dependencies:
     "@babel/core" "^7.23.7"
     "@rollup/plugin-babel" "^6.0.4"
