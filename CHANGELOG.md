@@ -1,3 +1,7 @@
+### v3.0.1
+
+- [*] Поднята версия @ktsstudio/mediaproject-utils до 6.0.0
+
 # v3.0.0
 
 - [+] добавлена утилита `isVkError` для проверки произвольного значения на соответствие типу ошибки от API ВК ([issue](https://github.com/ktsstudio/mediaproject-vk/issues/16))
