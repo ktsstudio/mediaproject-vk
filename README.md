@@ -24,6 +24,10 @@
 - [setVkViewSettings](./src/setVkViewSettings.ts)
 - [shareVkPost и shareVkPostWithUpload](./src/shareVkPost.ts)
 - [shareVkStory](./src/shareVkStory.ts)
+- [getVkStatuses](./src/getVkStatuses.ts)
+- [getVkStatuses](./src/getVkStatuses.ts)
+- [getVkStatus](./src/getVkStatus.ts)
+- [setVkStatus](./src/setVkStatus.ts)
 
 ### Хуки
 
