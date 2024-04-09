@@ -37,7 +37,7 @@ export default async ({
   });
 
   if (result.response) {
-    return result.response.status?.id || null;
+    return result.response.status.id || null;
   }
 
   onErrorOccurred?.(result as ErrorData);
