@@ -38,7 +38,7 @@ type DeviceInfo = {
 
 type ErrorCallbacksType = {
   onUserDeniedAll?: (error?: ErrorData) => void;
-  onUserDeniedSomeScopes?: (error?: ErrorData) => void;
+  onUserDeniedSomeScopes?: () => void;
   onErrorOccurred?: (error?: ErrorData) => void;
 };
 
