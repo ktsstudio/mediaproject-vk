@@ -1,10 +1,10 @@
+import { ErrorCallbacksType } from './common';
+
 type VkStatusesParamsType = {
   appId: number;
   accessToken?: string;
-  onUserDeniedAccess?: VoidFunction;
-  // eslint-disable-next-line
-  onErrorOccurred?: (error?: any, errorData?: any) => void;
-};
+  renewTokenIfExpired?: boolean;
+} & ErrorCallbacksType;
 
 type SetVkStatusParamsType = VkStatusesParamsType & {
   statusId: number;

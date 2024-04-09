@@ -1,3 +1,5 @@
+import { ErrorData } from '@vkontakte/vk-bridge/dist/types/src/types/bridge';
+
 import { SetVkStatusParamsType } from './types';
 import { callVkApi } from './callVkApi';
 
@@ -8,16 +10,20 @@ import { callVkApi } from './callVkApi';
  * @param {statusId} props.statusId ID статуса, если хотим снять статус, то установить statusId: 0.
  * @param {number} props.appId ID текущего приложения.
  * @param {string} props.accessToken Токен доступа для обращения к API ВКонтакте (передается в {@link callVkApi}). По умолчанию берется из window.access_token.
- * @param {VoidFunction} props.onUserDeniedAccess Коллбэк, вызываемый в случае, если пользователь не дал разрешение на получение прав доступа внутри {@link callVkApi}.
- * @param {VoidFunction} props.onErrorOccurred Коллбэк, вызываемый в случае, если произошла ошибка.
+ * @param {string} [props.renewTokenIfExpired=true] Нужно ли получить новый токен доступа и повторить запрос в случае, если срок действия токена закончился. Если указан как true, то при получении от API ошибки одной из {@link VK_TOKEN_ERRORS} будет вызван метод {@link getNewVkAccessToken} с аргументом getAccessTokenParams.
+ * @param {(error?: ErrorData) => void=} props.onUserDeniedAll Коллбэк, вызываемый в случае, если пользователь отказался давать доступ к запрашиваемым scopes.
+ * @param {(error?: ErrorData) => void=} props.onUserDeniedSomeScopes Коллбэк, вызываемый в случае, если пользователь дал доступ не ко всем требуемым scopes.
+ * @param {(error?: ErrorData) => void=} props.onErrorOccurred Коллбэк, вызываемый в случае, если произошла ошибка.
  * @return {Promise<boolean>} Возвращает, успешно ли выполнился запрос.
  *
  */
 export default async ({
+  appId,
   statusId,
   accessToken = window.access_token,
-  onUserDeniedAccess,
-  appId,
+  renewTokenIfExpired = true,
+  onUserDeniedAll,
+  onUserDeniedSomeScopes,
   onErrorOccurred,
 }: SetVkStatusParamsType): Promise<boolean> => {
   const result = await callVkApi({
@@ -29,17 +35,17 @@ export default async ({
     getAccessTokenParams: {
       appId,
       scopes: ['status'],
-      onUserDeniedAll: onUserDeniedAccess,
-      onUserDeniedSomeScopes: onUserDeniedAccess,
+      onUserDeniedAll,
+      onUserDeniedSomeScopes,
     },
-    renewTokenIfExpired: true,
+    renewTokenIfExpired,
   });
 
-  if (result.error_type) {
-    onErrorOccurred?.(result);
-
-    return false;
+  if (result.response) {
+    return true;
   }
 
-  return true;
+  onErrorOccurred?.(result as ErrorData);
+
+  return false;
 };
