@@ -13,3 +13,5 @@ export * from './shareVkPost';
 export * from './shareVkStory';
 
 export * from './window';
+
+export * from './statuses';
