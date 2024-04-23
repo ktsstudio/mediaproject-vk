@@ -1,5 +1,5 @@
 {
-  "name": "@ktsstudio/mediaproject-vk",
+  "name": "@kts-specials/mediaproject-vk",
   "version": "3.1.0",
   "description": "Package with utils for VK Mini Apps",
   "author": "KTS Studio <hello@ktsstudio.ru> (https://kts.studio)",
@@ -12,6 +12,9 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/ktsstudio/mediaproject-vk.git"
+  },
+  "publishConfig": {
+    "registry": "https://nexus.team.ktsstudio.ru/repository/ktsnpm/"
   },
   "bugs": {
     "email": "hello@ktsstudio.ru",
