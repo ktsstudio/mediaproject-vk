@@ -1,9 +1,9 @@
 import originalBridge, {
   PersonalAuthScope,
   ReceiveData,
+  ReceiveDataMap,
+  RequestProps,
 } from '@vkontakte/vk-bridge';
-import { RequestProps } from '@vkontakte/vk-bridge/dist/types/src/types/bridge';
-import { ReceiveDataMap } from '@vkontakte/vk-bridge/dist/types/src/types/data';
 
 import {
   ALLOWED_VK_SCOPES,

@@ -1,4 +1,4 @@
-import { ErrorData } from '@vkontakte/vk-bridge/dist/types/src/types/bridge';
+import { ErrorData } from '@vkontakte/vk-bridge';
 
 import { checkVkUserDenied, userDeniedReasons } from '../checkVkUserDenied';
 
@@ -7,23 +7,15 @@ import { randomNumberUpTo, randomString, range } from './utils';
 const getRandomStrings = () => range(3).map(() => randomString(24));
 
 const getVkApiTypeError = ({
-  errorReason,
+  errorMsg = randomString(10),
   errorCode = randomNumberUpTo(100),
-}: { errorReason?: string; errorCode?: number } = {}): ErrorData => ({
+}: { errorMsg?: string; errorCode?: number } = {}): ErrorData => ({
   error_type: 'api_error',
-  error_data: errorReason
-    ? {
-        error_code: errorCode,
-        error_msg: randomString(10),
-        request_params: getRandomStrings(),
-        // @ts-expect-error non standard field
-        error_reason: errorReason,
-      }
-    : {
-        error_code: errorCode,
-        error_msg: randomString(10),
-        request_params: getRandomStrings(),
-      },
+  error_data: {
+    error_code: errorCode,
+    error_msg: errorMsg,
+    request_params: getRandomStrings(),
+  },
   request_id: randomNumberUpTo(100),
 });
 
@@ -61,11 +53,11 @@ describe('Функция checkVkUserDenied', () => {
   userDeniedReasons.forEach((reason) => {
     it(
       'Объект ошибки, соответствующий типу ошибки api_error, ' +
-        `но с error_reason "${reason}" и кодом ошибки 4`,
+        `но с error_msg "${reason}" и кодом ошибки 4`,
       () => {
         expect(
           checkVkUserDenied(
-            getVkApiTypeError({ errorReason: reason, errorCode: 4 })
+            getVkApiTypeError({ errorMsg: reason, errorCode: 4 })
           )
         ).toBe(false);
       }

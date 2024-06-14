@@ -1,5 +1,7 @@
-import originalBridge from '@vkontakte/vk-bridge';
-import { AnyRequestMethodName } from '@vkontakte/vk-bridge/dist/types/src/types/bridge';
+import originalBridge, {
+  AnyRequestMethodName,
+  ErrorData,
+} from '@vkontakte/vk-bridge';
 
 import { callVkApi, VK_TOKEN_ERRORS } from '../callVkApi';
 import { getVkAccessToken as originalGetVkAccessToken } from '../getVkAccessToken';
@@ -39,30 +41,47 @@ const MOCK_GET_TOKEN_PARAMS = {
 } as GetVkAccessTokenParamsType;
 
 const getMockTokenExpiredError = ({
-  isWeb = true,
-  message = VK_TOKEN_ERRORS[0],
+  errorType = 'client_error',
+  message = [...VK_TOKEN_ERRORS][0],
 }: {
-  isWeb?: boolean;
+  errorType?: ErrorData['error_type'];
   message?: string;
-} = {}) => ({
-  error_type: 'some error type',
-  error_data: isWeb
-    ? {
-        error_reason: {
-          error_msg: message,
-        },
-      }
-    : {
+} = {}): ErrorData => {
+  if (errorType === 'api_error') {
+    return {
+      error_type: errorType,
+      error_data: {
+        error_code: randomNumberUpTo(100),
         error_msg: message,
+        request_params: [],
       },
-});
+    };
+  } else {
+    return {
+      error_type: errorType,
+      error_data: {
+        error_code: randomNumberUpTo(100),
+        error_reason: message,
+      },
+    };
+  }
+};
+
+const errorTypes: readonly ErrorData['error_type'][] = [
+  'api_error',
+  'auth_error',
+  'client_error',
+];
 
 /**
  * Подготовить кейсы возникновения ошибки о протухшем токене: на вебе/мобиле и с различным сообщением об ошибке
  */
-const getMockTokenExpiredErrorCases = () =>
-  [true, false].flatMap((isWeb) =>
-    VK_TOKEN_ERRORS.map((message) => ({ isWeb, message }))
+const getMockTokenExpiredErrorCases = (): {
+  errorType: ErrorData['error_type'];
+  message: string;
+}[] =>
+  errorTypes.flatMap((errorType) =>
+    [...VK_TOKEN_ERRORS].map((message) => ({ errorType, message }))
   );
 
 /**
@@ -188,8 +207,8 @@ describe('Функция callVkApi', () => {
   });
 
   it(
-    'Некоторая ошибка (в том числе из-за возможного некорректного токена), ' +
-      'нет токена, токен должен быть получен один раз',
+    'Некоторая ошибка (в том числе из-за возможного некорректного токена).\n\t' +
+      'Нет токена, токен должен быть получен один раз',
     async () => {
       bridge.send.mockImplementation(() => {
         throw MOCK_ANY_ERROR;
@@ -209,11 +228,11 @@ describe('Функция callVkApi', () => {
     }
   );
 
-  getMockTokenExpiredErrorCases().forEach(({ message, isWeb }) => {
+  getMockTokenExpiredErrorCases().forEach(({ message, errorType }) => {
     it(
-      'Успешный запрос, изначально протухший токен, ' +
-        'новый токен должен быть получен один раз. ' +
-        `Ошибка: ${message}, веб: ${isWeb}`,
+      'Успешный запрос, изначально протухший токен, новый ' +
+        'токен должен быть получен один раз.\n\t' +
+        `Ошибка [${errorType}]: ${message}`,
       async () => {
         getVkAccessToken.mockImplementation(() => Promise.resolve(MOCK_TOKEN));
 
@@ -221,7 +240,7 @@ describe('Функция callVkApi', () => {
         bridge.send
           .mockImplementationOnce(() => {
             throw getMockTokenExpiredError({
-              isWeb,
+              errorType,
               message,
             });
           })
@@ -243,19 +262,19 @@ describe('Функция callVkApi', () => {
     );
   });
 
-  getMockTokenExpiredErrorCases().forEach(({ message, isWeb }) => {
+  getMockTokenExpiredErrorCases().forEach(({ message, errorType }) => {
     it(
       'Некоторая ошибка (в том числе из-за возможного некорректного токена) ' +
-        'после получения нового токена. Изначально протухший токен, ' +
-        'новый токен должен быть получен один раз. ' +
-        `Ошибка: ${message}, веб: ${isWeb}`,
+        'после получения нового токена.\n\t' +
+        'Изначально протухший токен, новый токен должен быть получен один раз.\n\t' +
+        `Ошибка [${errorType}]: ${message}`,
       async () => {
         getVkAccessToken.mockImplementation(() => Promise.resolve(MOCK_TOKEN));
 
         bridge.send
           .mockImplementationOnce(() => {
             throw getMockTokenExpiredError({
-              isWeb,
+              errorType,
               message,
             });
           })
@@ -279,14 +298,14 @@ describe('Функция callVkApi', () => {
     );
   });
 
-  getMockTokenExpiredErrorCases().forEach(({ message, isWeb }) => {
+  getMockTokenExpiredErrorCases().forEach(({ message, errorType }) => {
     it(
       'Запрос с некоторым ответом, изначально протухший токен. ' +
-        'Новый токен получать не нужно. ' +
-        `Ошибка: ${message}, веб: ${isWeb}`,
+        'Новый токен получать не нужно.\n\t' +
+        `Ошибка [${errorType}]: ${message}`,
       async () => {
         const tokenExpiredError = getMockTokenExpiredError({
-          isWeb,
+          errorType,
           message,
         });
 
@@ -357,7 +376,8 @@ describe('Функция callVkApi', () => {
 
   it(
     'Запрос, токена нет, параметры для получения токена ' +
-      'передаются в getVkAccessToken, новый токен передаётся в бридж',
+      'передаются в getVkAccessToken.\n\t' +
+      'Новый токен передаётся в бридж',
     async () => {
       getVkAccessToken.mockImplementation(() =>
         Promise.resolve(MOCK_NEW_TOKEN)
@@ -398,8 +418,8 @@ describe('Функция callVkApi', () => {
 
   it(
     'Запрос, протухший токен передаётся в бридж, ' +
-      'затем новый токен передаётся в бридж. Параметры получения токена ' +
-      'передаются в getVkAccessToken',
+      'затем новый токен передаётся в бридж.\n\t' +
+      'Параметры получения токена передаются в getVkAccessToken',
     async () => {
       getVkAccessToken.mockImplementation(() =>
         Promise.resolve(MOCK_NEW_TOKEN)
