@@ -1,8 +1,9 @@
-import bridge, { ErrorData } from '@vkontakte/vk-bridge';
+import bridge from '@vkontakte/vk-bridge';
 
 import { getVkAccessToken } from './getVkAccessToken';
 import { isVkError } from './isVkError';
 import { CallVkApiPropsType, CallVkApiResponseType } from './types';
+import { makeUnknownVkError, parseVkErrorMessage } from './vkErrorUtils';
 
 /**
  * Ошибки от API ВКонтакте, в случае возникновения которых нужно обновить токен доступа.
@@ -28,8 +29,7 @@ const VK_TOKEN_ERRORS = new Set([
  *
  * @see {@link https://dev.vk.com/bridge/VKWebAppCallAPIMethod|VKWebAppCallAPIMethod}
  */
-// eslint-disable-next-line
-const callVkApi = async <D = any>({
+const callVkApi = async <D>({
   method,
   params = {},
   version = '5.199',
@@ -66,7 +66,7 @@ const callVkApi = async <D = any>({
       return makeUnknownVkError(error);
     }
 
-    const errorMessage = getVkErrorMessage(error);
+    const errorMessage = parseVkErrorMessage(error);
 
     /**
      * Если срок действия токена доступа истек,
@@ -91,36 +91,6 @@ const callVkApi = async <D = any>({
     }
 
     return error;
-  }
-};
-
-const getVkErrorMessage = (error: ErrorData) => {
-  if (error.error_type === 'api_error') {
-    return error.error_data.error_msg;
-  }
-
-  return error.error_data.error_reason;
-};
-
-const makeUnknownVkError = (error: unknown): ErrorData => {
-  return {
-    error_type: 'client_error',
-    error_data: {
-      error_code: -111_000_111,
-      error_reason: 'unknown',
-      error_description: toStringInfo(error),
-    },
-  };
-};
-
-const toStringInfo = (value: unknown): string => {
-  if (value instanceof Error) {
-    return value.message;
-  }
-  try {
-    return JSON.stringify(value);
-  } catch (error) {
-    return String(value);
   }
 };
 

@@ -1,5 +1,5 @@
 import { api } from '@ktsstudio/mediaproject-utils';
-import bridge, { ErrorData } from '@vkontakte/vk-bridge';
+import bridge from '@vkontakte/vk-bridge';
 
 import { callVkApi } from './callVkApi';
 import { checkVkUserDenied } from './checkVkUserDenied';
@@ -11,6 +11,7 @@ import {
   ShareVkPostPropsType,
   SaveVkWallPhotoResponseType,
 } from './types';
+import { toVkError } from './vkErrorUtils';
 
 /**
  * Утилита для шеринга поста на стену.
@@ -26,13 +27,13 @@ const shareVkPost = async (
   try {
     return await bridge.send('VKWebAppShowWallPostBox', props);
   } catch (error) {
-    const errorData = error as ErrorData;
+    const vkError = toVkError(error);
 
-    if (checkVkUserDenied(errorData)) {
+    if (checkVkUserDenied(vkError)) {
       return undefined;
     }
 
-    return errorData;
+    return vkError;
   }
 };
 
@@ -75,7 +76,9 @@ const shareVkPostWithUpload = async ({
     /**
      * Получаем URL сервера для загрузки фото
      */
-    const getWallUploadServerData = await callVkApi({
+    const getWallUploadServerData = await callVkApi<{
+      upload_url: string;
+    }>({
       method: 'photos.getWallUploadServer',
       accessToken,
       getAccessTokenParams: {
@@ -91,6 +94,12 @@ const shareVkPostWithUpload = async ({
       onErrorOccurred?.(getWallUploadServerData);
 
       return getWallUploadServerData;
+    }
+
+    if (!getWallUploadServerData.response) {
+      onErrorOccurred?.(new Error('getWallUploadServerData response is empty'));
+
+      return;
     }
 
     /**
@@ -167,13 +176,13 @@ const shareVkPostWithUpload = async ({
         : uploadedPhotoAttachment,
     });
   } catch (error) {
-    const errorData = error as ErrorData;
+    const vkError = toVkError(error);
 
-    if (!checkVkUserDenied(errorData)) {
-      onErrorOccurred?.(errorData);
+    if (!checkVkUserDenied(vkError)) {
+      onErrorOccurred?.(vkError);
     }
 
-    return errorData;
+    return vkError;
   }
 };
 

@@ -1,7 +1,8 @@
-import bridge, { ErrorData, RequestProps } from '@vkontakte/vk-bridge';
+import bridge, { RequestProps } from '@vkontakte/vk-bridge';
 
 import { checkVkUserDenied } from './checkVkUserDenied';
 import { ShareVkStoryPropsType, ShareVkStoryResponseType } from './types';
+import { toVkError } from './vkErrorUtils';
 
 /**
  * Утилита для шеринга истории.
@@ -36,13 +37,13 @@ const shareVkStory = async ({
 
     return await bridge.send('VKWebAppShowStoryBox', props);
   } catch (error) {
-    const errorData = error as ErrorData;
+    const vkError = toVkError(error);
 
-    if (checkVkUserDenied(errorData)) {
+    if (checkVkUserDenied(vkError)) {
       return;
     }
 
-    return errorData;
+    return vkError;
   }
 };
 

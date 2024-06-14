@@ -3,7 +3,6 @@ import eslint from '@eslint/js';
 import importPluginX from 'eslint-plugin-import-x';
 import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended';
 import reactPlugin from 'eslint-plugin-react';
-import globals from 'globals';
 import tsEslint from 'typescript-eslint';
 
 export default tsEslint.config(
@@ -45,7 +44,7 @@ export default tsEslint.config(
       'prefer-arrow-callback': 'error',
       '@typescript-eslint/consistent-type-definitions': 'off', // отключает принудительное использование только `type` или `interface`
       '@typescript-eslint/no-invalid-void-type': 'off', // отключает использование `void` только в сигнатуре возврата функции
-      '@typescript-eslint/no-explicit-any': 'warn',
+      '@typescript-eslint/no-explicit-any': ['warn', { ignoreRestArgs: true }],
       '@typescript-eslint/interface-name-prefix': 'off',
       '@typescript-eslint/no-unused-vars': 'error',
       '@typescript-eslint/camelcase': 'off',

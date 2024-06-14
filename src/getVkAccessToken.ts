@@ -9,6 +9,7 @@ import type {
   GetNewVkAccessTokenParamsType,
   GetNewVkAccessTokenResponseType,
 } from './types';
+import { toVkError } from './vkErrorUtils';
 
 /**
  * Массив всех возможных scopes для доступа к данным пользователя.
@@ -97,7 +98,7 @@ const getNewVkAccessToken = async ({
       app_id: appId,
     });
   } catch (error) {
-    return error as ErrorData;
+    return toVkError(error);
   }
 };
 

@@ -1,10 +1,11 @@
-import bridge, { ErrorData } from '@vkontakte/vk-bridge';
+import bridge from '@vkontakte/vk-bridge';
 
 import {
   VkPlatformType,
   SetViewSettingsPropsType,
   SetViewSettingsResponseType,
 } from './types';
+import { toVkError } from './vkErrorUtils';
 
 /**
  * Массив платформ, которые поддерживают view settings
@@ -69,7 +70,7 @@ const setVkViewSettings = async (
       );
     }
   } catch (error) {
-    return error as ErrorData;
+    return toVkError(error);
   }
 };
 
