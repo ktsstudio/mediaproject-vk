@@ -6,7 +6,7 @@ import { vkErrorTypes } from './consts';
  * Утилита для проверки произвольного значения на соответствие
  * типу {@link ErrorData}, обозначающему ошибку, приходящую от API VK
  *
- * @param {any} value Произвольное значение.
+ * @param {unknown} value Произвольное значение.
  * @returns {boolean} Если переданное значение соответствует
  * типу ошибки от API VK, возвращает true, а компилятор TypeScript
  * будет считать, что переданное значение имеет тип {@link ErrorData}.
@@ -26,12 +26,12 @@ import { vkErrorTypes } from './consts';
  *   }
  * }
  */
-const isVkError = (value: any): value is ErrorData => {
+const isVkError = (value: unknown): value is ErrorData => {
   return (
     typeof value === 'object' &&
     value !== null &&
     'error_data' in value &&
-    vkErrorTypes.has(value?.error_type)
+    vkErrorTypes.has((value as ErrorData)?.error_type)
   );
 };
 

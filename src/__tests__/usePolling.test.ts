@@ -229,7 +229,6 @@ describe('Хук usePolling:', () => {
 
       expect(bridge.subscribe).toBeCalledTimes(1);
 
-      // eslint-disable-next-line prefer-destructuring
       const listener = bridge.subscribe.mock.calls[0][0];
 
       unmount();
@@ -250,7 +249,6 @@ describe('Хук usePolling:', () => {
 
       expect(bridge.subscribe).toBeCalledTimes(1);
 
-      // eslint-disable-next-line prefer-destructuring
       const firstListener = bridge.subscribe.mock.calls[0][0];
 
       rerender({ condition: false });
@@ -261,7 +259,6 @@ describe('Хук usePolling:', () => {
       expect(bridge.subscribe).toBeCalledTimes(2);
       expect(bridge.subscribe).not.toHaveBeenLastCalledWith(firstListener);
 
-      // eslint-disable-next-line prefer-destructuring
       const secondListener = bridge.subscribe.mock.calls[1][0];
 
       rerender({ condition: true });

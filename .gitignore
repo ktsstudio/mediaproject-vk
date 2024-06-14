@@ -2,6 +2,7 @@ yarn-error.log
 public/
 dist/
 .idea/
+.vscode/
 node_modules/
 .DS_Store
 index.js

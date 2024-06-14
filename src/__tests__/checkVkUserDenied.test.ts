@@ -16,7 +16,7 @@ const getVkApiTypeError = ({
         error_code: errorCode,
         error_msg: randomString(10),
         request_params: getRandomStrings(),
-        // @ts-ignore
+        // @ts-expect-error non standard field
         error_reason: errorReason,
       }
     : {

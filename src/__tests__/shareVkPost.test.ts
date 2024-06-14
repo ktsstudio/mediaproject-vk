@@ -1,3 +1,5 @@
+import { api as originalApi } from '@ktsstudio/mediaproject-utils';
+import { ApiResponse, UrlConfigType } from '@ktsstudio/mediaproject-utils';
 import originalBridge, {
   ErrorData,
   PersonalAuthScope,
@@ -5,13 +7,8 @@ import originalBridge, {
   RequestProps,
   RequestPropsMap,
 } from '@vkontakte/vk-bridge';
-import { ReceiveData } from '@vkontakte/vk-bridge/dist/types/src/types/bridge';
-import { api as originalApi } from '@ktsstudio/mediaproject-utils';
+import { ReceiveData } from '@vkontakte/vk-bridge';
 import { when } from 'jest-when';
-import {
-  ApiResponse,
-  UrlConfigType,
-} from '@ktsstudio/mediaproject-utils/dist/es/types/api';
 
 import { callVkApi as originalCallVkApi } from '../callVkApi';
 import { shareVkPost, shareVkPostWithUpload } from '../shareVkPost';
@@ -764,8 +761,6 @@ describe('Функция shareVkPostWithUpload', () => {
 
       if (!bridgeCallConfig) {
         fail('Конфиг вызова VK Bridge не должен быть пустым');
-
-        return;
       }
 
       const resultAttachments = (bridgeCallConfig as ShareVkPostPropsType)
@@ -773,8 +768,6 @@ describe('Функция shareVkPostWithUpload', () => {
 
       if (!resultAttachments) {
         fail('Аттачи не должны быть пустыми');
-
-        return;
       }
 
       const resultAttachmentsArray = resultAttachments.split(',');

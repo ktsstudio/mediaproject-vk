@@ -1,7 +1,10 @@
-import bridge, { ErrorData, PersonalAuthScope } from '@vkontakte/vk-bridge';
+import bridge, {
+  type PersonalAuthScope,
+  ErrorData,
+} from '@vkontakte/vk-bridge';
 
 import { checkVkUserDenied } from './checkVkUserDenied';
-import {
+import type {
   GetVkAccessTokenParamsType,
   GetNewVkAccessTokenParamsType,
   GetNewVkAccessTokenResponseType,
@@ -106,7 +109,7 @@ const getNewVkAccessToken = async ({
  * @param {GetVkAccessTokenParamsType} props
  * @param {PersonalAuthScope[] | null} [props.scopes=null] Массив необходимых scopes. Объединяется с уже имеющимися правами доступа в window.scope.
  * @param {(error?: ErrorData) => void=} props.onUserDeniedAll Коллбэк, вызываемый в случае, если пользователь отказался давать доступ к запрашиваемым scopes.
- * @param {(error?: ErrorData) => void=} props.onUserDeniedSomeScopes Коллбэк, вызываемый в случае, если пользователь дал доступ не ко всем требуемым scopes.
+ * @param {() => void=} props.onUserDeniedSomeScopes Коллбэк, вызываемый в случае, если пользователь дал доступ не ко всем требуемым scopes.
  * @param {(error?: ErrorData) => void=} props.onErrorOccurred Коллбэк, вызываемый в случае, если произошла ошибка.
  * @param {number=} props.appId ID текущего приложения.
  * @returns {Promise<string | null>} В случае успеха возвращает токен доступа. Иначе возвращает null.

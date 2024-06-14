@@ -1,7 +1,7 @@
 import originalBridge, { ReceiveData } from '@vkontakte/vk-bridge';
 
-import { SetViewSettingsPropsType, VkPlatformType } from '../types';
 import { setVkViewSettings } from '../setVkViewSettings';
+import { SetViewSettingsPropsType, VkPlatformType } from '../types';
 
 import { getRandomVkApiError } from './utils';
 
@@ -102,7 +102,6 @@ describe('setVkViewSettings', () => {
 
       expect(bridge.send).toBeCalled();
 
-      // eslint-disable-next-line prefer-destructuring
       const [firstArg, secondArg] = bridge.send.mock.calls[0];
 
       expect(firstArg).toBe(BRIDGE_SET_VIEW_SETTINGS_METHOD);

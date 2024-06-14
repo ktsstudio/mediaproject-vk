@@ -1,8 +1,8 @@
 import originalBridge from '@vkontakte/vk-bridge';
 import { AnyRequestMethodName } from '@vkontakte/vk-bridge/dist/types/src/types/bridge';
 
-import { getVkAccessToken as originalGetVkAccessToken } from '../getVkAccessToken';
 import { callVkApi, VK_TOKEN_ERRORS } from '../callVkApi';
+import { getVkAccessToken as originalGetVkAccessToken } from '../getVkAccessToken';
 import { GetVkAccessTokenParamsType } from '../types';
 
 import { getRandomVkApiError, randomNumberUpTo, randomString } from './utils';

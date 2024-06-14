@@ -1,8 +1,8 @@
 import originalBridge, { ReceiveData } from '@vkontakte/vk-bridge';
 
-import { ShareVkStoryPropsType } from '../types';
-import { shareVkStory } from '../shareVkStory';
 import { userDeniedReasons } from '../checkVkUserDenied';
+import { shareVkStory } from '../shareVkStory';
+import { ShareVkStoryPropsType } from '../types';
 
 import { getRandomVkApiError, getUserDeniedCommonError } from './utils';
 

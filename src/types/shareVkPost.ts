@@ -1,8 +1,8 @@
-import { RequestPropsMap } from '@vkontakte/vk-bridge';
 import { ApiResponse, UrlConfigType } from '@ktsstudio/mediaproject-utils';
+import { RequestPropsMap } from '@vkontakte/vk-bridge';
 
-import { VkResponseType } from './common';
 import { CallVkApiResponseType } from './callVkApi';
+import { VkResponseType } from './common';
 
 type ShareVkPostPropsType = RequestPropsMap['VKWebAppShowWallPostBox'] & {
   link_image?: string;

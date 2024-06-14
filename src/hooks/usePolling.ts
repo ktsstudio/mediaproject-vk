@@ -1,8 +1,8 @@
-import { useRef, useCallback, useEffect } from 'react';
 import bridge, {
   AnyReceiveMethodName,
   VKBridgeEvent,
 } from '@vkontakte/vk-bridge';
+import { useRef, useCallback, useEffect } from 'react';
 
 /**
  * Хук для вызова переданной функции с указанной частотой.

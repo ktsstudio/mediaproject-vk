@@ -39,10 +39,17 @@ type DeviceInfo = {
   isMessenger: boolean;
 };
 
+type ErrorCallbacksType = {
+  onUserDeniedAll?: (error?: ErrorData) => void;
+  onUserDeniedSomeScopes?: () => void;
+  onErrorOccurred?: (error?: ErrorData) => void;
+};
+
 export type {
   VkResponseType,
   InternalVkPlatformType,
   ExternalVkPlatformType,
+  ErrorCallbacksType,
   VkPlatformType,
   DeviceInfo,
 };

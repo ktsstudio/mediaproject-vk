@@ -1,5 +1,5 @@
-import { isVkError } from '../isVkError';
 import { vkErrorTypes } from '../consts';
+import { isVkError } from '../isVkError';
 
 import { randomNumberUpTo, randomString, range } from './utils';
 
@@ -35,7 +35,6 @@ describe('Функция isVkError', () => {
 
   it('Функция не стрелочная', () => {
     expect(
-      // eslint-disable-next-line prefer-arrow-callback
       isVkError(function (n: number) {
         return 'smth' + n;
       })

@@ -1,5 +1,5 @@
-import { CheckVkAvatarIsDefaultParamsType } from '../types';
 import { checkVkAvatarIsDefault } from '../checkVkAvatarIsDefault';
+import { CheckVkAvatarIsDefaultParamsType } from '../types';
 
 import { randomString } from './utils';
 

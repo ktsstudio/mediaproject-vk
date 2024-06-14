@@ -1,13 +1,19 @@
-#### v4.0.0
+# v4.0.0
 
 [*] переход от понятия isMvk к isWeb
 [*] в перечни ВК-платформ добавлены платформы ВК Мессенджера
-
-## v3.1.0
-
 [*] исправлена проверка на пустую строку в функции `checkVkAvatarIsDefault`
 [*] в десктоп-платформы добавлены платформы десктопного ВК Мессенджера в функции `checkVkPlatform`
 [+] добавлены автотесты на функции `callVkApi`, `parseVkScopes`, `checkOneScopesSetIncludesAnother`, `getNewVkAccessToken`, `getVkAccessToken`, `checkVkPlatform`, `callVkApi`, `checkVkAvatarIsDefault`, `setVkViewSettings`, `shareVkStory`, `isVkError`, `checkVkUserDenied`, `shareVkPost`, `shareVkPostWithUpload`, хуки `usePolling`, `useEventSubscribe`
+
+## v3.1.0
+- [+] добавлена утилита `getVkStatuses` для получения получение списка статусов, доступных приложению
+- [+] добавлена утилита `getVkStatus` для получения текущего ID статуса пользователя
+- [+] добавлена утилита `setVkStatus` для установки/снятия ID статуса пользователю
+
+### v3.0.1
+
+- [*] Поднята версия @ktsstudio/mediaproject-utils до 6.0.0
 
 # v3.0.0
 
