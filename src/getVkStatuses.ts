@@ -16,7 +16,7 @@ import { VkStatusesParamsType, VkApiStatusType } from './types';
  * @return {Promise<VkApiStatusType[]>} Возвращает список доступных статусов.
  *
  */
-export default async ({
+const getVkStatuses = async ({
   appId,
   accessToken = window.access_token,
   renewTokenIfExpired = true,
@@ -44,3 +44,5 @@ export default async ({
 
   return [];
 };
+
+export { getVkStatuses };

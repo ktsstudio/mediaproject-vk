@@ -17,7 +17,7 @@ import { SetVkStatusParamsType } from './types';
  * @return {Promise<boolean>} Возвращает, успешно ли выполнился запрос.
  *
  */
-export default async ({
+const setVkStatus = async ({
   appId,
   statusId,
   accessToken = window.access_token,
@@ -49,3 +49,5 @@ export default async ({
 
   return false;
 };
+
+export { setVkStatus };

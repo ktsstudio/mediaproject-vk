@@ -16,7 +16,7 @@ import { VkStatusesParamsType } from './types';
  * @return {Promise<any>} Возвращает ID текущего статуса пользователя или null.
  *
  */
-export default async ({
+const getVkStatus = async ({
   appId,
   accessToken = window.access_token,
   renewTokenIfExpired = true,
@@ -44,3 +44,5 @@ export default async ({
 
   return null;
 };
+
+export { getVkStatus };

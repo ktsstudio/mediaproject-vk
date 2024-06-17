@@ -78,6 +78,7 @@ const callVkApi = async <D>({
       VK_TOKEN_ERRORS.has(errorMessage)
     ) {
       window.access_token = undefined;
+
       const newAccessToken = await getVkAccessToken(getAccessTokenParams);
 
       return await callVkApi({

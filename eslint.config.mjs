@@ -71,6 +71,41 @@ export default tsEslint.config(
           },
         },
       ],
+      'padding-line-between-statements': [
+        'error',
+
+        // After directives (like 'use-strict'), except between directives
+        { blankLine: 'always', prev: 'directive', next: '*' },
+        { blankLine: 'any', prev: 'directive', next: 'directive' },
+
+        // Before and after export
+        { blankLine: 'always', prev: '*', next: 'export' },
+        { blankLine: 'always', prev: 'export', next: '*' },
+
+        // Before and after every sequence of variable declarations
+        { blankLine: 'always', prev: '*', next: ['const', 'let', 'var'] },
+        { blankLine: 'always', prev: ['const', 'let', 'var'], next: '*' },
+        {
+          blankLine: 'any',
+          prev: ['const', 'let', 'var'],
+          next: ['const', 'let', 'var'],
+        },
+
+        // Before and after class declaration, if, while, switch, try
+        {
+          blankLine: 'always',
+          prev: '*',
+          next: ['class', 'if', 'while', 'switch', 'try'],
+        },
+        {
+          blankLine: 'always',
+          prev: ['class', 'if', 'while', 'switch', 'try'],
+          next: '*',
+        },
+
+        // Before return statements
+        { blankLine: 'always', prev: '*', next: 'return' },
+      ],
       'react/jsx-uses-react': 'error',
       'react/jsx-uses-vars': 'error',
       'react/jsx-no-target-blank': 'off',
