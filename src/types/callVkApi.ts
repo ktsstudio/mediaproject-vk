@@ -13,7 +13,7 @@ type CallVkApiPropsType = {
   getAccessTokenParams: GetVkAccessTokenParamsType;
 };
 
-type CallVkApiResponseType<D> = Partial<
+type CallVkApiResponseType<D = unknown> = Partial<
   {
     response: D;
   } & ErrorData

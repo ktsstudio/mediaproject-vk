@@ -1,7 +1,4 @@
-import {
-  PersonalAuthScope,
-  RequestPropsMap,
-} from '@vkontakte/vk-bridge';
+import { PersonalAuthScope, RequestPropsMap } from '@vkontakte/vk-bridge';
 
 import { ErrorCallbacksType, VkResponseType } from './common';
 

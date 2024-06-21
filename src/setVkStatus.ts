@@ -1,7 +1,7 @@
 import { ErrorData } from '@vkontakte/vk-bridge';
 
-import { SetVkStatusParamsType } from './types';
 import { callVkApi } from './callVkApi';
+import { SetVkStatusParamsType } from './types';
 
 /**
  * Утилита для установки ID статуса пользователю.
@@ -17,7 +17,7 @@ import { callVkApi } from './callVkApi';
  * @return {Promise<boolean>} Возвращает, успешно ли выполнился запрос.
  *
  */
-export default async ({
+const setVkStatus = async ({
   appId,
   statusId,
   accessToken = window.access_token,
@@ -49,3 +49,5 @@ export default async ({
 
   return false;
 };
+
+export { setVkStatus };

@@ -19,3 +19,11 @@ export * from './shareVkPost';
 export * from './shareVkStory';
 
 export * from './isVkError';
+
+export * from './getVkStatus';
+
+export * from './getVkStatuses';
+
+export * from './setVkStatus';
+
+export * from './vkErrorUtils';

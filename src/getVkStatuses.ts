@@ -1,7 +1,7 @@
 import { ErrorData } from '@vkontakte/vk-bridge';
 
-import { VkStatusesParamsType, VkApiStatusType } from './types';
 import { callVkApi } from './callVkApi';
+import { VkStatusesParamsType, VkApiStatusType } from './types';
 
 /**
  * Утилита для получения получение списка статусов, доступных приложению.
@@ -16,7 +16,7 @@ import { callVkApi } from './callVkApi';
  * @return {Promise<VkApiStatusType[]>} Возвращает список доступных статусов.
  *
  */
-export default async ({
+const getVkStatuses = async ({
   appId,
   accessToken = window.access_token,
   renewTokenIfExpired = true,
@@ -44,3 +44,5 @@ export default async ({
 
   return [];
 };
+
+export { getVkStatuses };

@@ -3,11 +3,14 @@
     "target": "es6",
     "module": "esnext",
     "moduleResolution": "node",
+    "declaration": true,
     "emitDeclarationOnly": true,
     "strict": true,
     "esModuleInterop": true,
     "jsx": "react",
     "strictNullChecks": true,
+    "resolveJsonModule": true,
+    "lib": ["ES2019.Array"]
   },
-  "include": ["src"]
+  "include": ["src", "jest.config.ts"]
 }

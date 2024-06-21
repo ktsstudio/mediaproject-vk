@@ -1,7 +1,7 @@
 import { ErrorData } from '@vkontakte/vk-bridge';
 
-import { VkStatusesParamsType } from './types';
 import { callVkApi } from './callVkApi';
+import { VkStatusesParamsType } from './types';
 
 /**
  * Утилита для получения текущего ID статуса пользователя.
@@ -16,7 +16,7 @@ import { callVkApi } from './callVkApi';
  * @return {Promise<any>} Возвращает ID текущего статуса пользователя или null.
  *
  */
-export default async ({
+const getVkStatus = async ({
   appId,
   accessToken = window.access_token,
   renewTokenIfExpired = true,
@@ -44,3 +44,5 @@ export default async ({
 
   return null;
 };
+
+export { getVkStatus };
