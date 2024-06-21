@@ -50,6 +50,12 @@ export const toVkError = (error: unknown): ErrorData => {
 };
 
 /**
+ * Код для имитации ошибки VK API, несуществующий в документации
+ * @see https://dev.vk.com/ru/bridge/getting-started#Обработка%20ошибок%20VK%20Bridge
+ */
+export const UNKNOWN_VK_ERROR_CODE = -111_000_111;
+
+/**
  * Утилита обертки неопределенных данных в имитацию ошибки VK API
  *
  * @param {unknown} data Данные неизвестного типа
@@ -59,7 +65,7 @@ export const makeUnknownVkError = (data: unknown): ErrorData => {
   return {
     error_type: 'client_error',
     error_data: {
-      error_code: -111_000_111,
+      error_code: UNKNOWN_VK_ERROR_CODE,
       error_reason: 'unknown',
       error_description: toStringInfo(data),
     },
@@ -76,4 +82,17 @@ const toStringInfo = (value: unknown): string => {
   } catch (error) {
     return String(value);
   }
+};
+
+/**
+ * Утилита для проверки что данная VK API ошибка является имитацией ошибки VK API
+ *
+ * @param {ErrorData} error VK API ошибка
+ * @returns {boolean} true если это имитация ошибки VK API
+ */
+export const isUnknownVkError = (error: ErrorData): boolean => {
+  return (
+    error.error_type === 'client_error' &&
+    error.error_data.error_code === UNKNOWN_VK_ERROR_CODE
+  );
 };

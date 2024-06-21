@@ -25,3 +25,5 @@ export * from './getVkStatus';
 export * from './getVkStatuses';
 
 export * from './setVkStatus';
+
+export * from './vkErrorUtils';

@@ -4,9 +4,14 @@
 [*] в перечни ВК-платформ добавлены платформы ВК Мессенджера
 [*] исправлена проверка на пустую строку в функции `checkVkAvatarIsDefault`
 [*] в десктоп-платформы добавлены платформы десктопного ВК Мессенджера в функции `checkVkPlatform`
-[+] добавлены автотесты на функции `callVkApi`, `parseVkScopes`, `checkOneScopesSetIncludesAnother`, `getNewVkAccessToken`, `getVkAccessToken`, `checkVkPlatform`, `callVkApi`, `checkVkAvatarIsDefault`, `setVkViewSettings`, `shareVkStory`, `isVkError`, `checkVkUserDenied`, `shareVkPost`, `shareVkPostWithUpload`, хуки `usePolling`, `useEventSubscribe`
+[+] добавлены автотесты на функции `callVkApi`, `parseVkScopes`, `checkOneScopesSetIncludesAnother`, `getNewVkAccessToken`, `getVkAccessToken`, `checkVkPlatform`, `callVkApi`, `checkVkAvatarIsDefault`, `setVkViewSettings`, `shareVkStory`, `isVkError`, `checkVkUserDenied`, `shareVkPost`, `shareVkPostWithUpload`, и на хуки `usePolling`, `useEventSubscribe`
+[*] в утилите `callVkApi` актуализировано значение по умолчанию параметра версии VK API: `5.131` -> `5.199`
+[*] обновлены средства разработки и их конфиги: typescript, eslint, prettier
+[*] логика по обработке ошибок ВК АПИ вынесена в файл `vkErrorUtils` с выделением обработки ошибок нестандартного формата в отдельный блок
+[*] изменен формат экспорта для новых утилит `getVkStatus`, `getVkStatuses` и `setVkStatus` c `default` на такой же как у остальных утилит, для консистентности при сборке библиотеки
 
 ## v3.1.0
+
 - [+] добавлена утилита `getVkStatuses` для получения получение списка статусов, доступных приложению
 - [+] добавлена утилита `getVkStatus` для получения текущего ID статуса пользователя
 - [+] добавлена утилита `setVkStatus` для установки/снятия ID статуса пользователю
